@@ -1,0 +1,62 @@
+{
+  "name": "hexo-themes",
+  "private": true,
+  "version": "1.0.0",
+  "description": "My HexoJS Theme Collections",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn workspaces foreach --worktree --no-private run build",
+    "clean": "npm run site:clean",
+    "start": "hexo server",
+    "site:build": "hexo generate",
+    "site:clean": "hexo clean"
+  },
+  "keywords": [
+    "hexo",
+    "themes"
+  ],
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "themes/*",
+    "plugins/*"
+  ],
+  "dependencies": {
+    "hexo": "^7.3.0",
+    "hexo-asset-link": "^2.2.3",
+    "hexo-cli": "^4.3.2",
+    "hexo-front-matter": "^4.2.1",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^4.0.0",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-log": "^4.1.0",
+    "hexo-renderer-marked": "^6.3.0",
+    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-renderers": "^2.0.2",
+    "hexo-server": "^3.0.0",
+    "hexo-shortcodes": "^1.2.3",
+    "hexo-theme-flowbite": "workspace:^",
+    "hexo-util": "^3.3.0",
+    "nunjucks": "^3.2.4",
+    "warehouse": "^5.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "binary-collections": "https://github.com/dimaslanjaka/bin.git",
+    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn#private",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "gulp": "^5.0.0",
+    "gulp-cli": "^3.0.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3"
+  },
+  "hexo": {
+    "version": "7.3.0"
+  }
+}

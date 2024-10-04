@@ -1,0 +1,12 @@
+{% extends '_layout.njk' %}
+
+{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} - {{ subtitle }}{% endif %}{% endblock %}
+
+{% block content %}
+
+  {%- for post in page.posts.toArray() %}
+    {# {{ partial('_macro/post.njk', {post: post, is_index: true}) }} #}
+    <h1>{{ post.title }}</h1>
+  {%- endfor %}
+
+{% endblock %}

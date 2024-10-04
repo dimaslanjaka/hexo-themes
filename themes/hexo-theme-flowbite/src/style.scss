@@ -1,0 +1,14 @@
+@import "flowbite/dist/flowbite.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// npx postcss node_browser/style.scss -o node_browser/style.css
+
+div[class*="log"] {
+  height: 300px; /* Set the maximum height of the div */
+  overflow: auto; /* Enable scrolling in both directions if content overflows */
+  // border: 1px solid #c7a8a8; /* Optional: to visualize the boundary of the div */
+  // padding: 10px; /* Optional: to add space inside the div */
+}
