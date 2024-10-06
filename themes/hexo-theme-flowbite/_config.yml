@@ -7,3 +7,13 @@ nav:
     link: https://www.webmanajemen.com/p/tos.html
   - text: Contact
     link: /contact
+  - text: Sub Menu
+    submenu:
+      - text: "Sub Menu 1"
+        link: "#"
+      - text: "Sub Menu 2"
+        link: "#"
+      - text: "Sub Menu 3"
+        link: "#"
+        divider: true
+nav_icon: https://flowbite.com/docs/images/logo.svg

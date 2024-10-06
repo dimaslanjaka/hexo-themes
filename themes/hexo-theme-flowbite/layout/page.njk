@@ -25,4 +25,5 @@
 {% endblock %}
 {% block content %}
   <div class="max-w-none format lg:format-lg dark:format-invert format-red post">{{ page.content }}</div>
+  {% include 'partials/disqus.njk' %}
 {% endblock content %}

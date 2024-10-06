@@ -36,6 +36,7 @@
         {# page content #}
         {{ injectBeforePostHtml() }}
         <div class="max-w-none format lg:format-lg dark:format-invert format-red post">{{ page.content }}</div>
+        {% include 'partials/disqus.njk' %}
         {{ injectAfterPostHtml() }}
       </main>
       <div class="flex-none hidden w-64 pl-8 mr-8 xl:text-sm lg:block">

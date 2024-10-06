@@ -102,6 +102,10 @@ hexo.extend.helper.register("object_keys", function (obj) {
   return Object.keys(obj);
 });
 
+hexo.extend.helper.register("is_array", function (obj) {
+  return Array.isArray(obj);
+});
+
 /**
  * fix url
  * - remove double slashes
