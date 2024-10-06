@@ -13,8 +13,10 @@ function watch() {
       "themes/hexo-theme-flowbite/src/**/*",
       "themes/hexo-theme-flowbite/*.js"
     ],
-    build
+    () => spawnAsync("yarn", ["workspace", "hexo-theme-flowbite", "run", "build"], { stdio: "inherit", cwd: __dirname })
   );
+  gulp.watch("./src/**/*", () => spawnAsync("rollup", ["-c"], { cwd: __dirname, stdio: "inherit" }));
 }
 
 exports.watch = watch;
+exports.build = build;
