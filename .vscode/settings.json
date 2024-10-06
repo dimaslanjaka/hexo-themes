@@ -75,7 +75,7 @@
   ],
   "[nunjucks]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.defaultFormatter": "monosans.djlint",
     "editor.suggest.insertMode": "replace",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "never",

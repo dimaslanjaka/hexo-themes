@@ -3,6 +3,7 @@
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
     "dbaeumer.vscode-eslint",
-    "ginfuru.better-nunjucks"
+    "ginfuru.better-nunjucks",
+    "monosans.djlint"
   ]
 }
