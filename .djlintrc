@@ -3,6 +3,6 @@
   "format_css": false,
   "format_js": false,
   "extension": "njk",
-  "ignore": "T003,T002",
+  "ignore": "T003,T002,H021,T028",
   "indent": 2
 }

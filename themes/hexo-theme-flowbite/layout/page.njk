@@ -1,27 +1,28 @@
 {% extends '_layout.njk' %}
-{% import '_macro/sidebar.njk' as sidebar_template with context %}
-
 {% block title %}
-  {%- set page_title_suffix = ' | ' + title %}
-
+  {%- set page_title_suffix = ' - ' + config.title %}
   {%- if page.type === 'categories' and not page.title %}
-    {{- __('title.category') + page_title_suffix }}
+    {{- __("title.category") + page_title_suffix }}
   {%- elif page.type === 'tags' and not page.title %}
-    {{- __('title.tag') + page_title_suffix }}
+    {{- __("title.tag") + page_title_suffix }}
   {%- elif page.type === 'schedule' and not page.title %}
-    {{- __('title.schedule') + page_title_suffix }}
+    {{- __("title.schedule") + page_title_suffix }}
   {%- else %}
     {{- page.title + page_title_suffix }}
   {%- endif %}
 {% endblock %}
-
-{% block class %}page posts-expand{% endblock %}
-
+{% block description %}
+  {%- set page_title_suffix = ' - ' + config.title %}
+  {%- if page.type === 'categories' and not page.title %}
+    {{- __("title.category") + page_title_suffix }}
+  {%- elif page.type === 'tags' and not page.title %}
+    {{- __("title.tag") + page_title_suffix }}
+  {%- elif page.type === 'schedule' and not page.title %}
+    {{- __("title.schedule") + page_title_suffix }}
+  {%- else %}
+    {{- page.title + page_title_suffix }}
+  {%- endif %} - {{ page.description }}
+{% endblock %}
 {% block content %}
-
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(page.toc.enable) }}
-{% endblock %}
+  <div class="max-w-none format lg:format-lg dark:format-invert format-red post">{{ page.content }}</div>
+{% endblock content %}

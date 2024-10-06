@@ -1,12 +1,14 @@
 ---
 title: Code Highlight Style test
 date: 2019-07-25 16:43:00
-tags:
+tags: [code]
 ---
 
 Make sure all the code blocks highlighted correctly. All the code samples are come from the demo of https://highlightjs.org
 
 <!-- more -->
+
+This is `inline` code with `backtick`
 
 ``` plain
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -118,6 +120,8 @@ int main(int argc, char *argv[]) {
 }
 ```
 
+### SQL
+
 ```sql
 CREATE TABLE "topic" (
     "id" serial NOT NULL PRIMARY KEY,
@@ -131,6 +135,13 @@ REFERENCES "forum" ("id");
 -- Initials
 insert into "topic" ("forum_id", "subject")
 values (2, 'D''artagnian');
+```
+
+```sql
+CREATE USER 'dimaslanjaka'@'%' IDENTIFIED VIA mysql_native_password USING '***';
+GRANT ALL PRIVILEGES ON *.* TO 'dimaslanjaka'@'%' REQUIRE NONE WITH GRANT OPTION
+MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+GRANT ALL PRIVILEGES ON `dimaslanjaka\_%`.* TO 'dimaslanjaka'@'%';
 ```
 
 ```objectivec

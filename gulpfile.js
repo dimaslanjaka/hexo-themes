@@ -7,7 +7,10 @@ async function build() {
 }
 
 function watch() {
-  gulp.watch(["themes/hexo-theme-flowbite/**/*.{njk,scss,js,cjs}"], build);
+  gulp.watch(
+    ["themes/hexo-theme-flowbite/layout/**/*", "themes/hexo-theme-flowbite/src**/*", "themes/hexo-theme-flowbite/*.js"],
+    build
+  );
 }
 
 exports.watch = watch;

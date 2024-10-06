@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: http://www.webmanajemen.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -43,17 +43,23 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
+
+# https://github.com/hexojs/hexo-util
+# https://hexo.io/docs/syntax-highlight.html
 syntax_highlighter: highlight.js
 highlight:
-  line_number: true
+  enable: true
+  line_number: false
   auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
+  tab_replace: '  ' # replace tabs with 2 spaces
+  wrap: false
+  hljs: true
 prismjs:
+  enable: false
   preprocess: true
   line_number: true
-  tab_replace: ''
+  tab_replace: '  ' # replace tabs with 2 spaces
+
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

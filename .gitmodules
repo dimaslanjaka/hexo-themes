@@ -2,3 +2,7 @@
 	path = plugins/hexo-renderers
 	url = https://github.com/dimaslanjaka/hexo-renderers
 	branch = pre-release
+[submodule "src-posts"]
+	path = src-posts
+	url = https://github.com/dimaslanjaka/source-posts.git
+	branch = posts

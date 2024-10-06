@@ -3,6 +3,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind screens;
+
+// @import "./highlight.js.scss";
+@import "./highlight-dark.scss";
+@import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+$font-size-smaller: 0.8125em;
+$font-size-small: 0.875em;
+$font-size-medium: 1em;
+$grey: #bbb;
+$grey-dark: #999;
+$grey-dim: #666;
+
+// https://github.com/hexojs/hexo-renderer-marked/pull/264
+img + figcaption,
+.fancybox + figcaption {
+  color: $grey-dark;
+  font-size: $font-size-small;
+  font-weight: bold;
+  line-height: 1;
+  margin: -15px auto 15px;
+  text-align: center;
+}
+
+iframe,
+img,
+video,
+embed {
+  margin-bottom: 20px;
+}
+
+.video-container {
+  height: 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding-top: 75%;
+  position: relative;
+  width: 100%;
+
+  iframe,
+  object,
+  embed {
+    height: 100%;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
 
 // npx postcss node_browser/style.scss -o node_browser/style.css
 

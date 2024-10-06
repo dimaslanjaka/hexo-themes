@@ -6,7 +6,8 @@ module.exports = {
     "./layout/**/*.njk",
     "./layout/**/*.html",
     "./source/**/*.js",
-    "./source/**/*.cjs"
+    "./source/**/*.cjs",
+    "./src/**/*.{js,ts,cjs,mjs}"
   ],
   theme: {
     extend: {
@@ -28,5 +29,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require("flowbite/plugin")]
+  plugins: [require("flowbite/plugin"), require("flowbite-typography")]
 };

@@ -1,0 +1,9 @@
+nav:
+  - text: About
+    link: /about
+  - text: Privacy Policy
+    link: https://www.webmanajemen.com/p/privacy.html
+  - text: Terms Of Service
+    link: https://www.webmanajemen.com/p/tos.html
+  - text: Contact
+    link: /contact

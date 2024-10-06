@@ -5,6 +5,7 @@ const importPlugin = require("postcss-import");
 const sass = require("sass");
 const fs = require("fs-extra");
 const path = require("path");
+const { spawnSync } = require("child_process");
 
 const inputSCSS = path.resolve(__dirname, "src/style.scss");
 
@@ -38,4 +39,9 @@ async function compileFlowbite() {
   await compile(path.resolve(__dirname, "source/css/style.css"));
 }
 
-compileFlowbite()
+async function compileJS() {
+  spawnSync("npx", ["rollup", "-c"], { stdio: "inherit", shell: true, cwd: __dirname });
+}
+
+compileFlowbite();
+compileJS();
