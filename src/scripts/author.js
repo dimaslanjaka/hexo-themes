@@ -5,9 +5,11 @@
  */
 function getAuthorName(author) {
   if (typeof author === "string") return author;
-  if (typeof author.name === "string") return author.name;
-  if (typeof author.nick === "string") return author.nick;
-  if (typeof author.nickname === "string") return author.nickname;
+  if (author && typeof author === "object" && !Array.isArray(author)) {
+    if (typeof author.name === "string") return author.name;
+    if (typeof author.nick === "string") return author.nick;
+    if (typeof author.nickname === "string") return author.nickname;
+  }
 }
 
 hexo.extend.helper.register("getAuthorName", function (author, fallback) {
