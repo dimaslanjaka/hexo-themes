@@ -13,7 +13,8 @@
     "post:standalone": "sbg post standalone",
     "post:copy": "sbg post copy",
     "post": "run-s \"post:**\"",
-    "prepare": "husky && yarn workspaces foreach --worktree run prepare"
+    "prepare": "husky && yarn workspaces foreach --worktree run prepare",
+    "pack": "node -r ts-node/register pack.ts"
   },
   "keywords": [
     "hexo",
@@ -49,24 +50,30 @@
   },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
+    "@types/minimist": "^1.2.5",
     "@types/node": "^22.7.4",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
     "binary-collections": "https://github.com/dimaslanjaka/bin.git",
+    "cross-env": "^7.0.3",
     "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn#private",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "fs-extra": "^11.2.0",
     "gulp": "^5.0.0",
     "gulp-cli": "^3.0.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
+    "minimist": "^1.2.8",
     "nodemon": "^3.1.7",
+    "picocolors": "^1.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-embed": "^0.4.15",
     "prettier-plugin-sql": "^0.18.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "upath": "^2.0.1"
   },
   "hexo": {
     "version": "7.3.0"
