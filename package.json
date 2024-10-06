@@ -12,7 +12,8 @@
     "site:clean": "hexo clean",
     "post:standalone": "sbg post standalone",
     "post:copy": "sbg post copy",
-    "post": "run-s \"post:**\""
+    "post": "run-s \"post:**\"",
+    "prepare": "husky && yarn workspaces foreach --worktree run prepare"
   },
   "keywords": [
     "hexo",
