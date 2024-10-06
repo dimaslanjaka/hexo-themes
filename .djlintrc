@@ -1,5 +1,5 @@
 {
-  "exclude": ".venv,venv,.tox,.eggs,dist",
+  "exclude": ".venv,venv,.tox,.eggs,dist,source",
   "format_css": false,
   "format_js": false,
   "extension": "njk",
