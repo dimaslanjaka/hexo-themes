@@ -5,8 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "npm run clean && npm run start",
+      "command": "npm run start",
       "name": "start",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "npm run clean && npm run start",
+      "name": "clean-start",
       "request": "launch",
       "type": "node-terminal"
     }
