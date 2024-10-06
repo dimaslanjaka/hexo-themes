@@ -20,6 +20,12 @@ prismjs:
   tab_replace: '  ' # replace tabs with 2 spaces
 ```
 
+### Disqus comment
+
+```yaml
+disqus_shortname: YOUR_DISQUS_USERNAME
+```
+
 ### Code injection
 
 | File Path | Description |

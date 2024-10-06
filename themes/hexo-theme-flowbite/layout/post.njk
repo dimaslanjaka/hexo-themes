@@ -28,13 +28,14 @@
           <div id="accordion-post-metadata-body"
                class="hidden"
                aria-labelledby="accordion-post-metadata">
-            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+            <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
               <p class="text-gray-500 dark:text-gray-400">{{ page.description }}</p>
             </div>
           </div>
         </div>
         {# page content #}
         {{ injectBeforePostHtml() }}
+        {{ partial('macro/labels.njk', {post: page}) }}
         <div class="max-w-none format lg:format-lg dark:format-invert format-red post">{{ page.content }}</div>
         {% include 'partials/disqus.njk' %}
         {{ injectAfterPostHtml() }}
@@ -113,7 +114,7 @@
                 </div>
               </div>
             {% endif %}
-            {%- if (post.tags and post.tags.length) or (site.tags and site.tags.length) %}
+            {%- if (page.tags and page.tags.length) or (site.tags and site.tags.length) %}
               <h2 id="accordion-post-tags">
                 <button type="button"
                         class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
@@ -136,8 +137,8 @@
                    aria-labelledby="accordion-post-tags">
                 <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
                   {%- set all_tags = [] %}
-                  {%- if post.tags %}
-                    {%- set all_tags = all_tags.concat(post.tags.toArray()) %}
+                  {%- if page.tags %}
+                    {%- set all_tags = all_tags.concat(page.tags.toArray()) %}
                   {%- endif %}
                   {%- if site.tags %}
                     {%- set all_tags = all_tags.concat(site.tags.toArray()) %}

@@ -152,3 +152,9 @@ img + figcaption,
   background: #f1f1f1; /* Color of the scrollbar track */
   border-radius: 1px; /* Rounded corners */
 }
+
+// post aside
+#TableOfContents > ul > li {
+  padding-bottom: 0.3rem;
+  // padding-top: 0.5rem;
+}

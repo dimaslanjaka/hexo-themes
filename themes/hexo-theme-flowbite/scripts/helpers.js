@@ -191,3 +191,8 @@ hexo.extend.helper.register("parseToc", function (content) {
   // Return an array of error object if content is not a string
   return [{ error: "Cannot parse table of content" }];
 });
+
+hexo.extend.helper.register("get_thumbnail", function (page) {
+  if (page.thumbnail) return page.thumbnail;
+  return "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
+});
