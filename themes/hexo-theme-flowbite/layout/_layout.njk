@@ -9,6 +9,9 @@
       {% block title %}{% endblock %}
     </title>
     <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="keywords" content="keyword1, keyword2, keyword3, keyword4">
+    <meta name="author"
+          content="{{ getAuthorName(page.author, config.author) }}">
     <link rel="icon"
           type="image/x-icon"
           href="//www.webmanajemen.com/favicon.ico" />

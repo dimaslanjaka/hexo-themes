@@ -8,15 +8,6 @@ hexo.extend.helper.register("getPosts", function () {
   return page.posts;
 });
 
-hexo.extend.helper.register("getAuthor", function (author, fallback) {
-  if (!author) return fallback;
-  if (typeof author === "string") return author;
-  if (typeof author.name === "string") return author.name;
-  if (typeof author.nick === "string") return author.nick;
-  if (typeof author.nickname === "string") return author.nickname;
-  return hexo.config.author;
-});
-
 hexo.extend.helper.register("getLanguage", function (page) {
   let lang;
   if ("lang" in page) {

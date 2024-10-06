@@ -7,7 +7,17 @@ const config = {
   // Specifies your current project has own eslint rules without extends parent folder eslint rules
   root: true,
   // .eslintignore migration
-  ignorePatterns: ["*.md", "**/tmp/**", "*.html", "*.py", "*.txt", "**/app/**", "**/dist/**", "!.*.{js,cjs,mjs}"],
+  ignorePatterns: [
+    "*.md",
+    "**/tmp/**",
+    "*.html",
+    "*.py",
+    "*.txt",
+    "**/app/**",
+    "**/dist/**",
+    "!.*.{js,cjs,mjs}",
+    "./scripts/**/*"
+  ],
   noInlineConfig: false,
   reportUnusedDisableDirectives: true,
   parser: "@typescript-eslint/parser", // Specifies the ESLint parser

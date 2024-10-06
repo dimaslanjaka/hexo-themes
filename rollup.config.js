@@ -1,0 +1,77 @@
+const commonjs = require("@rollup/plugin-commonjs");
+const json = require("@rollup/plugin-json");
+const resolve = require("@rollup/plugin-node-resolve");
+const typescript = require("@rollup/plugin-typescript");
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
+const _ = require("lodash");
+
+console.clear();
+function getWorkspaceLocations() {
+  const output = execSync("yarn workspaces list --json", { encoding: "utf8" });
+  const workspaces = output
+    .split("\n")
+    .filter((line) => line) // Remove empty lines
+    .map((line) => JSON.parse(line)); // Parse JSON lines
+
+  return workspaces.map((workspace) => path.join(__dirname, workspace.location));
+}
+
+function getPackageJsonFiles(workspaces) {
+  const packageJsonFiles = [];
+
+  workspaces.forEach((workspace) => {
+    const packageJsonPath = path.join(workspace, "package.json");
+    if (fs.existsSync(packageJsonPath)) {
+      packageJsonFiles.push(packageJsonPath);
+    }
+  });
+
+  return packageJsonFiles;
+}
+
+const workspaceLocations = getWorkspaceLocations();
+const allPackageJsonFiles = getPackageJsonFiles(workspaceLocations);
+const deps = _.uniq(
+  allPackageJsonFiles
+    .map((file) => JSON.parse(fs.readFileSync(file, "utf-8")))
+    .map((pkg) => {
+      // Combine dependencies and devDependencies into a single array
+      return Object.keys(pkg.dependencies || {}).concat(Object.keys(pkg.devDependencies || {}));
+    })
+    .flat() // Flatten the array of arrays
+);
+
+/**
+ * @type {import("rollup").RollupOptions}
+ */
+const hexoThemeFlowbiteHelper = {
+  input: "src/scripts/index.js", // Replace with your entry file(s)
+  output: {
+    file: "themes/hexo-theme-flowbite/scripts/helper.js", // Output file
+    format: "cjs", // Output format
+    sourcemap: false // Sourcemaps for easier debugging
+  },
+  plugins: [
+    json.default({ indent: "  " }),
+    resolve.nodeResolve({
+      preferBuiltins: true,
+      extensions: [".js", ".ts", ".cjs", ".mjs"]
+    }),
+    commonjs.default({
+      // exclude: ["**/node_modules/**"],
+    }),
+    typescript.default({
+      tsconfig: false,
+      compilerOptions: {
+        lib: ["DOM", "DOM.Iterable", "ES2020"],
+        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"]
+      },
+      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
+    })
+  ],
+  external: deps // Exclude external dependencies from the bundle
+};
+
+module.exports = [hexoThemeFlowbiteHelper];

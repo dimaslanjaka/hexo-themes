@@ -14,5 +14,5 @@
     "esModuleInterop": true,
     "lib": ["ES2015", "ES6", "ES5", "ES2022"]
   },
-  "exclude": ["node_modules", "tmp", "dist"]
+  "exclude": ["node_modules", "tmp", "dist", "themes/**/scripts/**"]
 }
