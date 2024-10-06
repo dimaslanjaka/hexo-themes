@@ -9,7 +9,8 @@
 {% block content %}
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
-      {%- for post in page.posts.toArray() %}
+      {%- for itemPost in page.posts.toArray() %}
+        {% set post = pageInfo(itemPost) %}
         <article itemscope
                  itemtype="http://schema.org/Article"
                  class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"

@@ -26,10 +26,12 @@
     "@fancyapps/ui": "^5.0.36",
     "cheerio": "^1.0.0",
     "fs-extra": "^11.2.0",
+    "hexo-post-parser": "^1.2.14",
     "hexo-renderers": "workspace:^",
     "highlight.js": "^11.10.0",
     "jquery": "^3.7.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sbg-utility": "^1.1.8"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.0",
