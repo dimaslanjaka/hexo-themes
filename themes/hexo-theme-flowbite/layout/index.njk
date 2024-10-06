@@ -8,7 +8,7 @@
 {% endblock description %}
 {% block content %}
   <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
       {%- for post in page.posts.toArray() %}
         <article itemscope
                  itemtype="http://schema.org/Article"
@@ -28,5 +28,10 @@
         </article>
       {%- endfor %}
     </div>
+    {%- if page.prev or page.next %}
+      <nav class="pagination">
+        {{ next_paginator() }}
+      </nav>
+    {%- endif %}
   </div>
 {% endblock %}

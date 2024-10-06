@@ -18,7 +18,7 @@ const compile = async (outputCSS) => {
     });
 
     // Write the compiled CSS
-    fs.writeFileSync(outputCSS, sassResult.css);
+    // fs.writeFileSync(outputCSS, sassResult.css);
 
     // Then, process with PostCSS
     const postCssResult = await postcss([importPlugin, tailwindcss, autoprefixer]).process(sassResult.css, {
@@ -36,12 +36,15 @@ const compile = async (outputCSS) => {
 };
 
 async function compileFlowbite() {
-  await compile(path.resolve(__dirname, "source/css/style.css"));
+  await compile(path.join(__dirname, "source/css/style.css"));
 }
 
 async function compileJS() {
   spawnSync("npx", ["rollup", "-c"], { stdio: "inherit", shell: true, cwd: __dirname });
 }
 
-compileFlowbite();
-compileJS();
+if (require.main === module) {
+  compileFlowbite().then(compileJS);
+}
+
+module.exports = { compileFlowbite, compileJS };

@@ -8,7 +8,11 @@ async function build() {
 
 function watch() {
   gulp.watch(
-    ["themes/hexo-theme-flowbite/layout/**/*", "themes/hexo-theme-flowbite/src**/*", "themes/hexo-theme-flowbite/*.js"],
+    [
+      "themes/hexo-theme-flowbite/layout/**/*",
+      "themes/hexo-theme-flowbite/src/**/*",
+      "themes/hexo-theme-flowbite/*.js"
+    ],
     build
   );
 }

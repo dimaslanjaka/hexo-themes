@@ -7,13 +7,13 @@
     <div class="flex w-full">
       <main class="flex-auto w-full min-w-0 lg:static lg:max-h-full lg:overflow-visible">
         {# page overview #}
-        <div id="accordion-collapse" data-accordion="collapse">
-          <h2 id="accordion-collapse-heading-1">
+        <div id="accordion-collapse-metadata" data-accordion="collapse">
+          <h2 id="accordion-post-metadata">
             <button type="button"
                     class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                    data-accordion-target="#accordion-collapse-body-1"
+                    data-accordion-target="#accordion-post-metadata-body"
                     aria-expanded="false"
-                    aria-controls="accordion-collapse-body-1">
+                    aria-controls="accordion-post-metadata-body">
               <span class="font-bold tracking-tight text-gray-900 dark:text-white">{{ page.title }} - {{ config.title }}</span>
               <svg data-accordion-icon
                    class="w-3 h-3 rotate-180 shrink-0"
@@ -25,10 +25,10 @@
               </svg>
             </button>
           </h2>
-          <div id="accordion-collapse-body-1"
+          <div id="accordion-post-metadata-body"
                class="hidden"
-               aria-labelledby="accordion-collapse-heading-1">
-            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+               aria-labelledby="accordion-post-metadata">
+            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
               <p class="text-gray-500 dark:text-gray-400">{{ page.description }}</p>
             </div>
           </div>
@@ -40,77 +40,127 @@
       </main>
       <div class="flex-none hidden w-64 pl-8 mr-8 xl:text-sm lg:block">
         <div class="flex overflow-y-auto sticky top-5 flex-col justify-between">
-          {% if tocdatas.length > 0 %}
-            <h4 class="pl-2.5 mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase dark:text-white lg:text-xs">
-              On this page
-            </h4>
-            <nav id="TableOfContents">
-              <ul class="toc">
-                {%- for dataToc in tocdatas %}
-                  <li>
-                    <a href="{{ dataToc.link }}">{{ dataToc.title }}</a>
-                    {%- if dataToc.subItems.length > 0 %}
-                      <ul>
-                        {%- for subItem in dataToc.subItems %}
-                          <li>
-                            <a href="{{ subItem.link }}">{{ subItem.title }}</a>
-                            {%- if subItem.subItems.length > 0 %}
-                              <ul>
-                                {%- for nestedItem in subItem.subItems %}
-                                  <li>
-                                    <a href="{{ nestedItem.link }}">{{ nestedItem.title }}</a>
-                                    {%- if nestedItem.subItems.length > 0 %}
-                                      <ul>
-                                        {%- for deeperItem in nestedItem.subItems %}
-                                          <li>
-                                            <a href="{{ deeperItem.link }}">{{ deeperItem.title }}</a>
-                                            {%- if deeperItem.subItems.length > 0 %}
-                                              <ul>
-                                                {%- for deepestItem in deeperItem.subItems %}
-                                                  <li>
-                                                    <a href="{{ deepestItem.link }}">{{ deepestItem.title }}</a>
-                                                  </li>
-                                                {%- endfor %}
-                                              </ul>
-                                            {%- endif %}
-                                          </li>
-                                        {%- endfor %}
-                                      </ul>
-                                    {%- endif %}
-                                  </li>
-                                {%- endfor %}
-                              </ul>
-                            {%- endif %}
-                          </li>
-                        {%- endfor %}
-                      </ul>
-                    {%- endif %}
-                  </li>
-                {%- endfor %}
-              </ul>
-            </nav>
-            <div class="border-b border-gray-300 my-4"></div>
-          {% endif %}
-          {%- if (post.tags and post.tags.length) or (site.tags and site.tags.length) %}
-            <h4 class="pl-2.5 mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase dark:text-white lg:text-xs">
-              Tags
-            </h4>
-            {%- set all_tags = [] %}
-            {%- if post.tags %}
-              {%- set all_tags = all_tags.concat(post.tags.toArray()) %}
-            {%- endif %}
-            {%- if site.tags %}
-              {%- set all_tags = all_tags.concat(site.tags.toArray()) %}
-            {%- endif %}
-            <div class="flex flex-wrap justify-center">
-              {%- for tag in all_tags %}
-                <a href="{{ url_for(tag.path) }}"
-                   rel="tag"
-                   class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> {{ tag.name }}</a>
-              {%- endfor %}
-            </div>
-            <div class="border-b border-gray-300 my-4"></div>
-          {%- endif %}
+          {# accordion start #}
+          <div id="accordion-collapse-aside" data-accordion="collapse">
+            {% if tocdatas.length > 0 %}
+              <h2 id="accordion-post-toc">
+                <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-post-toc-body"
+                        aria-expanded="false"
+                        aria-controls="accordion-post-toc-body">
+                  <span><i class="fa-light fa-table mr-2"></i> On this page</span>
+                  <svg data-accordion-icon
+                       class="w-3 h-3 rotate-180 shrink-0"
+                       aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-post-toc-body"
+                   class="hidden"
+                   aria-labelledby="accordion-post-toc">
+                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                  <nav id="TableOfContents">
+                    <ul class="toc">
+                      {%- for dataToc in tocdatas %}
+                        <li>
+                          <a href="{{ dataToc.link }}">{{ dataToc.title }}</a>
+                          {%- if dataToc.subItems.length > 0 %}
+                            <ul>
+                              {%- for subItem in dataToc.subItems %}
+                                <li>
+                                  <a href="{{ subItem.link }}">{{ subItem.title }}</a>
+                                  {%- if subItem.subItems.length > 0 %}
+                                    <ul>
+                                      {%- for nestedItem in subItem.subItems %}
+                                        <li>
+                                          <a href="{{ nestedItem.link }}">{{ nestedItem.title }}</a>
+                                          {%- if nestedItem.subItems.length > 0 %}
+                                            <ul>
+                                              {%- for deeperItem in nestedItem.subItems %}
+                                                <li>
+                                                  <a href="{{ deeperItem.link }}">{{ deeperItem.title }}</a>
+                                                  {%- if deeperItem.subItems.length > 0 %}
+                                                    <ul>
+                                                      {%- for deepestItem in deeperItem.subItems %}
+                                                        <li>
+                                                          <a href="{{ deepestItem.link }}">{{ deepestItem.title }}</a>
+                                                        </li>
+                                                      {%- endfor %}
+                                                    </ul>
+                                                  {%- endif %}
+                                                </li>
+                                              {%- endfor %}
+                                            </ul>
+                                          {%- endif %}
+                                        </li>
+                                      {%- endfor %}
+                                    </ul>
+                                  {%- endif %}
+                                </li>
+                              {%- endfor %}
+                            </ul>
+                          {%- endif %}
+                        </li>
+                      {%- endfor %}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            {% endif %}
+            {%- if (post.tags and post.tags.length) or (site.tags and site.tags.length) %}
+              <h2 id="accordion-post-tags">
+                <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-post-tags-body"
+                        aria-expanded="false"
+                        aria-controls="accordion-post-tags-body">
+                  <span><i class="fa-duotone fa-solid fa-tags mr-2"></i> Tags</span>
+                  <svg data-accordion-icon
+                       class="w-3 h-3 rotate-180 shrink-0"
+                       aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-post-tags-body"
+                   class="hidden"
+                   aria-labelledby="accordion-post-tags">
+                <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                  {%- set all_tags = [] %}
+                  {%- if post.tags %}
+                    {%- set all_tags = all_tags.concat(post.tags.toArray()) %}
+                  {%- endif %}
+                  {%- if site.tags %}
+                    {%- set all_tags = all_tags.concat(site.tags.toArray()) %}
+                  {%- endif %}
+                  <div class="flex flex-wrap justify-center">
+                    {%- for tag in all_tags %}
+                      <a href="{{ url_for(tag.path) }}"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> {{ tag.name }}</a>
+                    {%- endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          {# accordion ends #}
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-2188063137129806"
+               data-ad-slot="1136979979"
+               data-ad-format="auto"
+               data-full-width-responsive="true"
+               data-adtest="on"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
       </div>
     </div>
