@@ -7,3 +7,4 @@ require("./post/author");
 require("./post/metadata");
 require("./post/thumbnail");
 require("./utils");
+require("./config");

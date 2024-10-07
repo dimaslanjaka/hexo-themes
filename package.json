@@ -31,6 +31,7 @@
   ],
   "dependencies": {
     "cheerio": "^1.0.0",
+    "deepmerge-ts": "^7.1.1",
     "hexo": "^7.3.0",
     "hexo-asset-link": "^2.2.3",
     "hexo-cli": "^4.3.2",
@@ -52,7 +53,8 @@
     "nunjucks": "^3.2.4",
     "sanitize-filename": "^1.6.3",
     "static-blog-generator": "^3.0.1",
-    "warehouse": "^5.0.1"
+    "warehouse": "^5.0.1",
+    "yaml": "^2.5.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.0",
