@@ -94,8 +94,22 @@ hexo.extend.helper.register("pageInfo", (page: HexoPageSchema) => {
   const cachePath = getCachePath(page);
   if (fs.existsSync(cachePath)) {
     try {
-      const extract = jsonParseWithCircularRefs(fs.readFileSync(cachePath, "utf-8"));
-      return extract;
+      const result = jsonParseWithCircularRefs<HexoPageSchema>(fs.readFileSync(cachePath, "utf-8"));
+      if (result && result.metadata) {
+        // Assign values to the page object if they exist and are not undefined or null
+        for (const key in result.metadata) {
+          if (["type"].includes(key)) continue;
+          if (Object.hasOwnProperty.call(result.metadata, key)) {
+            const value = result.metadata[key];
+            if (value !== undefined && value !== null && !page[key]) {
+              // fix: thumbnail always undefined
+              if (key === "cover" && value.includes("no-image-svgrepo")) continue;
+              if (key === "thumbnail" && value.includes("no-image-svgrepo")) continue;
+              page[key] = value;
+            }
+          }
+        }
+      }
     } catch (error) {
       hexo.log.error("fail load post info", error.message);
     }
