@@ -4,3 +4,4 @@ require("./helpers");
 require("./injector");
 require("./paginator");
 require("./post");
+require("./utils");

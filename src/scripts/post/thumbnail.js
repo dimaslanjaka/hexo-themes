@@ -42,6 +42,8 @@ function getImages(page) {
   return final;
 }
 
+hexo.extend.helper.register("getImages", getImages);
+
 /**
  * get thumbnail url
  * @param {import("hexo/dist/hexo/locals-d").HexoLocalsData} page
