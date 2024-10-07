@@ -139,3 +139,4 @@ yarn.lock
 
 **/tmp
 /public
+.deploy_*

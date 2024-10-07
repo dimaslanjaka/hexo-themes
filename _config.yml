@@ -24,7 +24,7 @@ search:
   content: true
   format: html
 url: https://www.webmanajemen.com/
-root: /hexo-theme-flowbite/
+root: /hexo-themes/hexo-theme-flowbite/
 permalink: :title.html
 permalink_defaults:
   lang: en
