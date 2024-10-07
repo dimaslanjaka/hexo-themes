@@ -414,6 +414,8 @@ function requireThumbnail () {
 	  return final;
 	}
 
+	hexo.extend.helper.register("getImages", getImages);
+
 	/**
 	 * get thumbnail url
 	 * @param {import("hexo/dist/hexo/locals-d").HexoLocalsData} page
@@ -520,6 +522,36 @@ function requirePost () {
 	return post;
 }
 
+var utils = {};
+
+var array = {};
+
+var hasRequiredArray;
+
+function requireArray () {
+	if (hasRequiredArray) return array;
+	hasRequiredArray = 1;
+	function chunkArray(array, size) {
+	  const result = [];
+	  for (let i = 0; i < array.length; i += size) {
+	    result.push(array.slice(i, i + size));
+	  }
+	  return result;
+	}
+
+	hexo.extend.helper.register("chunkArray", chunkArray);
+	return array;
+}
+
+var hasRequiredUtils;
+
+function requireUtils () {
+	if (hasRequiredUtils) return utils;
+	hasRequiredUtils = 1;
+	requireArray();
+	return utils;
+}
+
 var hasRequiredScripts;
 
 function requireScripts () {
@@ -531,6 +563,7 @@ function requireScripts () {
 	requireInjector();
 	requirePaginator();
 	requirePost();
+	requireUtils();
 	return scripts;
 }
 
