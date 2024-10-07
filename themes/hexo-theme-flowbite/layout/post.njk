@@ -38,6 +38,7 @@
         {{ injectBeforePostHtml() }}
         <div class="p-5">{{ partial('macro/labels.njk', { post: post }) }}</div>
         <div class="max-w-none format lg:format-lg dark:format-invert format-red post">{{ post.content }}</div>
+        {{ partial('macro/gallery-collage.njk', { post: post }) }}
         {% include 'partials/disqus.njk' %}
         {{ injectAfterPostHtml() }}
       </main>
