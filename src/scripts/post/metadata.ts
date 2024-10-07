@@ -1,7 +1,7 @@
 import hexoPostParser, { postMap } from "hexo-post-parser";
 import path from "path";
 import sanitize from "sanitize-filename";
-import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5 } from "sbg-utility";
+import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
 
 hexoPostParser.setConfig(hexo.config);
@@ -16,10 +16,13 @@ const pageQueue: HexoPageSchema[] = [];
 let isProcessing = false;
 
 function getCachePath(page: HexoPageSchema) {
+  let hash: string;
+  if (page && "full_source" in page) md5FileSync(page.full_source);
+  if (!hash) hash = md5(page.content || page._content);
   return path.join(
     process.cwd(),
     "tmp/hexo-theme-flowbite/caches/post-" +
-      sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + md5(page.content || page._content))
+      sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + hash)
   );
 }
 

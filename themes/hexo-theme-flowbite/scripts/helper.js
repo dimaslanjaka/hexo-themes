@@ -365,8 +365,13 @@ hexoPostParser.setConfig(hexo.config);
 var pageQueue = [];
 var isProcessing = false;
 function getCachePath(page) {
+    var hash;
+    if (page && "full_source" in page)
+        sbgUtility.md5FileSync(page.full_source);
+    if (!hash)
+        hash = sbgUtility.md5(page.content || page._content);
     return path.join(process.cwd(), "tmp/hexo-theme-flowbite/caches/post-" +
-        sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + sbgUtility.md5(page.content || page._content)));
+        sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + hash));
 }
 /**
  * Preprocess a page and save its parsed result to a cache file
