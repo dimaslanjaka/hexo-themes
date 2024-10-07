@@ -27,7 +27,7 @@
     "cheerio": "^1.0.0",
     "fs-extra": "^11.2.0",
     "hexo-post-parser": "^1.2.14",
-    "hexo-renderers": "*",
+    "hexo-renderers": "^2.0.5",
     "highlight.js": "^11.10.0",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
