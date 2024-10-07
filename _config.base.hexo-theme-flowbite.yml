@@ -3,7 +3,8 @@ subtitle: "Hexo Theme Flowbite"
 description: Website Management Indonesia - hexo-theme-flowbite is hexo theme build with flowbite
 keywords: javascript, typescript, scss, css, html, nunjucks
 url: https://www.webmanajemen.com/
-root: /hexo-themes/hexo-theme-flowbite/
+root: /hexo-theme-flowbite/
+public_dir: public/hexo-theme-flowbite
 permalink: :title.html
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

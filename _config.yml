@@ -24,7 +24,7 @@ search:
   content: true
   format: html
 url: https://www.webmanajemen.com/
-root: /hexo-themes/hexo-theme-flowbite/
+root: /hexo-theme-flowbite/
 permalink: :title.html
 permalink_defaults:
   lang: en
@@ -32,7 +32,7 @@ pretty_urls:
   trailing_index: true
   trailing_html: true
 source_dir: source
-public_dir: public
+public_dir: public/hexo-theme-flowbite
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
