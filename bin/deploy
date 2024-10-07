@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
+
+const fs = require("fs-extra");
+const cp = require("cross-spawn");
+const gulp = require("gulp");
+const path = require("path");
+
+const remote = "https://github.com/dimaslanjaka/hexo-themes";
+const branch = "gh-pages";
+const deployDir = ".deploy_git";
+/**
+ * @type {import("child_process").SpawnOptions}
+ */
+const cpOpt = { cwd: deployDir, stdio: "inherit" };
+
+async function initializeGit() {
+  await cp.spawnAsync("git", ["remote", "add", "origin", remote], { ...cpOpt, stdio: "ignore" });
+  await cp.spawnAsync("git", ["remote", "set-url", "origin", remote], { ...cpOpt, stdio: "ignore" });
+  await cp.spawnAsync("git", ["checkout", branch], cpOpt);
+  await cp.spawnAsync("git", ["pull"], cpOpt);
+}
+
+/**
+ * copy and process files using gulp
+ * @param {string|string[]} src
+ * @param {string} dest
+ * @param {Parameters<typeof gulp['src']>[1]} options
+ * @returns {Promise<void>}
+ */
+async function gulpCopyAsync(src, dest, options) {
+  return new Promise((resolve, reject) => {
+    gulp.src(src, options).pipe(gulp.dest(dest)).on("end", resolve).on("error", reject);
+  });
+}
+
+async function main() {
+  if (fs.existsSync(deployDir + "/.git")) {
+    await initializeGit();
+    const src = "./public/**/*";
+    console.log("copying", src, "to", deployDir);
+    await gulpCopyAsync(src, deployDir);
+    await cp.spawnAsync("git", ["add", "."], cpOpt);
+    await cp.spawnAsync("git", ["commit", "-m", "update site " + new Date()], cpOpt);
+    await cp.spawnAsync("git", ["push", "-u", "origin", branch], cpOpt);
+  }
+}
+
+main();
