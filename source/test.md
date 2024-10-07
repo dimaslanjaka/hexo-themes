@@ -1,3 +1,5 @@
 ---
-layout: test
+layout: test-flowbite
 ---
+
+Test flowbite layout
