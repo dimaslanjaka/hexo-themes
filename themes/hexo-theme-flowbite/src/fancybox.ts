@@ -15,4 +15,30 @@ export default function initFancybox() {
   Fancybox.bind(wrapper, "[data-fancybox=true]", {
     // Your custom options
   });
+
+  // mansonry - \layout\macro\gallery-mansonry.njk
+  // Select all buttons with the masonry-target attribute
+  const buttons = document.querySelectorAll("[masonry-target]");
+
+  // Loop through each button and add a click event listener
+  buttons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Get the target ID from the masonry-target attribute
+      const targetId = this.getAttribute("masonry-target");
+      const image = document.getElementById(targetId);
+      if (image) {
+        // Get the src of the original image
+        const imageSrc = image.getAttribute("src");
+
+        // Show Fancybox with the image
+        Fancybox.show([
+          {
+            src: imageSrc, // Use the copied src instead of inline
+            type: "image" // Specify type as image
+          }
+        ]);
+      }
+    });
+  });
 }

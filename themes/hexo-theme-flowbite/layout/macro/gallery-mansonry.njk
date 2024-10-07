@@ -5,26 +5,14 @@
     {% for imageUrl in images %}
       <div class="masonry-item relative overflow-hidden rounded-lg">
         <img src="{{ imageUrl }}"
+             id="image-{{ loop.index }}"
              alt="Gallery Image {{ loop.index }}"
              class="w-full h-full object-cover transition-transform transform hover:scale-105 duration-300">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300">
           <button class="px-3 py-1 text-white bg-blue-600 rounded-lg"
-                  data-modal-target="modal-{{ loop.index }}"
-                  data-modal-toggle="modal-{{ loop.index }}">View</button>
+                  masonry-target="image-{{ loop.index }}">View</button>
         </div>
       </div>
     {% endfor %}
   </div>
 </div>
-{% for imageUrl in images %}
-  <div id="modal-{{ loop.index }}"
-       class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-white rounded-lg p-2">
-      <img src="{{ imageUrl }}"
-           alt="Modal Image {{ loop.index }}"
-           class="w-full h-auto">
-      <button class="mt-2 px-3 py-1 bg-blue-600 text-white rounded-lg"
-              data-modal-hide="modal-{{ loop.index }}">Close</button>
-    </div>
-  </div>
-{% endfor %}
