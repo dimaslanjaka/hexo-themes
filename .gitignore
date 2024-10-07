@@ -138,3 +138,4 @@ dist
 yarn.lock
 
 **/tmp
+/public
