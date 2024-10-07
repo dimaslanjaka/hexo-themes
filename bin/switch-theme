@@ -1,8 +1,11 @@
-import fs from "fs-extra";
-import minimist from "minimist";
-import yaml from "yaml";
+#!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
 
-// ts-node switch-theme.ts flowbite
+const fs = require("fs-extra");
+const minimist = require("minimist");
+const yaml = require("yaml");
+
+// switch-theme flowbite
 
 const argv = minimist(process.argv.slice(2));
 const themeName = argv._[0].includes("hexo-theme") ? argv._[0] : "hexo-theme-" + argv._[0];
