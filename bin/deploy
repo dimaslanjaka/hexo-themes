@@ -34,12 +34,46 @@ async function gulpCopyAsync(src, dest, options) {
   });
 }
 
+/**
+ * Copies a file from source to destination with additional checks and options.
+ *
+ * @param {string} srcPath - The path to the source file.
+ * @param {string} destPath - The path to the destination file.
+ * @param {import('fs-extra').CopyOptions} [options={}] - Optional options to forward to fs.copy.
+ * @returns {Promise<void>} - Resolves if the file is copied successfully.
+ * @throws {Error} - Throws an error if the source file does not exist.
+ */
+async function copyFile(srcPath, destPath, options = {}) {
+  try {
+    // Check if the source file exists
+    const srcExists = await fs.pathExists(srcPath);
+    if (!srcExists) {
+      console.error(`Source file does not exist: ${srcPath}`);
+      return false;
+    }
+
+    // Ensure the destination directory exists (recursive)
+    const destDir = path.dirname(destPath);
+    await fs.ensureDir(destDir);
+
+    // Copy the file with provided options
+    await fs.copy(srcPath, destPath, options);
+
+    console.log(`File copied successfully from ${srcPath} to ${destPath}`);
+  } catch (error) {
+    console.error(`Error copying file: ${error.message}`);
+    throw error;
+  }
+}
+
 async function main() {
   if (fs.existsSync(deployDir + "/.git")) {
     await initializeGit();
     const src = "./public/**/*";
     console.log("copying", src, "to", deployDir);
     await gulpCopyAsync(src, deployDir);
+    console.log("fix corruped binary files");
+    await copyFile("public", deployDir);
     await cp.spawnAsync("git", ["add", "."], cpOpt);
     await cp.spawnAsync("git", ["commit", "-m", "update site " + new Date()], cpOpt);
     await cp.spawnAsync("git", ["push", "-u", "origin", branch], cpOpt);
