@@ -17,3 +17,4 @@ nav:
         link: "#"
         divider: true
 nav_icon: https://flowbite.com/docs/images/logo.svg
+gallery: true

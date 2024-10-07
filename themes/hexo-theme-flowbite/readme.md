@@ -2,6 +2,10 @@
 
 ### Syntax highlighter
 
+This theme only working for highlight.js with below configuration
+
+- apply to `_config.yml`
+
 ```yaml
 # https://github.com/hexojs/hexo-util
 # https://hexo.io/docs/syntax-highlight.html
@@ -20,11 +24,27 @@ prismjs:
   tab_replace: '  ' # replace tabs with 2 spaces
 ```
 
+### Gallery
+
+Show gallery each post (`boolean`)
+
+- apply to `_config.flowbite.yml`
+
+```yml
+gallery: true
+```
+
 ### Disqus comment
+
+Integrate disqus comment system (`string`)
+
+- apply to `_config.yml`
 
 ```yaml
 disqus_shortname: YOUR_DISQUS_USERNAME
 ```
+
+> remove `disqus_shortname` to disable disqus comment system
 
 ### Code injection
 

@@ -38,7 +38,8 @@
         {{ injectBeforePostHtml() }}
         <div class="p-5">{{ partial('macro/labels.njk', { post: post }) }}</div>
         <div class="max-w-none format lg:format-lg dark:format-invert format-red post">{{ post.content }}</div>
-        {{ partial('macro/gallery-mansonry.njk', { post: post }) }}
+        {% if theme.gallery %}{{ partial('macro/gallery-mansonry.njk', { post: post }) }}{% endif %}
+        {% include 'partials/post-pagination.njk' %}
         {% include 'partials/disqus.njk' %}
         {{ injectAfterPostHtml() }}
       </main>
