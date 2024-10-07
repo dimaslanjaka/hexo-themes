@@ -1,0 +1,17 @@
+title: "WMI"
+subtitle: "Hexo Theme Flowbite"
+description: Website Management Indonesia - hexo-theme-flowbite is hexo theme build with flowbite
+keywords: javascript, typescript, scss, css, html, nunjucks
+url: https://www.webmanajemen.com/
+root: /hexo-themes/hexo-theme-flowbite/
+permalink: :title.html
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: "/"
+  per_page: 9
+  order_by: -updated # updated | date | -date | -updated
+  pagination_dir: page
+disqus_shortname: dimaslanjaka

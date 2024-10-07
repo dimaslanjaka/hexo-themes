@@ -1,7 +1,0 @@
-title: "WMI"
-subtitle: "Hexo Theme Flowbite"
-description: Website Management Indonesia - hexo-theme-flowbite is hexo theme build with flowbite
-keywords: javascript, typescript, scss, css, html, nunjucks
-url: https://www.webmanajemen.com/
-root: /hexo-themes/hexo-theme-flowbite/
-permalink: :title.html
