@@ -13,7 +13,10 @@
     "scripts",
     "source",
     "_config.yml",
-    "_vendors.yml"
+    "_vendors.yml",
+    "src",
+    "*.cjs",
+    "*.js"
   ],
   "author": {
     "email": "dimaslanjaka@gmail.com",

@@ -1,7 +1,7 @@
 import * as croSpawn from "cross-spawn";
-import { existsSync, mkdirSync, renameSync, rmSync } from "fs";
+import { existsSync, mkdirSync, renameSync, rmSync } from "fs-extra";
 import minimist from "minimist";
-import { dirname, join } from "path";
+import path from "path";
 import pc from "picocolors";
 
 const argv = minimist(process.argv.slice(2));
@@ -16,7 +16,7 @@ const parseWorkspaces = croSpawn
       .filter((str) => str.length > 4)
       .map((str) => {
         const parse: { location: string; name: string } = JSON.parse(str.trim());
-        parse.location = join(__dirname, parse.location);
+        parse.location = path.join(__dirname, parse.location);
         return parse;
       })
       .filter((o) => existsSync(o.location))
@@ -24,7 +24,7 @@ const parseWorkspaces = croSpawn
 
 async function buildPack(workspaces: Awaited<typeof parseWorkspaces>) {
   if (workspaces.length === 0) return console.log("workspaces empty");
-  const runBuild = (wname: string, clean?: boolean) => {
+  const runBuild = async (wname: string, clean?: boolean) => {
     // activate clean when argument -c or --clean exist and clean option is undefined
     if (typeof clean === "undefined") clean = argv["c"] || argv["clean"];
 
@@ -32,59 +32,48 @@ async function buildPack(workspaces: Awaited<typeof parseWorkspaces>) {
     const workspace = workspaces.filter((o) => o.name === wname)[0];
     if (!workspace) throw new Error("workspace " + wname + " not found");
 
-    let promised: ReturnType<typeof croSpawn.async>;
     if (clean) {
-      promised = croSpawn
-        .async("yarn", ["run", "clean"], {
-          cwd: workspace.location
-        })
-        .then(() =>
-          croSpawn.async("yarn", ["run", "build"], {
-            cwd: workspace.location
-          })
-        );
+      await croSpawn.async("yarn", ["run", "clean"], {
+        cwd: workspace.location
+      });
+      await croSpawn.async("yarn", ["run", "build"], {
+        cwd: workspace.location
+      });
     } else {
-      promised = croSpawn.async("yarn", ["run", "build"], {
+      await croSpawn.async("yarn", ["run", "build"], {
         cwd: workspace.location
       });
     }
-    return promised
-      .then(() =>
-        croSpawn.async("yarn", ["workspace", wname, "pack"], {
-          cwd: __dirname
-        })
-      )
-      .then(() => {
-        if (typeof workspace === "object") {
-          const tarballName = workspace.name + ".tgz";
-          const tarballPath = join(workspace.location, tarballName);
-          const originalTarballPath = join(workspace.location, "package.tgz");
+    await croSpawn.async("yarn", ["workspace", wname, "pack"], {
+      cwd: __dirname
+    });
+    if (typeof workspace === "object") {
+      const tarballName = workspace.name + ".tgz";
+      const tarballPath = path.join(workspace.location, tarballName);
+      const originalTarballPath = path.join(workspace.location, "package.tgz");
 
-          // rename package.tgz to {workspace.name}.tgz
-          if (existsSync(originalTarballPath)) {
-            renameSync(originalTarballPath, tarballPath);
-          } else {
-            console.log(originalTarballPath + " not found");
-          }
-          // move {workspace.name}.tgz to releases/{workspace.name}.tgz
-          if (existsSync(tarballPath)) {
-            const dest = join(__dirname, "releases", tarballName);
-            if (!existsSync(dirname(dest))) mkdirSync(dirname(dest));
-            if (existsSync(dest)) rmSync(dest);
-            renameSync(tarballPath, dest);
-          } else {
-            console.log(tarballPath + " not found");
-          }
-        } else {
-          console.log(wname, "is not workspace");
-        }
-      })
-      .then(() =>
-        console.log(
-          wname.padEnd(19),
-          ((clean ? pc.red("clean") + "->" : "") + pc.green("build") + "->" + pc.yellow("pack") + " successful").trim()
-        )
-      );
+      // rename package.tgz to {workspace.name}.tgz
+      if (existsSync(originalTarballPath)) {
+        renameSync(originalTarballPath, tarballPath);
+      } else {
+        console.log(originalTarballPath + " not found");
+      }
+      // move {workspace.name}.tgz to releases/{workspace.name}.tgz
+      if (existsSync(tarballPath)) {
+        const dest = path.join(__dirname, "releases", tarballName);
+        if (!existsSync(path.dirname(dest))) mkdirSync(path.dirname(dest));
+        if (existsSync(dest)) rmSync(dest);
+        renameSync(tarballPath, dest);
+      } else {
+        console.log(tarballPath + " not found");
+      }
+    } else {
+      console.log(wname, "is not workspace");
+    }
+    return console.log(
+      wname.padEnd(19),
+      ((clean ? pc.red("clean") + "->" : "") + pc.green("build") + "->" + pc.yellow("pack") + " successful").trim()
+    );
   };
 
   return new Promise((res: (...args: any[]) => void) => {
