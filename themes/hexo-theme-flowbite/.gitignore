@@ -63,3 +63,5 @@ venv/
 /databases
 /public/static
 **/.mypy_cache
+/source/js
+/source/css
