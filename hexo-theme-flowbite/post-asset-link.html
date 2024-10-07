@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=9; IE=8; IE=7; IE=EDGE; chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      post-asset-link test - WMI
+    </title>
+    <meta name="description" content="WMI - post-asset-link testppost body/p pimg src=/hexo-theme-flowbite/post-asset-link/sample.jpg alt=Alt Text title=Title Textbrimg src=/hexo-theme-flowbite/post-asset-link/sample.jpg alt=Alt Text title=Titl" />
+    <meta name="keywords" content="keyword1, keyword2, keyword3, keyword4">
+    <meta name="author"
+          content="Dimas Lanjaka">
+    <link rel="icon"
+          type="image/x-icon"
+          href="//www.webmanajemen.com/favicon.ico" />
+    <link rel="stylesheet"
+          href="https://rawcdn.githack.com/dimaslanjaka/Web-Manajemen/0f634f242ff259087c9fe176e8f28ccaebb5c015/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <!--<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || { cmd: [] };
+  googletag.cmd.push(function () {
+    googletag.defineSlot('/23205672412/15674323', [[320, 480], [480, 320], [1024, 768], [768, 1024]], 'div-gpt-ad-1727938514366-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2188063137129806"
+  crossorigin="anonymous"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="bg-white dark:bg-slate-800 dark:text-slate-200">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 mb-4">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="WMI Logo" />
+      <span class="text-2xl font-semibold whitespace-nowrap dark:text-white">WMI</span>
+    </a>
+    <button data-collapse-toggle="navbar-dropdown"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-dropdown"
+            aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5"
+           aria-hidden="true"
+           xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+      </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        
+        
+          
+            
+              <a href="/about"
+                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+            
+          
+            
+              <a href="https://www.webmanajemen.com/p/privacy.html"
+                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Privacy Policy</a>
+            
+          
+            
+              <a href="https://www.webmanajemen.com/p/tos.html"
+                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Terms Of Service</a>
+            
+          
+            
+              <a href="/contact"
+                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+            
+          
+            
+              <li>
+                <button id="dropdownNavbarLink"
+                        data-dropdown-toggle="dropdownNavbar"
+                        class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                  Sub Menu
+                  <svg class="w-2.5 h-2.5 ms-2.5"
+                       aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                  </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownNavbar"
+                     class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                      aria-labelledby="dropdownLargeButton">
+                    
+                      
+                        <li>
+                          <a href="#"
+                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sub Menu 1</a>
+                        </li>
+                      
+                    
+                      
+                        <li>
+                          <a href="#"
+                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sub Menu 2</a>
+                        </li>
+                      
+                    
+                      
+                    
+                  </ul>
+                  
+                    
+                  
+                    
+                  
+                    
+                      <div class="py-1">
+                        <a href="#"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sub Menu 3</a>
+                      </div>
+                    
+                  
+                </div>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <main class="mx-4">
+      
+  <div class="w-full mx-auto max-w-8xl">
+    <div class="flex w-full">
+      <main class="flex-auto w-full min-w-0 lg:static lg:max-h-full lg:overflow-visible">
+        
+        <div id="accordion-collapse-metadata" data-accordion="collapse">
+          <h2 id="accordion-post-metadata">
+            <button type="button"
+                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                    data-accordion-target="#accordion-post-metadata-body"
+                    aria-expanded="false"
+                    aria-controls="accordion-post-metadata-body">
+              <span class="font-bold tracking-tight text-gray-900 dark:text-white">post-asset-link test - WMI</span>
+              <svg data-accordion-icon
+                   class="w-3 h-3 rotate-180 shrink-0"
+                   aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+              </svg>
+            </button>
+          </h2>
+          <div id="accordion-post-metadata-body"
+               class="hidden"
+               aria-labelledby="accordion-post-metadata">
+            <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+              <p class="text-gray-500 dark:text-gray-400">post-asset-link testppost body/p pimg src=/hexo-theme-flowbite/post-asset-link/sample.jpg alt=Alt Text title=Title Textbrimg src=/hexo-theme-flowbite/post-asset-link/sample.jpg alt=Alt Text title=Titl</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- /23205672412/15674323 -->
+<!--<div id="div-gpt-ad-1727938514366-0" style="min-width: 320px; min-height: 320px">
+  <script>
+    googletag.cmd.push(function () {
+      googletag.display("div-gpt-ad-1727938514366-0");
+    });
+  </script>
+</div>-->
+
+        <div class="p-5"><span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+</span>
+</div>
+        <div class="max-w-none format lg:format-lg dark:format-invert format-red post"><p>post body</p>
+<p><img src="/hexo-theme-flowbite/post-asset-link/sample.jpg" alt="Alt Text" title="Title Text"><br><img src="/hexo-theme-flowbite/post-asset-link/sample.jpg" alt="Alt Text" title="Title Text"></p>
+<script src="post-asset-link/script.js"></script>
+</div>
+        
+
+
+        
+  <div class="border-t border-gray-300 dark:border-gray-600"></div>
+  <div class="flex justify-between items-center py-4">
+    <div class="post-nav-item">
+        <a href="/hexo-theme-flowbite/no-title-with-desc.html"
+           rel="prev"
+           title=""
+           class="inline-flex items-center px-4 py-2 text-base font-medium text-gray-700 bg-white rounded-lg hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700">
+          <i class="fa fa-angle-left mr-2"></i> 
+        </a>
+    </div>
+    <div class="post-nav-item">
+        <a href="/hexo-theme-flowbite/code-highlight.html"
+           rel="next"
+           title="Code Highlight Style test"
+           class="inline-flex items-center px-4 py-2 text-base font-medium text-gray-700 bg-white rounded-lg hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700">
+          Code Highlight Style test <i class="fa fa-angle-right ml-2"></i>
+        </a>
+    </div>
+  </div>
+  <div class="border-b border-gray-300 dark:border-gray-600"></div>
+
+        
+  <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+            var disqus_config = function (){
+              this.page.url = 'https://www.webmanajemen.com/post-asset-link.html';
+              this.page.identifier = 'https://www.webmanajemen.com/post-asset-link.html';
+            };
+
+            (function() {
+            var d = document, s = d.createElement('script');
+            s.type = 'text/javascript'; s.async = true;
+            s.src = 'https://dimaslanjaka.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a></noscript>
+  </div>
+
+
+        <!--inject html after post-->
+      </main>
+      <div class="flex-none hidden w-64 pl-8 mr-8 xl:text-sm lg:block">
+        <div class="flex overflow-y-auto sticky top-5 flex-col justify-between">
+          
+          <div id="accordion-collapse-aside" data-accordion="collapse">
+            
+              <h2 id="accordion-post-tags">
+                <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-post-tags-body"
+                        aria-expanded="false"
+                        aria-controls="accordion-post-tags-body">
+                  <span><i class="fa-duotone fa-solid fa-tags mr-2"></i> Tags</span>
+                  <svg data-accordion-icon
+                       class="w-3 h-3 rotate-180 shrink-0"
+                       aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+                  </svg>
+                </button>
+              </h2>
+              <div id="accordion-post-tags-body"
+                   class="hidden"
+                   aria-labelledby="accordion-post-tags">
+                <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                  <div class="flex flex-wrap justify-center">
+                      <a href="/hexo-theme-flowbite/tags/code/"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> code</a>
+                      <a href="/hexo-theme-flowbite/tags/Foo/"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> Foo</a>
+                      <a href="/hexo-theme-flowbite/tags/Bar/"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> Bar</a>
+                      <a href="/hexo-theme-flowbite/tags/sample/"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> sample</a>
+                      <a href="/hexo-theme-flowbite/tags/plugin/"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> plugin</a>
+                      <a href="/hexo-theme-flowbite/tags/Baz/"
+                         rel="tag"
+                         class="hover:text-blue-700 mx-2"><i class="fa-regular fa-tag"></i> Baz</a>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+          
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-2188063137129806"
+               data-ad-slot="1136979979"
+               data-ad-format="auto"
+               data-full-width-responsive="true"
+               data-adtest="on"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </main>
+    <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+  <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://www.webmanajemen.com" class="hover:underline">WMI™</a>. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+      
+        
+          
+            <li>
+              <a href="/about"
+                 class="hover:underline me-4 md:me-6">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.webmanajemen.com/p/privacy.html"
+                 class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.webmanajemen.com/p/tos.html"
+                 class="hover:underline me-4 md:me-6">Terms Of Service</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact"
+                 class="hover:underline me-4 md:me-6">Contact</a>
+            </li>
+          
+        
+          
+        
+      
+    </ul>
+  </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="/js/script.js"></script>
+    <!-- inject before end body -->
+  
+<script src="/hexo-theme-flowbite/hexo-shortcodes-lib/githubcard.js"></script>
+<link rel="stylesheet" href="/hexo-theme-flowbite/hexo-shortcodes-lib/gist.css" />
+</body>
+      
+</html>
