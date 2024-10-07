@@ -1,6 +1,6 @@
 {
   "name": "hexo-theme-flowbite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "bin": "bin/hexo-theme-flowbite.js",
   "scripts": {

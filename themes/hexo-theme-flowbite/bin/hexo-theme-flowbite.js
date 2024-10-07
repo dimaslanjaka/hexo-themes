@@ -1,8 +1,28 @@
 'use strict';
 
 var axios = require('axios');
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
+var tar = require('tar');
+
+function _interopNamespaceDefault(e) {
+    var n = Object.create(null);
+    if (e) {
+        Object.keys(e).forEach(function (k) {
+            if (k !== 'default') {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function () { return e[k]; }
+                });
+            }
+        });
+    }
+    n.default = e;
+    return Object.freeze(n);
+}
+
+var tar__namespace = /*#__PURE__*/_interopNamespaceDefault(tar);
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -64,21 +84,68 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
 
+/**
+ * Extracts a specific subdirectory from a `.tgz` file to an output directory.
+ *
+ * @param filePath - The path to the `.tgz` file.
+ * @param outputDir - The directory where files will be extracted.
+ * @param subPath - The subdirectory within the `.tgz` archive to extract (e.g., 'package/').
+ * @param strip - Whether to strip the leading subdirectory from the extracted files. If true, the leading subdirectory (e.g., 'package/') will be removed. Defaults to `false`.
+ * @returns - A promise that resolves when extraction is complete.
+ */
+function extractTarGz(filePath_1, outputDir_1, subPath_1) {
+    return __awaiter(this, arguments, void 0, function (filePath, outputDir, subPath, strip) {
+        var error_1;
+        if (strip === void 0) { strip = false; }
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    // Ensure the output directory exists
+                    return [4 /*yield*/, fs.ensureDir(outputDir)];
+                case 1:
+                    // Ensure the output directory exists
+                    _a.sent();
+                    // Extract the contents of the tarball
+                    return [4 /*yield*/, tar__namespace.x({
+                            file: filePath,
+                            C: outputDir,
+                            filter: function (file) { return (subPath ? file.startsWith(subPath) : true); }, // Extract only files under subPath, or all files if subPath is not specified
+                            strip: strip ? 1 : undefined // Remove the leading subdirectory (e.g., 'package/') if strip is true
+                        })];
+                case 2:
+                    // Extract the contents of the tarball
+                    _a.sent();
+                    console.log("Extracted ".concat(subPath ? subPath : "all contents", " from ").concat(filePath, " to ").concat(outputDir));
+                    return [2 /*return*/, true];
+                case 3:
+                    error_1 = _a.sent();
+                    console.error("Error extracting ".concat(subPath ? subPath : "all contents", " from ").concat(filePath, ":"), error_1);
+                    return [2 /*return*/, false];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+
 var url = "https://github.com/dimaslanjaka/hexo-themes/raw/master/releases/hexo-theme-flowbite.tgz";
-var filePath = path.resolve(process.cwd(), "tmp", "hexo-theme-flowbite.tgz");
+var filePath = path.join(process.cwd(), "tmp", "hexo-theme-flowbite.tgz");
+var outputDir = path.join(process.cwd(), "themes", "hexo-theme-flowbite");
 function downloadFile() {
     return __awaiter(this, void 0, void 0, function () {
         var writer, response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
+                case 0: return [4 /*yield*/, fs.ensureDir(path.dirname(filePath))];
+                case 1:
+                    _a.sent();
                     writer = fs.createWriteStream(filePath);
                     return [4 /*yield*/, axios({
                             url: url,
                             method: "GET",
                             responseType: "stream"
                         })];
-                case 1:
+                case 2:
                     response = _a.sent();
                     response.data.pipe(writer);
                     return [2 /*return*/, new Promise(function (resolve, reject) {
@@ -89,6 +156,35 @@ function downloadFile() {
         });
     });
 }
-downloadFile()
-    .then(function () { return console.log("Download completed!"); })
-    .catch(function (err) { return console.error("Error downloading file:", err); });
+function main() {
+    return __awaiter(this, void 0, void 0, function () {
+        var err_1, err_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, downloadFile()];
+                case 1:
+                    _a.sent();
+                    console.log("Download completed!");
+                    return [3 /*break*/, 3];
+                case 2:
+                    err_1 = _a.sent();
+                    console.error("Error downloading file:", err_1);
+                    return [3 /*break*/, 3];
+                case 3:
+                    _a.trys.push([3, 5, , 6]);
+                    return [4 /*yield*/, extractTarGz(filePath, outputDir, "package/", true)];
+                case 4:
+                    _a.sent();
+                    return [3 /*break*/, 6];
+                case 5:
+                    err_2 = _a.sent();
+                    console.error("Error extracting file:", err_2);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
+            }
+        });
+    });
+}
+main();
