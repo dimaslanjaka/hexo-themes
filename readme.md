@@ -1,6 +1,10 @@
 # hexo-themes
 My HexoJS Theme Collections
 
+| package | description
+| :--- | :--- |
+| [hexo-theme-flowbite](./themes/hexo-theme-flowbite/) | Hexo theme build using **tailwind** and **flowbite** |
+
 ### How to install
 
 #### Manual
