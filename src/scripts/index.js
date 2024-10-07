@@ -1,4 +1,3 @@
-require("./author");
 require("./date");
 require("./fancybox");
 require("./helpers");

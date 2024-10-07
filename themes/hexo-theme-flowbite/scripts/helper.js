@@ -8,44 +8,13 @@ var require$$1$1 = require('path');
 var require$$0$2 = require('hexo-post-parser');
 var require$$1$2 = require('lodash');
 var require$$3 = require('sbg-utility');
+var require$$4 = require('sanitize-filename');
 
 function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
 var scripts = {};
-
-var author = {};
-
-/**
- * get author name
- * @param {string|Record<string, any>} author
- * @returns
- */
-
-var hasRequiredAuthor;
-
-function requireAuthor () {
-	if (hasRequiredAuthor) return author;
-	hasRequiredAuthor = 1;
-	function getAuthorName(author) {
-	  if (typeof author === "string") return author;
-	  if (author && typeof author === "object" && !Array.isArray(author)) {
-	    if (typeof author.name === "string") return author.name;
-	    if (typeof author.nick === "string") return author.nick;
-	    if (typeof author.nickname === "string") return author.nickname;
-	  }
-	}
-
-	hexo.extend.helper.register("getAuthorName", function (author, fallback) {
-	  const resultAuthor = getAuthorName(author);
-	  if (resultAuthor) return resultAuthor;
-	  const resultFallback = getAuthorName(fallback);
-	  if (resultFallback) return resultFallback;
-	  return getAuthorName(hexo.config.author) || "Unknown";
-	});
-	return author;
-}
 
 var date = {};
 
@@ -287,11 +256,6 @@ function requireHelpers () {
 	  // Return an array of error object if content is not a string
 	  return [{ error: "Cannot parse table of content" }];
 	});
-
-	hexo.extend.helper.register("get_thumbnail", function (page) {
-	  if (page.thumbnail) return page.thumbnail;
-	  return "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
-	});
 	return helpers;
 }
 
@@ -366,15 +330,81 @@ function requirePaginator () {
 
 var post = {};
 
-var hasRequiredPost;
+var author = {};
 
-function requirePost () {
-	if (hasRequiredPost) return post;
-	hasRequiredPost = 1;
+/**
+ * get author name
+ * @param {Partial<string|Record<string, any>|import("hexo/dist/hexo/index-d").HexoConfig>} author
+ * @returns
+ */
+
+var hasRequiredAuthor;
+
+function requireAuthor () {
+	if (hasRequiredAuthor) return author;
+	hasRequiredAuthor = 1;
+	function getAuthorName(author) {
+	  if (typeof author === "string") return author;
+	  if (author && typeof author === "object" && !Array.isArray(author)) {
+	    if (typeof author.name === "string") return author.name;
+	    if (typeof author.nick === "string") return author.nick;
+	    if (typeof author.nickname === "string") return author.nickname;
+	    if (typeof author.author_obj === "object") return getAuthorName(author.author_obj);
+	  }
+	}
+
+	hexo.extend.helper.register("getAuthorName", function (author, fallback) {
+	  const resultAuthor = getAuthorName(author);
+	  if (resultAuthor) return resultAuthor;
+	  const resultFallback = getAuthorName(fallback);
+	  if (resultFallback) return resultFallback;
+	  return getAuthorName(hexo.config) || "Unknown";
+	});
+	return author;
+}
+
+var thumbnail = {};
+
+/**
+ * get thumbnail url
+ * @param {import("hexo/dist/hexo/locals-d").HexoLocalsData} page
+ */
+
+var hasRequiredThumbnail;
+
+function requireThumbnail () {
+	if (hasRequiredThumbnail) return thumbnail;
+	hasRequiredThumbnail = 1;
+	function getThumbnail(page) {
+	  if (page && typeof page === "object") {
+	    if (typeof page.thumbnail === "string") return page.thumbnail;
+	    if (Array.isArray(page.photos)) {
+	      console.log(page.photos);
+	      if (typeof page.photos[0] === "string") return page.photos[0];
+	    }
+	  }
+	}
+
+	hexo.extend.helper.register("getThumbnail", function (page) {
+	  const result = getThumbnail(page);
+	  if (result) return result;
+	  return "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
+	});
+	return thumbnail;
+}
+
+var metadata = {};
+
+var hasRequiredMetadata;
+
+function requireMetadata () {
+	if (hasRequiredMetadata) return metadata;
+	hasRequiredMetadata = 1;
 	const hexoPostParser = require$$0$2;
 	const _ = require$$1$2;
 	const path = require$$1$1;
 	const { md5, fs, jsonStringifyWithCircularRefs, jsonParseWithCircularRefs } = require$$3;
+	const sanitize = require$$4;
 
 	hexoPostParser.setConfig(hexo.config);
 
@@ -385,7 +415,8 @@ function requirePost () {
 	function preprocess(page) {
 	  const cachePath = path.join(
 	    process.cwd(),
-	    "tmp/hexo-theme-flowbite/caches/post-" + md5(page.content || page._content || page._id || page.title)
+	    "tmp/hexo-theme-flowbite/caches/post-" +
+	      sanitize((page.title || page._id) + "-" + md5(page.content || page._content))
 	  );
 	  fs.ensureDirSync(path.dirname(cachePath));
 	  hexoPostParser
@@ -397,12 +428,20 @@ function requirePost () {
 	          delete result.metadata[key];
 	        }
 	      });
-	      fs.writeFileSync(cachePath, jsonStringifyWithCircularRefs(result));
+	      try {
+	        fs.writeFileSync(cachePath, jsonStringifyWithCircularRefs(result));
+	      } catch (error) {
+	        hexo.log.error("fail save post info", error.message);
+	      }
 	    })
 	    .catch(_.noop);
 	  if (fs.existsSync(cachePath)) {
-	    const extract = jsonParseWithCircularRefs(fs.readFileSync(cachePath, "utf-8"));
-	    return extract;
+	    try {
+	      const extract = jsonParseWithCircularRefs(fs.readFileSync(cachePath, "utf-8"));
+	      return extract;
+	    } catch (error) {
+	      hexo.log.error("fail load post info", error.message);
+	    }
 	  }
 	}
 
@@ -421,6 +460,17 @@ function requirePost () {
 	  }
 	  return page;
 	});
+	return metadata;
+}
+
+var hasRequiredPost;
+
+function requirePost () {
+	if (hasRequiredPost) return post;
+	hasRequiredPost = 1;
+	requireAuthor();
+	requireThumbnail();
+	requireMetadata();
 	return post;
 }
 
@@ -429,7 +479,6 @@ var hasRequiredScripts;
 function requireScripts () {
 	if (hasRequiredScripts) return scripts;
 	hasRequiredScripts = 1;
-	requireAuthor();
 	requireDate();
 	requireFancybox();
 	requireHelpers();

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const assign = Object.assign;
 function addCount(array, searchProperty, newProperty) {
@@ -54,14 +54,14 @@ function listRelatedPosts(_post, options, _hexo) {
   options = assign(
     {
       maxCount: 5,
-      orderBy: 'date',
+      orderBy: "date",
       isAscending: false
     },
     options
   );
-  const orderOption = ['date', 'random'];
+  const orderOption = ["date", "random"];
   if (orderOption.indexOf(options.orderBy) === -1) {
-    options.orderBy = 'date';
+    options.orderBy = "date";
   }
   let postList = [];
   // console.log(_post.tags);
@@ -70,18 +70,18 @@ function listRelatedPosts(_post, options, _hexo) {
       postList.push(post);
     });
   });
-  postList = addCount(postList, '_id', 'count');
-  const thisPostPosition = objectArrayIndexOf(postList, _post._id, '_id');
+  postList = addCount(postList, "_id", "count");
+  const thisPostPosition = objectArrayIndexOf(postList, _post._id, "_id");
   postList.splice(thisPostPosition, 1);
-  if (options.orderBy === 'random') {
+  if (options.orderBy === "random") {
     shuffle(postList);
   } else {
     postList.sort(dynamicSort(options.orderBy, options.isAscending));
   }
-  postList.sort(dynamicSort('count', false));
+  postList.sort(dynamicSort("count", false));
   return postList;
 }
 
-hexo.extend.helper.register('list_related_posts', (post, options, hexo) => {
+hexo.extend.helper.register("list_related_posts", (post, options, hexo) => {
   return listRelatedPosts(post, options, hexo);
 });

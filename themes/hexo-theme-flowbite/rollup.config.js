@@ -4,8 +4,6 @@ const resolve = require("@rollup/plugin-node-resolve");
 const typescript = require("@rollup/plugin-typescript");
 const fs = require("fs");
 
-console.clear();
-
 const pkg = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
 const deps = Object.keys(pkg.dependencies).concat(Object.keys(pkg.devDependencies));
 const globals = {

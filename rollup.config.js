@@ -7,7 +7,6 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 
-console.clear();
 function getWorkspaceLocations() {
   const output = execSync("yarn workspaces list --json", { encoding: "utf8" });
   const workspaces = output

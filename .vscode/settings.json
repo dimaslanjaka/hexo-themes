@@ -152,7 +152,8 @@
     "**/node_modules": true,
     "**/vendor": true,
     "**/tmp/yarn": true,
-    "db.json": true
+    "db.json": true,
+    "themes/**/scripts/**": true
   },
   "code-runner.executorMap": {
     "typescriptreact": "cross-env-shell DEBUG=chimera-* ts-node",
