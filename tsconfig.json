@@ -12,7 +12,18 @@
     "target": "ES5",
     "outDir": "tmp/dist",
     "esModuleInterop": true,
-    "lib": ["ES2015", "ES6", "ES5", "ES2022"]
+    "lib": [
+      "ES2015",
+      "ES6",
+      "ES5",
+      "ES2022"
+    ],
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "tmp", "dist", "themes/**/scripts/**"]
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "dist",
+    "themes/**/scripts/**"
+  ]
 }

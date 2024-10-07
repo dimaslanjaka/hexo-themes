@@ -1,15 +1,13 @@
-const _ = require("lodash");
-const cheerio = require("cheerio");
+import { load } from "cheerio";
+import _ from "lodash";
+import { HexoPageSchema } from "../../types/post";
 
 /**
  * get all images from page/post
- * @param {Partial<import("hexo/dist/types").PageSchema|import("hexo/dist/types").PostSchema>} page
+ * @param page
  */
-function getImages(page) {
-  /**
-   * @type {string[]}
-   */
-  const results = [];
+function getImages(page: Partial<HexoPageSchema>) {
+  const results: string[] = [];
   if (page && typeof page === "object") {
     if (typeof page.thumbnail === "string") results.push(page.thumbnail);
     if (typeof page.cover === "string") results.push(page.cover);
@@ -19,7 +17,7 @@ function getImages(page) {
   }
   if (page.content || page._content) {
     // Collect all image URLs from url
-    const $ = cheerio.load(page.content || page._content);
+    const $ = load(page.content || page._content);
     $("img").each((_, img) => {
       const element = $(img);
 

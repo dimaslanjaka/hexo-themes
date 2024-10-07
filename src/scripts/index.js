@@ -3,5 +3,7 @@ require("./fancybox");
 require("./helpers");
 require("./injector");
 require("./paginator");
-require("./post");
+require("./post/author");
+require("./post/metadata");
+require("./post/thumbnail");
 require("./utils");

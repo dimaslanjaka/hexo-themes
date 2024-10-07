@@ -65,7 +65,8 @@ const hexoThemeFlowbiteHelper = {
       tsconfig: false,
       compilerOptions: {
         lib: ["DOM", "DOM.Iterable", "ES2020"],
-        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"]
+        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+        allowSyntheticDefaultImports: true
       },
       include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
     })

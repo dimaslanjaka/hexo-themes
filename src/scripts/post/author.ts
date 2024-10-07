@@ -1,9 +1,9 @@
 /**
  * get author name
- * @param {Partial<string|Record<string, any>|import("hexo/dist/hexo/index-d").HexoConfig>} author
+ * @param author
  * @returns
  */
-function getAuthorName(author) {
+function getAuthorName(author: Partial<string | Record<string, any> | import("hexo/dist/hexo/index-d").HexoConfig>) {
   if (typeof author === "string") return author;
   if (author && typeof author === "object" && !Array.isArray(author)) {
     if (typeof author.name === "string") return author.name;
