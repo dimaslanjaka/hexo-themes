@@ -16,7 +16,8 @@ const config = {
     "**/app/**",
     "**/dist/**",
     "!.*.{js,cjs,mjs}",
-    "**/themes/**/scripts/**"
+    "**/themes/**/scripts/**",
+    "**/themes/**/bin/**"
   ],
   noInlineConfig: false,
   reportUnusedDisableDirectives: true,

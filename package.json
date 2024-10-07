@@ -16,7 +16,8 @@
     "post:copy": "sbg post copy",
     "post": "run-s \"post:**\"",
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
-    "pack": "node -r ts-node/register pack.ts"
+    "pack": "node -r ts-node/register pack.ts",
+    "clean:post": "rimraf source/_posts && git restore source/_posts"
   },
   "keywords": [
     "hexo",
@@ -51,8 +52,11 @@
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "nunjucks": "^3.2.4",
+    "rimraf": "^6.0.1",
     "sanitize-filename": "^1.6.3",
     "static-blog-generator": "^3.0.1",
+    "tar": "^7.4.3",
+    "tar-stream": "^3.1.7",
     "warehouse": "^5.0.1",
     "yaml": "^2.5.1"
   },
@@ -67,6 +71,7 @@
     "@types/lodash": "^4.17.10",
     "@types/minimist": "^1.2.5",
     "@types/node": "^22.7.4",
+    "@types/tar-stream": "^3",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
     "binary-collections": "https://github.com/dimaslanjaka/bin.git",
@@ -106,6 +111,6 @@
     "sbg-cli": "https://github.com/dimaslanjaka/static-blog-generator/raw/316df44/packages/sbg-cli/release/sbg-cli.tgz",
     "sbg-server": "https://github.com/dimaslanjaka/static-blog-generator/raw/316df44/packages/sbg-server/release/sbg-server.tgz",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/a2e797bc27975cba20ef4c87547841e6341bfcf4/release/nodejs-package-types.tgz",
-    "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/e445450/release/hexo-post-parser.tgz"
+    "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/c955d99/release/hexo-post-parser.tgz"
   }
 }

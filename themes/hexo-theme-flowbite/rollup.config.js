@@ -5,7 +5,7 @@ const typescript = require("@rollup/plugin-typescript");
 const fs = require("fs");
 
 const pkg = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
-const deps = Object.keys(pkg.dependencies).concat(Object.keys(pkg.devDependencies));
+const _deps = Object.keys(pkg.dependencies).concat(Object.keys(pkg.devDependencies));
 const globals = {
   jquery: "$",
   lodash: "_",
@@ -28,7 +28,7 @@ module.exports = {
     json.default(),
     resolve.nodeResolve({
       browser: true, // Resolve for browser environment
-      extensions: [".js", ".ts"] // Resolve both JavaScript and TypeScript
+      extensions: [".mjs", ".js", ".json", ".node", "ts"] // Resolve both JavaScript and TypeScript
     }),
     commonjs.default({
       include: "node_modules/**" // Include node_modules

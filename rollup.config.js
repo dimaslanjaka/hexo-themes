@@ -56,7 +56,7 @@ const hexoThemeFlowbiteHelper = {
     json.default({ indent: "  " }),
     resolve.nodeResolve({
       preferBuiltins: true,
-      extensions: [".js", ".ts", ".cjs", ".mjs"]
+      extensions: [".mjs", ".js", ".json", ".node", "ts", ".cjs", ".mjs"]
     }),
     commonjs.default({
       // exclude: ["**/node_modules/**"],
@@ -66,7 +66,8 @@ const hexoThemeFlowbiteHelper = {
       compilerOptions: {
         lib: ["DOM", "DOM.Iterable", "ES2020"],
         typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
-        allowSyntheticDefaultImports: true
+        allowSyntheticDefaultImports: true,
+        esModuleInterop: true
       },
       include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
     })
@@ -74,4 +75,35 @@ const hexoThemeFlowbiteHelper = {
   external: deps // Exclude external dependencies from the bundle
 };
 
-module.exports = [hexoThemeFlowbiteHelper];
+const hexoThemeFlowbiteCLI = {
+  input: "src/cli/hexo-theme-flowbite.ts", // Replace with your entry file(s)
+  output: [
+    {
+      file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.js", // Output file
+      format: "cjs" // Browser-compatible format
+    }
+  ],
+  plugins: [
+    json.default(),
+    resolve.nodeResolve({
+      extensions: [".mjs", ".js", ".json", ".node", "ts"] // Resolve both JavaScript and TypeScript
+    }),
+    commonjs.default({
+      include: "node_modules/**" // Include node_modules
+    }),
+    typescript.default({
+      tsconfig: false,
+      compilerOptions: {
+        lib: ["DOM", "DOM.Iterable", "ES2020"],
+        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+        allowSyntheticDefaultImports: true,
+        esModuleInterop: true
+      },
+      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"],
+      exclude: ["**/*.test.js", "**/*.test.ts"]
+    })
+  ],
+  external: deps // Exclude external dependencies from the bundle
+};
+
+module.exports = [hexoThemeFlowbiteHelper, hexoThemeFlowbiteCLI];
