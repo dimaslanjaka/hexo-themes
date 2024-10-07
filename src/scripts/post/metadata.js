@@ -14,7 +14,7 @@ function preprocess(page) {
   const cachePath = path.join(
     process.cwd(),
     "tmp/hexo-theme-flowbite/caches/post-" +
-      sanitize((page.title || page._id) + "-" + md5(page.content || page._content))
+      sanitize((page.title || page._id).substring(0, 100) + "-" + md5(page.content || page._content))
   );
   fs.ensureDirSync(path.dirname(cachePath));
   hexoPostParser
@@ -48,9 +48,13 @@ hexo.extend.helper.register("pageInfo", (page) => {
   if (result && result.metadata) {
     // Assign values to the page object if they exist and are not undefined or null
     for (const key in result.metadata) {
+      if (["type"].includes(key)) continue;
       if (Object.hasOwnProperty.call(result.metadata, key)) {
         const value = result.metadata[key];
         if (value !== undefined && value !== null && !page[key]) {
+          // fix: thumbnail always undefined
+          if (key === "cover" && value.includes("no-image-svgrepo")) continue;
+          if (key === "thumbnail" && value.includes("no-image-svgrepo")) continue;
           page[key] = value;
         }
       }

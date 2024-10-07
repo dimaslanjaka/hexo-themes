@@ -5,8 +5,8 @@ var require$$1 = require('nunjucks');
 var require$$2 = require('hexo-util');
 var require$$0$1 = require('fs-extra');
 var require$$1$1 = require('path');
-var require$$0$2 = require('hexo-post-parser');
-var require$$1$2 = require('lodash');
+var require$$0$2 = require('lodash');
+var require$$0$3 = require('hexo-post-parser');
 var require$$3 = require('sbg-utility');
 var require$$4 = require('sanitize-filename');
 
@@ -365,24 +365,66 @@ function requireAuthor () {
 
 var thumbnail = {};
 
-/**
- * get thumbnail url
- * @param {import("hexo/dist/hexo/locals-d").HexoLocalsData} page
- */
-
 var hasRequiredThumbnail;
 
 function requireThumbnail () {
 	if (hasRequiredThumbnail) return thumbnail;
 	hasRequiredThumbnail = 1;
-	function getThumbnail(page) {
+	const _ = require$$0$2;
+	const cheerio = require$$0;
+
+	/**
+	 * get all images from page/post
+	 * @param {Partial<import("hexo/dist/types").PageSchema|import("hexo/dist/types").PostSchema>} page
+	 */
+	function getImages(page) {
+	  /**
+	   * @type {string[]}
+	   */
+	  const results = [];
 	  if (page && typeof page === "object") {
-	    if (typeof page.thumbnail === "string") return page.thumbnail;
+	    if (typeof page.thumbnail === "string") results.push(page.thumbnail);
+	    if (typeof page.cover === "string") results.push(page.cover);
 	    if (Array.isArray(page.photos)) {
-	      console.log(page.photos);
-	      if (typeof page.photos[0] === "string") return page.photos[0];
+	      results.push(...page.photos);
 	    }
 	  }
+	  if (page.content || page._content) {
+	    // Collect all image URLs from url
+	    const $ = cheerio.load(page.content || page._content);
+	    $("img").each((_, img) => {
+	      const element = $(img);
+
+	      // Collect URLs from 'src', 'data-src', and 'srcset'
+	      const src = element.attr("src");
+	      const dataSrc = element.attr("data-src");
+	      const srcset = element.attr("srcset");
+
+	      if (src) results.push(src);
+	      if (dataSrc) results.push(dataSrc);
+
+	      // If 'srcset' exists, split it into individual URLs (ignoring size descriptors)
+	      if (srcset) {
+	        const srcsetUrls = srcset.split(",").map((entry) => entry.trim().split(" ")[0]);
+	        results.push(...srcsetUrls);
+	      }
+	    });
+	  }
+	  const final = _.filter(_.uniq(results), _.identity).filter((str) => !str.includes("no-image-svgrepo-com"));
+	  return final;
+	}
+
+	/**
+	 * get thumbnail url
+	 * @param {import("hexo/dist/hexo/locals-d").HexoLocalsData} page
+	 */
+	function getThumbnail(page) {
+	  if (page && typeof page === "object") {
+	    // priority defined thumbnail in frontmatter
+	    if (typeof page.thumbnail === "string") return page.thumbnail;
+	    if (typeof page.cover === "string") return page.cover;
+	  }
+	  return _.sample(getImages(page));
 	}
 
 	hexo.extend.helper.register("getThumbnail", function (page) {
@@ -400,8 +442,8 @@ var hasRequiredMetadata;
 function requireMetadata () {
 	if (hasRequiredMetadata) return metadata;
 	hasRequiredMetadata = 1;
-	const hexoPostParser = require$$0$2;
-	const _ = require$$1$2;
+	const hexoPostParser = require$$0$3;
+	const _ = require$$0$2;
 	const path = require$$1$1;
 	const { md5, fs, jsonStringifyWithCircularRefs, jsonParseWithCircularRefs } = require$$3;
 	const sanitize = require$$4;
@@ -416,7 +458,7 @@ function requireMetadata () {
 	  const cachePath = path.join(
 	    process.cwd(),
 	    "tmp/hexo-theme-flowbite/caches/post-" +
-	      sanitize((page.title || page._id) + "-" + md5(page.content || page._content))
+	      sanitize((page.title || page._id).substring(0, 100) + "-" + md5(page.content || page._content))
 	  );
 	  fs.ensureDirSync(path.dirname(cachePath));
 	  hexoPostParser
@@ -450,9 +492,13 @@ function requireMetadata () {
 	  if (result && result.metadata) {
 	    // Assign values to the page object if they exist and are not undefined or null
 	    for (const key in result.metadata) {
+	      if (["type"].includes(key)) continue;
 	      if (Object.hasOwnProperty.call(result.metadata, key)) {
 	        const value = result.metadata[key];
 	        if (value !== undefined && value !== null && !page[key]) {
+	          // fix: thumbnail always undefined
+	          if (key === "cover" && value.includes("no-image-svgrepo")) continue;
+	          if (key === "thumbnail" && value.includes("no-image-svgrepo")) continue;
 	          page[key] = value;
 	        }
 	      }
