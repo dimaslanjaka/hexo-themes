@@ -5,8 +5,8 @@
 @tailwind utilities;
 @tailwind screens;
 
-// @import "./highlight.js.scss";
-@import "./highlight-dark.scss";
+@import "./pre-code-button.scss";
+@import "./highlight/github-dark-dimmen.scss";
 @import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 $font-size-smaller: 0.8125em;

@@ -21,6 +21,7 @@ Step to contribute
 ```bash
 touch yarn.lock
 yarn install
+yarn build
 ```
 
 #### Live testing
