@@ -9,7 +9,7 @@
     "build:production": "yarn workspaces foreach --worktree --no-private run build",
     "build": "clear && run-s \"build:**\"",
     "clean": "npm run site:clean",
-    "start": "hexo server",
+    "start": "hexo server --ssl",
     "site:build": "hexo generate",
     "site:clean": "hexo clean",
     "post:standalone": "sbg post standalone",
