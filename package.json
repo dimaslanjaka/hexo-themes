@@ -18,7 +18,7 @@
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
     "pack": "node -r ts-node/register pack.ts",
     "clean:post": "rimraf source/_posts && git restore source/_posts",
-    "deploy": "npm run build && npm run pack && npm run site:build && bash bin/deploy"
+    "deploy": "npm run build && npm run pack && npm run site:build && ./bin/deploy"
   },
   "keywords": [
     "hexo",
