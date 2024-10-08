@@ -48,7 +48,7 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-renderers": "^2.0.5",
     "hexo-seo": "^1.4.1",
-    "hexo-server": "^3.0.0",
+    "hexo-server": "*",
     "hexo-shortcodes": "*",
     "hexo-theme-flowbite": "workspace:^",
     "hexo-util": "^3.3.0",
