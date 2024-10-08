@@ -12,17 +12,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/post-asset-link.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>post-asset-link test</news:title>
-      <news:publication_date>2023-04-22T10:15:14+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://www.webmanajemen.com/no-title-with-desc.html</loc>
     <news:news>
       <news:publication>
@@ -31,6 +20,17 @@
       </news:publication>
       <news:title>no-title-with-desc.md</news:title>
       <news:publication_date>2024-10-07T21:52:11+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/post-asset-link.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>post-asset-link test</news:title>
+      <news:publication_date>2023-04-22T10:15:14+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -111,17 +111,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>日本語テスト</news:title>
-      <news:publication_date>2013-12-24T23:33:26+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://www.webmanajemen.com/tag-plugins.html</loc>
     <news:news>
       <news:publication>
@@ -133,14 +122,14 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/tags.html</loc>
+    <loc>https://www.webmanajemen.com/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
     <news:news>
       <news:publication>
         <news:language>en</news:language>
         <news:name>Dimas Lanjaka</news:name>
       </news:publication>
-      <news:title>Tags</news:title>
-      <news:publication_date>2013-12-24T23:29:53+07:00</news:publication_date>
+      <news:title>日本語テスト</news:title>
+      <news:publication_date>2013-12-24T23:33:26+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -152,28 +141,6 @@
       </news:publication>
       <news:title>中文測試</news:title>
       <news:publication_date>2013-12-24T23:31:30+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.webmanajemen.com/hello-world.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>Hello World</news:title>
-      <news:publication_date>2013-12-24T17:49:32+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.webmanajemen.com/elements.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>Elements</news:title>
-      <news:publication_date>2013-12-24T23:29:08+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -196,6 +163,39 @@
       </news:publication>
       <news:title>Categories</news:title>
       <news:publication_date>2013-12-24T23:30:09+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/tags.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>Tags</news:title>
+      <news:publication_date>2013-12-24T23:29:53+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/elements.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>Elements</news:title>
+      <news:publication_date>2013-12-24T23:29:08+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/hello-world.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>Hello World</news:title>
+      <news:publication_date>2013-12-24T17:49:32+07:00</news:publication_date>
     </news:news>
   </url>
 </urlset>
