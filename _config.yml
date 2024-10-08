@@ -168,6 +168,7 @@ server:
       - png
       - jpg
       - jpeg
+      - svg
 theme: hexo-theme-flowbite
 deploy:
   type: git

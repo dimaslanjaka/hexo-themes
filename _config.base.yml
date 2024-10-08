@@ -236,6 +236,7 @@ server:
       - png
       - jpg
       - jpeg
+      - svg
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
