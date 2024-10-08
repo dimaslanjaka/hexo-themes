@@ -103,6 +103,7 @@
     "version": "7.3.0"
   },
   "resolutions": {
+    "@types/node": "^22.7.4",
     "node-sass": "9.0.0",
     "binary-collections": "https://github.com/dimaslanjaka/bin/raw/fcd1121/releases/bin.tgz",
     "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/fc1f9b7/releases/hexo.tgz",
