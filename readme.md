@@ -7,13 +7,13 @@ My HexoJS Theme Collections
 
 ### How to install
 
-#### Manual
-
 - download `tgz` file from [Relase Folder](./releases/)
 - extract `<tgz>/package/<all files here>` file to `<hexo project>/themes/hexo-theme-name/<here>`
 - install dependencies eg: `npm install hexo-theme-flowbite` or `yarn add hexo-theme-flowbite` (change theme name)
 
-##### How to update
+> for enable dynamic build on-fly like **hexo-theme-flowbite** add as **dev dependencies** (`yarn add -D hexo-theme-flowbite`)
+
+#### How to update
 
 To update theme, just call `npx hexo-theme-name` on cwd hexo project. Sample:
 
