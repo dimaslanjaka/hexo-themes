@@ -65,3 +65,4 @@ venv/
 **/.mypy_cache
 /source/js
 /source/css
+/scripts/helper.js

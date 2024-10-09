@@ -14,7 +14,8 @@
 >
 > when theme in `themes/hexo-theme-flowbite` the yaml config filename is `_config.hexo-theme-flowbite.yml`
 
-[Full hexo-theme-flowbite config and description here](https://github.com/dimaslanjaka/hexo-themes/blob/master/themes/hexo-theme-flowbite/_config.yml)
+- [Full hexo-theme-flowbite config and description here](https://github.com/dimaslanjaka/hexo-themes/blob/master/themes/hexo-theme-flowbite/_config.yml)
+- [Full hexo-theme-flowbite config on production](https://github.com/dimaslanjaka/static-blog-generator-hexo/blob/master/site/_config.flowbite.yml)
 
 ### Syntax highlighter
 

@@ -141,3 +141,4 @@ yarn.lock
 /public
 .deploy_*
 /site
+/themes/**/scripts/helper.js
