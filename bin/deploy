@@ -74,6 +74,7 @@ async function main() {
     await gulpCopyAsync(src, deployDir);
     console.log("fix corruped binary files");
     await copyFile("public", deployDir);
+    await fs.writeFile(path.join(deployDir, ".no_jekyll"), "");
     await cp.spawnAsync("git", ["add", "."], cpOpt);
     await cp.spawnAsync("git", ["commit", "-m", "update site " + new Date()], cpOpt);
     await cp.spawnAsync("git", ["push", "-u", "origin", branch], cpOpt);
