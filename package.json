@@ -29,7 +29,8 @@
   "workspaces": [
     "themes/*",
     "plugins/*",
-    "src-posts"
+    "src-posts",
+    "test/*"
   ],
   "dependencies": {
     "axios": "^1.7.7",
@@ -79,9 +80,9 @@
     "@types/tar-stream": "^3",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
-    "binary-collections": "https://github.com/dimaslanjaka/bin.git",
+    "binary-collections": "git+https://github.com/dimaslanjaka/bin.git",
     "cross-env": "^7.0.3",
-    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn#private",
+    "cross-spawn": "git+https://github.com/dimaslanjaka/node-cross-spawn.git#private",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
