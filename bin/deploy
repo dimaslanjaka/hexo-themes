@@ -6,7 +6,11 @@ const cp = require("cross-spawn");
 const gulp = require("gulp");
 const path = require("path");
 const build_readme = require("./readme.build");
+const { execSync } = require("child_process");
 
+const latestCommitShortHash = execSync("git rev-parse --short HEAD", { cwd: path.join(__dirname, "..") })
+  .toString()
+  .trim();
 const remote = "https://github.com/dimaslanjaka/hexo-themes";
 const branch = "gh-pages";
 const deployDir = ".deploy_git";
@@ -80,7 +84,7 @@ async function main() {
     build_readme();
     await copyFile(".gitattributes", path.join(deployDir, ".gitattributes"));
     await cp.spawnAsync("git", ["add", "."], cpOpt);
-    await cp.spawnAsync("git", ["commit", "-m", "update site " + new Date()], cpOpt);
+    await cp.spawnAsync("git", ["commit", "-m", `update site ${latestCommitShortHash}`], cpOpt);
     await cp.spawnAsync("git", ["push", "-u", "origin", branch], cpOpt);
   }
 }
