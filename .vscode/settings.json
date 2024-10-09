@@ -34,19 +34,9 @@
       "env": {
         "CHERE_INVOKING": "1"
       }
-    },
-    "MSYS2": {
-      "source": "PowerShell",
-      "args": [
-        "bash.exe",
-        "--login",
-        "-i",
-        "-c",
-        "(\"cd \\`\"``cygpath '{0}'``\\`\"; /usr/bin/bash --login -i\" -f (Resolve-Path .).Path )"
-      ]
     }
   },
-  "terminal.integrated.defaultProfile.windows": "MSYS2",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
   "npm.enableRunFromFolder": true,
   "files.autoSave": "onWindowChange",
   "files.autoSaveDelay": 30000,
