@@ -51,7 +51,7 @@
     "hexo-seo": "^1.4.1",
     "hexo-server": "*",
     "hexo-shortcodes": "*",
-    "hexo-theme-flowbite": "workspace:^",
+    "hexo-theme-flowbite": "*",
     "hexo-util": "^3.3.0",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",

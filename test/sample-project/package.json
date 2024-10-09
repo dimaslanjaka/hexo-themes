@@ -2,6 +2,6 @@
   "name": "test-project",
   "private": true,
   "dependencies": {
-    "hexo-theme-flowbite": "workspace:^"
+    "hexo-theme-flowbite": "*"
   }
 }
