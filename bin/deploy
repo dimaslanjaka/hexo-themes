@@ -5,6 +5,7 @@ const fs = require("fs-extra");
 const cp = require("cross-spawn");
 const gulp = require("gulp");
 const path = require("path");
+const build_readme = require("./readme.build");
 
 const remote = "https://github.com/dimaslanjaka/hexo-themes";
 const branch = "gh-pages";
@@ -19,6 +20,7 @@ async function initializeGit() {
   await cp.spawnAsync("git", ["remote", "set-url", "origin", remote], { ...cpOpt, stdio: "ignore" });
   await cp.spawnAsync("git", ["checkout", branch], cpOpt);
   await cp.spawnAsync("git", ["pull"], cpOpt);
+  await cp.spawnAsync("git", ["rm", "-rf", "."], cpOpt);
 }
 
 /**
@@ -75,6 +77,8 @@ async function main() {
     console.log("fix corruped binary files");
     await copyFile("public", deployDir);
     await fs.writeFile(path.join(deployDir, ".no_jekyll"), "");
+    build_readme();
+    await copyFile(".gitattributes", path.join(deployDir, ".gitattributes"));
     await cp.spawnAsync("git", ["add", "."], cpOpt);
     await cp.spawnAsync("git", ["commit", "-m", "update site " + new Date()], cpOpt);
     await cp.spawnAsync("git", ["push", "-u", "origin", branch], cpOpt);

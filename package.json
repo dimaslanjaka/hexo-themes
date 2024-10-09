@@ -18,7 +18,7 @@
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
     "pack": "node -r ts-node/register pack.ts",
     "clean:post": "rimraf source/_posts && git restore source/_posts",
-    "deploy": "npm run build && npm run pack && npm run site:build && ./bin/deploy"
+    "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && ./bin/deploy"
   },
   "keywords": [
     "hexo",
@@ -54,6 +54,7 @@
     "hexo-util": "^3.3.0",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
+    "marked": "^14.1.2",
     "minimist": "^1.2.8",
     "nunjucks": "^3.2.4",
     "rimraf": "^6.0.1",
