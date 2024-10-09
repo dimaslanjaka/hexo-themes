@@ -24,6 +24,7 @@ nav_icon: https://flowbite.com/docs/images/logo.svg
 gallery: true
 # Show loading animation before page fully loaded
 loading_animation:
+  # toggle loading animation
   enable: true
   # type mini: small loader fixed on top right
   # type full: full page loader
