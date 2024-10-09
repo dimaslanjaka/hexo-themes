@@ -1,0 +1,72 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master # Run on push to the master branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: master
+          repository: dimaslanjaka/hexo-themes
+          # submodules: recursive
+          token: "${{ secrets.ACCESS_TOKEN }}"
+          lfs: ""
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: dimaslanjaka/hexo-themes
+          path: .deploy_git
+          ref: gh-pages
+          lfs: ""
+      - name: update submodules
+        run: |
+          echo "init submodules"
+          git submodule init
+          git submodule foreach "git submodule init"
+          echo "sync submodules"
+          git submodule sync
+          git submodule foreach "git submodule sync"
+          echo "update submodules"
+          mkdir -p bin >/dev/null 2>&1
+          curl -L https://github.com/dimaslanjaka/bin/raw/master/bin/submodule-install > bin/submodule-install
+          rm -rf .git/modules
+          bash ./bin/submodule-install
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            **/node_modules
+            ~/.cache/yarn
+            ./.yarn/cache*
+            ./.yarn/*.gz
+            **/dist
+            **/.yarn/cache*
+            **/node_modules
+            **/tmp
+            **/*.lock
+            db.json
+          key: ${{ runner.os }}-${{ hashFiles('**/themes/**/*.cjs', '**/themes/**/*.js', '**/themes/**/*.ts', '**/themes/**/*.scss') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          corepack enable
+          touch yarn.lock
+          yarn install
+
+      - name: Run deploy
+        run: yarn run deploy
