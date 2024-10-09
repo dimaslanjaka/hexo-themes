@@ -76,9 +76,12 @@ disqus_shortname: YOUR_DISQUS_USERNAME
 
 ### Code injection
 
+Inject your own widget html [see folder](./source/_data/hexo-theme-flowbite/)
+
 | File Path | Description |
 | :--- | :--- |
 | `source/_data/hexo-theme-flowbite/head.html` | inject html codes before `</head>` |
 | `source/_data/hexo-theme-flowbite/body.html` | inject html codes before `</body>` |
 | `source/_data/hexo-theme-flowbite/before-post.html` | inject html before post |
 | `source/_data/hexo-theme-flowbite/after-post.html` | inject html after post |
+
