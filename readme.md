@@ -11,6 +11,7 @@ My HexoJS Theme Collections
 
 - download `tgz` file from [Relase Folder](./releases/)
 - extract `<tgz>/package/<all files here>` file to `<hexo project>/themes/hexo-theme-name/<here>`
+- install dependencies eg: `npm install hexo-theme-flowbite` or `yarn add hexo-theme-flowbite` (change theme name)
 
 ### Contribute
 
