@@ -26,6 +26,7 @@ Step to contribute
 #### Setup
 
 ```bash
+git submodule update -i -r
 touch yarn.lock
 yarn install
 yarn build
