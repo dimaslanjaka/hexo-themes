@@ -1,14 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hexo-themes</title>
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>hexo-themes - HexoJS theme collection</title>
+      
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1, h2, h3 { border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    pre { background-color: #f4f4f4; padding: 10px; border-radius: 4px; }
+    code { font-family: monospace; background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+    a { color: #3498db; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+  </style>
 
-<body>
-  <a href="./hexo-theme-flowbite/">hexo-theme-flowbite</a>
-</body>
+    </head>
+    <body>
+      <h1>hexo-themes</h1>
+<p>My HexoJS Theme Collections</p>
+<table>
+<thead>
+<tr>
+<th align="left">package</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="./hexo-theme-flowbite/">hexo-theme-flowbite</a></td>
+<td align="left">Hexo theme build using <strong>tailwind</strong> and <strong>flowbite</strong></td>
+</tr>
+</tbody></table>
+<h3>How to install</h3>
+<h4>Manual</h4>
+<ul>
+<li>download <code>tgz</code> file from <a href="./releases/">Relase Folder</a></li>
+<li>extract <code>&lt;tgz&gt;/package/&lt;all files here&gt;</code> file to <code>&lt;hexo project&gt;/hexo-theme-name/&lt;here&gt;</code></li>
+<li>install dependencies eg: <code>npm install hexo-theme-flowbite</code> or <code>yarn add hexo-theme-flowbite</code> (change theme name)</li>
+</ul>
+<h3>Contribute</h3>
+<p>Step to contribute</p>
+<h4>Setup</h4>
+<pre><code class="language-bash">touch yarn.lock
+yarn install
+yarn build
+</code></pre>
+<h4>Live testing</h4>
+<pre><code class="language-bash">yarn run start
+</code></pre>
+<h4>Bundle</h4>
+<pre><code class="language-bash">yarn run build
+yarn run pack
+</code></pre>
 
-</html>
+    </body>
+    </html>
+  
