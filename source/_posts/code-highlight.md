@@ -1,6 +1,7 @@
 ---
 title: Code Highlight Style test
 date: 2019-07-25 16:43:00
+updated: 2024-10-09T16:13:07+07:00
 tags: [code]
 ---
 
@@ -10,7 +11,7 @@ Make sure all the code blocks highlighted correctly. All the code samples are co
 
 This is `inline` code with `backtick`
 
-``` plain
+```plain
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 ```
 
@@ -48,6 +49,8 @@ impl From<&'a str> for State {
 ]
 ```
 
+## Python
+
 ```python
 @requires_authorization
 def somefunc(param1='', param2=0):
@@ -61,6 +64,30 @@ class SomeClass:
 
 >>> message = '''interpreter
 ... prompt'''
+```
+
+```python
+def check_value(x):
+    if x == 1:
+        return "Value is 1"
+    elif x == 2:
+        return "Value is 2"
+    elif x == 3:
+        return "Value is 3"
+    elif x == 4:
+        return "Value is 4"
+    elif x == 5:
+        return "Value is 5"
+    elif x == 6:
+        return "Value is 6"
+    elif x == 7:
+        return "Value is 7"
+    elif x == 8:
+        return "Value is 8"
+    elif x == 9:
+        return "Value is 9"
+    else:
+        return "Value is something else"
 ```
 
 ```html
@@ -294,3 +321,4 @@ default = True
 auto = no
 counter = 1_000
 ```
+
