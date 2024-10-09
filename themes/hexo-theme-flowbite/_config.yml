@@ -17,7 +17,7 @@ nav:
         link: "#"
       - text: "Sub Menu 3"
         link: "#"
-        divider: true
+        divider: true # add divider before this item
 # Top navbar icon
 nav_icon: https://flowbite.com/docs/images/logo.svg
 # Show gallery images after post/page
