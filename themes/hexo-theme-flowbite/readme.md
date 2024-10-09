@@ -14,6 +14,8 @@
 >
 > when theme in `themes/hexo-theme-flowbite` the yaml config filename is `_config.hexo-theme-flowbite.yml`
 
+[Full hexo-theme-flowbite config and description here](https://github.com/dimaslanjaka/hexo-themes/blob/master/themes/hexo-theme-flowbite/_config.yml)
+
 ### Syntax highlighter
 
 This theme only working for highlight.js with below configuration
