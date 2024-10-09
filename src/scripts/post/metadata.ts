@@ -16,9 +16,15 @@ const pageQueue: HexoPageSchema[] = [];
 let isProcessing = false;
 
 function getCachePath(page: HexoPageSchema) {
-  let hash: string;
-  if (page && "full_source" in page) md5FileSync(page.full_source);
-  if (!hash) hash = md5(page.content || page._content);
+  let hash = "empty-hash";
+  if (page && "full_source" in page && page.full_source) md5FileSync(page.full_source);
+  if (hash === "empty-hash") {
+    if (page.content) {
+      hash = md5(page.content);
+    } else if (page._content) {
+      hash = md5(page._content);
+    }
+  }
   return path.join(
     process.cwd(),
     "tmp/hexo-theme-flowbite/caches/post-" +
@@ -33,24 +39,36 @@ function getCachePath(page: HexoPageSchema) {
  * @param callback - The callback that handles the result or error.
  */
 function preprocess(page: HexoPageSchema, callback: PreprocessCallback): void {
-  const cachePath = getCachePath(page);
+  if (!page.full_source) {
+    hexo.log.warn("fail parse metadata from", page.title || page.subtitle || page.permalink);
+    return;
+  }
 
+  const cachePath = getCachePath(page);
+  if (fs.existsSync(cachePath)) {
+    // skip already parsed metadata
+    return;
+  }
   fs.ensureDirSync(path.dirname(cachePath));
 
   hexoPostParser
     .parsePost(page.full_source, { fix: true })
     .then((result: postMap) => {
+      if (!result.metadata) return;
       // Remove keys with undefined or null values
-      Object.keys(result.metadata).forEach((key) => {
+      const keys = Object.keys(result.metadata);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
         if (result.metadata[key] === undefined || result.metadata[key] === null) {
           delete result.metadata[key];
         }
-      });
+      }
       try {
         fs.writeFileSync(cachePath, jsonStringifyWithCircularRefs(result));
         callback(null, { result, cachePath }); // Pass cachePath in the callback
       } catch (error) {
         hexo.log.error("fail save post info", (error as Error).message);
+        if (fs.existsSync(cachePath)) fs.rm(cachePath, { force: true, recursive: true });
         callback(error as Error, null); // Invoke callback on error
       }
     })
