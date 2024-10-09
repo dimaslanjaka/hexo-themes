@@ -3,7 +3,7 @@
 const fs = require("fs-extra");
 const { marked } = require("marked"); // Updated import
 
-// Define your dark CSS theme
+// Simple dark theme
 const simpleTheme = `
   <style>
     body {
@@ -53,6 +53,10 @@ const simpleTheme = `
     }
     th {
       background-color: #1e1e1e; /* Darker background for table header */
+    }
+    img {
+      max-width: 100%; /* Make images responsive */
+      height: auto; /* Maintain aspect ratio */
     }
   </style>
 `;
