@@ -13,7 +13,8 @@
     <meta name="description" content="
   WMI - 
 " >
-    <meta name="keywords" content="keyword1, keyword2, keyword3, keyword4">
+    <meta name="keywords" content="">
+    <meta name="search" content="/hexo-themes/hexo-theme-flowbite/hexo-search.json">
     <meta name="author"
           content="Dimas Lanjaka">
     <link rel="icon"
@@ -82,10 +83,18 @@
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center">
           <a href="/hexo-themes/hexo-theme-flowbite/">
-            <img src="https://flowbite.com/docs/images/logo.svg" alt="Logo" class="h-8 w-auto" title="Logo" itemprop="image">
+            <img src="/hexo-themes/hexo-theme-flowbite/logo.svg" alt="Logo" class="h-8 w-auto" title="Logo" itemprop="image">
           </a>
           <a href="/hexo-themes/hexo-theme-flowbite/" class="text-white text-lg font-semibold ml-2">WMI</a>
         </div>
+      </div>
+      
+      <div class="relative flex items-center sm:ml-6">
+        <button id="openSearchModal"
+                class="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white">
+          <i class="fa fa-search"></i>
+          <span class="sr-only">Open Search</span>
+        </button>
       </div>
       
       <div class="hidden sm:block sm:ml-6">
@@ -94,16 +103,6 @@
             
               <div class="relative group">
                 <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://github.com/dimaslanjaka/hexo-themes" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" hexo-seo="true" alt="Archive" title="Archive">
-                  <i class="fa-duotone fa-solid fa-arrow-up-right-from-square mr-2"></i> GitHub
-                  
-                </a>
-                
-                
-              </div>
-            
-              <div class="relative group">
-                <a href=""
-                   class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Site Overview
                   <i class="fa-thin fa-caret-down ml-2"></i>
                 </a>
@@ -128,21 +127,42 @@
               <div class="relative group">
                 <a href=""
                    class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Sub Menu
+                  Games
                   <i class="fa-thin fa-caret-down ml-2"></i>
                 </a>
                 
                 
                   <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
                     
-                      <a href="#"
-                         class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 1</a>
+                      <a href="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="Archive" title="Archive">Quiz The Legend Of Neverland</a>
                     
-                      <a href="#"
-                         class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 2</a>
+                      <a href="https://www.webmanajemen.com/p/privacy.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="Archive" title="Archive">Privacy Policy</a>
                     
-                      <a href="#"
-                         class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 3</a>
+                      <a href="https://www.webmanajemen.com/p/tos.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="Archive" title="Archive">Terms Of Service</a>
+                    
+                      <a href="/contact"
+                         class="block px-4 py-2 text-sm hover:bg-gray-700">Contact</a>
+                    
+                  </div>
+                
+              </div>
+            
+              <div class="relative group">
+                <a href=""
+                   class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Utilities
+                  <i class="fa-thin fa-caret-down ml-2"></i>
+                </a>
+                
+                
+                  <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                    
+                      <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com/proxyManager.html" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="Archive" title="Archive">PHP Proxy Hunter</a>
+                    
+                      <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com:8443/proxy/" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="Archive" title="Archive">Python Proxy Hunter</a>
+                    
+                      <a href="/android-engineer"
+                         class="block px-4 py-2 text-sm hover:bg-gray-700">Android Flashtool Utility</a>
                     
                   </div>
                 
@@ -184,15 +204,6 @@
         
           <div class="relative group">
             <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://github.com/dimaslanjaka/hexo-themes" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" hexo-seo="true" alt="Archive" title="Archive">
-              <i class="fa-duotone fa-solid fa-arrow-up-right-from-square mr-2"></i> GitHub
-              
-            </a>
-            
-          </div>
-        
-          <div class="relative group">
-            <a href=""
-               class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
               Site Overview
               <i class="fa-thin fa-caret-down ml-2"></i>
             </a>
@@ -216,20 +227,40 @@
           <div class="relative group">
             <a href=""
                class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-              Sub Menu
+              Games
               <i class="fa-thin fa-caret-down ml-2"></i>
             </a>
             
               <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
                 
-                  <a href="#"
-                     class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 1</a>
+                  <a href="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="Archive" title="Archive">Quiz The Legend Of Neverland</a>
                 
-                  <a href="#"
-                     class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 2</a>
+                  <a href="https://www.webmanajemen.com/p/privacy.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="Archive" title="Archive">Privacy Policy</a>
                 
-                  <a href="#"
-                     class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 3</a>
+                  <a href="https://www.webmanajemen.com/p/tos.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="Archive" title="Archive">Terms Of Service</a>
+                
+                  <a href="/contact"
+                     class="block px-4 py-2 text-sm hover:bg-gray-700">Contact</a>
+                
+              </div>
+            
+          </div>
+        
+          <div class="relative group">
+            <a href=""
+               class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              Utilities
+              <i class="fa-thin fa-caret-down ml-2"></i>
+            </a>
+            
+              <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                
+                  <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com/proxyManager.html" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="Archive" title="Archive">PHP Proxy Hunter</a>
+                
+                  <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com:8443/proxy/" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="Archive" title="Archive">Python Proxy Hunter</a>
+                
+                  <a href="/android-engineer"
+                     class="block px-4 py-2 text-sm hover:bg-gray-700">Android Flashtool Utility</a>
                 
               </div>
             
@@ -262,6 +293,29 @@
   </div>
 </nav>
 
+<div id="searchModal"
+     class="fixed inset-0 z-50 hidden overflow-y-auto"
+     aria-labelledby="modal-title"
+     role="dialog"
+     aria-modal="true">
+  <div class="flex items-start justify-center min-h-screen px-4">
+    <div class="search-modal bg-gray-800 text-white p-6 rounded-lg shadow-lg relative">
+      <button id="closeSearchModal"
+              class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i class="fa fa-times"></i>
+      </button>
+      <h2 class="text-lg font-medium mb-4">Search</h2>
+      <input type="text"
+             id="searchInput"
+             class="w-full p-2 rounded bg-gray-700 text-white"
+             placeholder="Type to search..." >
+      <div id="searchResults" class="mt-4">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
     <main class="mx-4">
       
   <div class="container mx-auto px-4">
@@ -271,7 +325,7 @@
                  itemtype="http://schema.org/Article"
                  class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
                  lang="en">
-          <img src="https://octodex.github.com/images/dojocat.jpg" alt="Typography and tags" class="w-full h-48 object-cover mb-4" title="Typography and tags" itemprop="image">
+          <img src="https://octodex.github.com/images/stormtroopocat.jpg" alt="Typography and tags" class="w-full h-48 object-cover mb-4" title="Typography and tags" itemprop="image">
           <div class="p-6">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2"
                 itemprop="headline">
@@ -311,7 +365,7 @@
                       </a>
                     </span>
                   </span>
-                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Typography and tagspimg src=/hexo-themes/hexo-theme-flowbite/images/lake.png alt=$cover/p h1 id=Installationa href=#Installation class=headerlink title=Installation/aInstallation/h1hr pThis post uses </p>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Typography and tags Installation This post uses hexo-renderer-markdown-it plugin as markdown processor, so please install it to achieve the effect. hexo-renderer-markdown-it npm un hexo-renderer-marked --savenpm i hexo-renderer-markdown-it --savenpm i markdown-it-emoji --savenpm i markdown-it-ma</p>
               </div>
             </article>
         </div>

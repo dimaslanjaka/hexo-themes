@@ -5,7 +5,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>related posts</news:title>
       <news:publication_date>2024-10-09T18:59:33+07:00</news:publication_date>
@@ -27,7 +27,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>post-asset-link test</news:title>
       <news:publication_date>2023-04-22T10:15:14+07:00</news:publication_date>
@@ -38,7 +38,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Code Highlight Style test</news:title>
       <news:publication_date>2019-07-25T16:43:00+07:00</news:publication_date>
@@ -49,7 +49,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Markdown Style test</news:title>
       <news:publication_date>2018-07-24T23:31:06+07:00</news:publication_date>
@@ -60,7 +60,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Unknown Author</news:name>
+        <news:name>Dimas Lanjaka</news:name>
       </news:publication>
       <news:title>Typography and tags</news:title>
       <news:publication_date>2017-12-20T13:51:07+07:00</news:publication_date>
@@ -82,9 +82,9 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Unknown Author</news:name>
+        <news:name>Dimas Lanjaka</news:name>
       </news:publication>
-      <news:title>no title</news:title>
+      <news:title>no-title.md</news:title>
       <news:publication_date>2013-12-25T22:57:49+07:00</news:publication_date>
     </news:news>
   </url>
@@ -93,7 +93,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Excerpts</news:title>
       <news:publication_date>2013-12-25T00:23:23+07:00</news:publication_date>
@@ -104,7 +104,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Videos</news:title>
       <news:publication_date>2013-12-25T00:19:15+07:00</news:publication_date>
@@ -159,7 +159,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>中文測試</news:title>
       <news:publication_date>2013-12-24T23:31:30+07:00</news:publication_date>
@@ -170,7 +170,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.</news:title>
       <news:publication_date>2013-12-24T23:31:06+07:00</news:publication_date>
@@ -181,7 +181,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Categories</news:title>
       <news:publication_date>2013-12-24T23:30:09+07:00</news:publication_date>
@@ -192,7 +192,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Unknown Author</news:name>
+        <news:name>Dimas Lanjaka</news:name>
       </news:publication>
       <news:title>Link Post</news:title>
       <news:publication_date>2013-12-24T23:30:04+07:00</news:publication_date>
@@ -203,7 +203,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Unknown Author</news:name>
+        <news:name>Dimas Lanjaka</news:name>
       </news:publication>
       <news:title>Tags</news:title>
       <news:publication_date>2013-12-24T23:29:53+07:00</news:publication_date>
@@ -225,7 +225,7 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Hello World</news:title>
       <news:publication_date>2013-12-24T17:49:32+07:00</news:publication_date>
