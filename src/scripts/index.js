@@ -8,3 +8,4 @@ require("./post/metadata");
 require("./post/thumbnail");
 require("./utils");
 require("./config");
+require("./clean");

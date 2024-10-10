@@ -1,4 +1,6 @@
+import { load } from "cheerio";
 import hexoPostParser, { postMap } from "hexo-post-parser";
+import { renderMarkdownIt } from "hexo-post-parser/dist/markdown/toHtml";
 import path from "path";
 import sanitize from "sanitize-filename";
 import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
@@ -38,7 +40,7 @@ function getCachePath(page: HexoPageSchema) {
  * @param page - The page object to be processed.
  * @param callback - The callback that handles the result or error.
  */
-function preprocess(page: HexoPageSchema, callback: PreprocessCallback): void {
+export function metadataProcess(page: HexoPageSchema, callback: PreprocessCallback) {
   if (!page.full_source) {
     hexo.log.warn("fail parse metadata from", page.title || page.subtitle || page.permalink);
     return;
@@ -67,13 +69,59 @@ function preprocess(page: HexoPageSchema, callback: PreprocessCallback): void {
         fs.writeFileSync(cachePath, jsonStringifyWithCircularRefs(result));
         callback(null, { result, cachePath }); // Pass cachePath in the callback
       } catch (error) {
-        hexo.log.error("fail save post info", (error as Error).message);
+        hexo.log.error("fail save post info", error.message);
         if (fs.existsSync(cachePath)) fs.rm(cachePath, { force: true, recursive: true });
         callback(error as Error, null); // Invoke callback on error
       }
     })
-    .catch((err: Error) => {
-      callback(err, null); // Catch parsePost errors
+    .catch((_err: Error) => {
+      try {
+        if (page.full_source) {
+          const parse = hexoPostParser.parsePostFM(page.full_source);
+          if (parse.attributes) {
+            const html = renderMarkdownIt(parse.body);
+            const $ = load(html);
+            if (!parse.attributes.description) parse.attributes.description = $.text().slice(0, 150);
+            if (!parse.attributes.thumbnail) {
+              parse.attributes.thumbnail =
+                "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
+              const imgTags = $("img").filter((i, el) => {
+                const src = $(el).attr("src");
+                return typeof src === "string" && src.trim() !== "";
+              });
+
+              // Get a random img tag
+              if (imgTags.length > 0) {
+                const randomIndex = Math.floor(Math.random() * imgTags.length);
+                const randomImgSrc = $(imgTags[randomIndex]).attr("src");
+                parse.attributes.thumbnail = randomImgSrc;
+              } else {
+                parse.attributes.thumbnail =
+                  "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
+              }
+            }
+            const result = { metadata: parse.attributes, rawbody: parse.body };
+            // Remove keys with undefined or null values
+            const keys = Object.keys(result.metadata);
+            for (let i = 0; i < keys.length; i++) {
+              const key = keys[i];
+              if (result.metadata[key] === undefined || result.metadata[key] === null) {
+                delete result.metadata[key];
+              }
+            }
+            try {
+              fs.writeFileSync(cachePath, jsonStringifyWithCircularRefs(result));
+              callback(null, { result, cachePath }); // Pass cachePath in the callback
+            } catch (error) {
+              hexo.log.error("fail save post info", error.message);
+              if (fs.existsSync(cachePath)) fs.rm(cachePath, { force: true, recursive: true });
+              callback(error as Error, null); // Invoke callback on error
+            }
+          }
+        }
+      } catch (err) {
+        callback(new Error("fallback metadata failed: " + err.message), null); // Catch parsePost errors
+      }
     });
 }
 
@@ -89,7 +137,7 @@ function scheduleProcessing(): void {
   const page = pageQueue.shift(); // Get the first item in the queue
 
   if (page) {
-    preprocess(page, (err, _data) => {
+    metadataProcess(page, (err, _data) => {
       if (err) {
         hexo.log.error("Error processing page:", err.message);
       } else {
@@ -110,7 +158,7 @@ function addToQueue(page: HexoPageSchema): void {
   scheduleProcessing(); // Start processing if not already running
 }
 
-hexo.extend.helper.register("pageInfo", (page: HexoPageSchema) => {
+export const metadataHelper = (page: HexoPageSchema) => {
   addToQueue(page);
   const cachePath = getCachePath(page);
   if (fs.existsSync(cachePath)) {
@@ -136,4 +184,6 @@ hexo.extend.helper.register("pageInfo", (page: HexoPageSchema) => {
     }
   }
   return page; // Return the original page for now
-});
+};
+
+hexo.extend.helper.register("pageInfo", metadataHelper);

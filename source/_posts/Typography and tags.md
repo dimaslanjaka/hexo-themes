@@ -1,7 +1,7 @@
 ---
 title: Typography and tags
 date: 2017-12-20 13:51:07
-tags: 
+tags:
   - typography
   - hexo
 categories:
