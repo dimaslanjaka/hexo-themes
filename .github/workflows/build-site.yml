@@ -67,6 +67,6 @@ jobs:
           corepack enable
           touch yarn.lock
           yarn install
-
-      - name: Run deploy
-        run: yarn run deploy
+      - run: yarn build
+      - run: yarn site:build
+      - run: ./bin/deploy
