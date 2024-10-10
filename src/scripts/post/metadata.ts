@@ -6,7 +6,7 @@ import path from "path";
 import sanitize from "sanitize-filename";
 import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
-import getHexoArgs from "../args";
+import getHexoArgs from "../utils/args";
 import { saveAsSearch } from "./search";
 
 hexoPostParser.setConfig(hexo.config);
