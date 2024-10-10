@@ -8,7 +8,7 @@
         <news:name>Dimas Lanjaka</news:name>
       </news:publication>
       <news:title>related posts</news:title>
-      <news:publication_date>2024-10-08T04:57:33+07:00</news:publication_date>
+      <news:publication_date>2024-10-09T18:59:33+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -16,9 +16,9 @@
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
-      <news:title>no-title-with-desc.md</news:title>
+      <news:title>no title</news:title>
       <news:publication_date>2024-10-07T21:52:11+07:00</news:publication_date>
     </news:news>
   </url>
@@ -53,6 +53,17 @@
       </news:publication>
       <news:title>Markdown Style test</news:title>
       <news:publication_date>2018-07-24T23:31:06+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/Typography-and-tags.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>Typography and tags</news:title>
+      <news:publication_date>2017-12-20T13:51:07+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -122,6 +133,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://www.webmanajemen.com/link-post-without-title.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>no title</news:title>
+      <news:publication_date>2013-12-24T23:44:13+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
     <loc>https://www.webmanajemen.com/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
     <news:news>
       <news:publication>
@@ -166,14 +188,36 @@
     </news:news>
   </url>
   <url>
+    <loc>https://www.webmanajemen.com/link-post.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>Link Post</news:title>
+      <news:publication_date>2013-12-24T23:30:04+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
     <loc>https://www.webmanajemen.com/tags.html</loc>
     <news:news>
       <news:publication>
         <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
+        <news:name>Unknown Author</news:name>
       </news:publication>
       <news:title>Tags</news:title>
       <news:publication_date>2013-12-24T23:29:53+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/elements.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>Elements</news:title>
+      <news:publication_date>2013-12-24T23:29:08+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -185,17 +229,6 @@
       </news:publication>
       <news:title>Hello World</news:title>
       <news:publication_date>2013-12-24T17:49:32+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.webmanajemen.com/elements.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>Elements</news:title>
-      <news:publication_date>2013-12-24T23:29:08+07:00</news:publication_date>
     </news:news>
   </url>
 </urlset>
