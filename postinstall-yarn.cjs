@@ -33,14 +33,20 @@ const extractRepositoryUrl = (input) => {
 };
 
 /**
- * Fetches the latest commit from a specified GitHub repository.
+ * Fetches the latest commit from a specified GitHub repository and branch.
  *
  * @param {string} repoOwner - The owner of the repository.
  * @param {string} repoName - The name of the repository.
+ * @param {string|null|undefined} [branch='pre-release'] - The branch to fetch the latest commit from (default is 'pre-release').
  * @returns {Promise<Object|null>} - The latest commit object or null if an error occurs.
  */
-async function getLatestCommit(repoOwner, repoName) {
-  const url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits`;
+async function getLatestCommit(repoOwner, repoName, branch = "pre-release") {
+  let url;
+  if (typeof branch === "string" && branch.length > 0) {
+    url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits/${branch}`;
+  } else {
+    url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits`;
+  }
 
   try {
     /**
@@ -57,10 +63,12 @@ async function getLatestCommit(repoOwner, repoName) {
     } else {
       response = await axios.get(url);
     }
-    const latestCommit = response.data[0]; // The latest commit is the first in the array
+    const latestCommit = response.data; // The latest commit for the specified branch
     return latestCommit;
   } catch (error) {
-    console.error("Error fetching the latest commit:", error);
+    // retry fetch default branch
+    if (branch === "pre-release") return getLatestCommit(repoOwner, repoName, null);
+    console.error("Error fetching the latest commit:", repoOwner, repoName, branch, error.message);
     return null;
   }
 }
