@@ -142,3 +142,5 @@ yarn.lock
 .deploy_*
 /site
 /themes/**/scripts/helper.js
+/plugins/hexo-renderers
+/plugins/hexo-shortcodes
