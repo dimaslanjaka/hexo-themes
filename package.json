@@ -18,7 +18,8 @@
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
     "pack": "node -r ts-node/register pack.ts",
     "clean:post": "rimraf source/_posts && git restore source/_posts",
-    "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && ./bin/deploy"
+    "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && ./bin/deploy",
+    "postinstall": "node postinstall-yarn.cjs"
   },
   "keywords": [
     "hexo",
@@ -117,7 +118,7 @@
     "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/fc1f9b7/releases/hexo-util.tgz",
     "warehouse": "https://github.com/dimaslanjaka/hexo/raw/fc1f9b7/releases/warehouse.tgz",
     "hexo-seo": "https://github.com/dimaslanjaka/hexo-seo/raw/0ebda7c/release/hexo-seo.tgz",
-    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/0b390a8/release/hexo-renderers.tgz",
+    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/6cb3798/release/hexo-renderers.tgz",
     "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/raw/f70a1c0/release/hexo-shortcodes.tgz",
     "static-blog-generator": "https://github.com/dimaslanjaka/static-blog-generator/raw/43b9229/packages/static-blog-generator/release/static-blog-generator.tgz",
     "instant-indexing": "https://github.com/dimaslanjaka/static-blog-generator/raw/43b9229/packages/instant-indexing/release/instant-indexing.tgz",
@@ -131,5 +132,6 @@
     "git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/8849c22/release/git-command-helper.tgz",
     "@types/git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/8849c22/release/git-command-helper.tgz",
     "hexo-generator-redirect": "https://github.com/dimaslanjaka/hexo-generator-redirect/raw/0885394/release/hexo-generator-redirect.tgz"
-  }
+  },
+  "packageManager": "yarn@4.5.0"
 }
