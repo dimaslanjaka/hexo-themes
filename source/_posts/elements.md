@@ -2,7 +2,7 @@ title: Elements
 date: 2013-12-24 23:29:08
 tags:
 ---
-![cover](https://source.unsplash.com/random/800x400?lake)
+![cover](https://picsum.photos/800/400)
 The purpose of this post is to help you make sure all of HTML elements can display properly. If you use CSS reset, don't forget to redefine the style by yourself.
 
 ---

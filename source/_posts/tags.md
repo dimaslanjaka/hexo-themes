@@ -5,5 +5,5 @@ tags:
 - Bar
 - Baz
 ---
-![cover](https://source.unsplash.com/random/900x300?sky)
+![cover](https://picsum.photos/900/300)
 This post contains 3 tags. Make sure your theme can display all of the tags.
