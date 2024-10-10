@@ -3,11 +3,18 @@ const axios = require("axios");
 const { spawn } = require("cross-spawn");
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config({ override: true });
+
+const githubToken = process.env.ACCESS_TOKEN || process.env.GH_TOKEN;
 
 /**
  * @type {import('./package.json')}
  */
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf-8"));
+if (!pkg.dependencies) pkg.dependencies = {};
+if (!pkg.devDependencies) pkg.devDependencies = {};
+if (!pkg.resolutions) pkg.resolutions = {};
+if (!pkg.overrides) pkg.overrides = {};
 
 /**
  * Extracts the GitHub repository URL and its components from a given string.
@@ -36,7 +43,20 @@ async function getLatestCommit(repoOwner, repoName) {
   const url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits`;
 
   try {
-    const response = await axios.get(url);
+    /**
+     * @type {import("axios").AxiosResponse<any, any>}
+     */
+    let response;
+    if (githubToken) {
+      response = await axios.get(url, {
+        headers: {
+          Authorization: `token ${githubToken}`,
+          Accept: "application/vnd.github.v3+json"
+        }
+      });
+    } else {
+      response = await axios.get(url);
+    }
     const latestCommit = response.data[0]; // The latest commit is the first in the array
     return latestCommit;
   } catch (error) {
@@ -65,7 +85,27 @@ async function processPkg(packageName, version) {
             (match, p1) => `raw/${ansiColors.red(p1)}/release/`
           );
           const updateVersion = version.replace(/raw\/(.*)\/release\//, `raw/${sha}/release/`);
-          const needUpdate = version !== updateVersion;
+          /**
+           * @type {import("axios").AxiosResponse<any, any>}
+           */
+          let response;
+          if (githubToken) {
+            response = await axios
+              .get(updateVersion, {
+                headers: {
+                  Authorization: `token ${githubToken}`,
+                  Accept: "application/vnd.github.v3+json"
+                }
+              })
+              .catch(() => {
+                return { status: 404 };
+              });
+          } else {
+            response = await axios.get(updateVersion).catch(() => {
+              return { status: 404 };
+            });
+          }
+          const needUpdate = version !== updateVersion && response.status === 200;
           console.log(
             ansiColors.magentaBright(packageName),
             coloredVersion,
@@ -89,14 +129,14 @@ async function processPkg(packageName, version) {
  *
  * @returns {Promise<void>}
  */
-async function main() {
-  const keys = Object.keys(pkg.dependencies).concat(Object.keys(pkg.devDependencies)).flat();
+async function deps() {
+  const keys = [...new Set([...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.devDependencies || {})])];
   for (let i = 0; i < keys.length; i++) {
     const packageName = keys[i];
     if (packageName in pkg.dependencies || packageName in pkg.devDependencies) {
       const version = pkg.dependencies[packageName] || pkg.devDependencies[packageName];
-      const { needUpdate = false, updateVersion } = (await processPkg(packageName, version)) || {};
-      if (needUpdate) {
+      const { needUpdate = false, updateVersion = null } = (await processPkg(packageName, version)) || {};
+      if (needUpdate && updateVersion) {
         await new Promise((resolve, reject) => {
           const child = spawn("yarn", ["up", `${packageName}@${updateVersion}`], {
             cwd: process.cwd(),
@@ -109,4 +149,25 @@ async function main() {
   }
 }
 
-main().catch((error) => console.error("Error in main:", error));
+async function resolutions() {
+  const keys = [...new Set([...Object.keys(pkg.resolutions || {}), ...Object.keys(pkg.overrides || {})])];
+  for (let i = 0; i < keys.length; i++) {
+    const packageName = keys[i];
+    if (packageName in pkg.resolutions || packageName in pkg.overrides) {
+      const version = pkg.resolutions[packageName] || pkg.overrides[packageName];
+      const { needUpdate = false, updateVersion = null } = (await processPkg(packageName, version)) || {};
+      if (needUpdate && updateVersion) {
+        if (pkg.resolutions[packageName]) {
+          pkg.resolutions[packageName] = updateVersion;
+        } else if (pkg.overrides[packageName]) {
+          pkg.overrides[packageName] = updateVersion;
+        }
+      }
+    }
+  }
+  fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2));
+}
+
+deps()
+  .then(resolutions)
+  .catch((error) => console.error("Error in main:", error));
