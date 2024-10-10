@@ -19,6 +19,22 @@ To update theme, just call `npx hexo-theme-name` on cwd hexo project. Sample:
 
 ![image](https://github.com/user-attachments/assets/b62da4d0-8db1-4dc8-ae3d-b0b5e2640ad1)
 
+### Features
+
+#### Search data
+
+All post metadata on `{{ config.root }}/hexo-search.json` with contents
+
+```jsonc
+[
+  {
+    "url": "url relative post",
+    "title": "post title",
+    "description": "post excerpt or description"
+  }
+]
+```
+
 ### Contribute
 
 Step to contribute

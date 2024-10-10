@@ -10,7 +10,7 @@ categories:
 ![$cover](images/lake.png)
 
 # Installation
----
+
 This post uses `hexo-renderer-markdown-it` plugin as markdown processor, so please install it to achieve the effect.
 
 ```bash installation
@@ -51,7 +51,7 @@ markdown:
 ```
 
 # Usage
----
+
 
 ## Headings
 
@@ -76,14 +76,14 @@ markdown:
 ```markdown source code
 ___
 
----
+
 
 ***
 ```
 
 ___
 
----
+
 
 ***
 
@@ -94,7 +94,7 @@ ___
 
 test.. test... test..... test?..... test!....
 
-!!!!!! ???? ,,  -- ---
+!!!!!! ???? ,,  --
 
 "Smartypants, double quotes" and 'single quotes'
 ```
@@ -103,7 +103,7 @@ test.. test... test..... test?..... test!....
 
 test.. test... test..... test?..... test!....
 
-!!!!!! ???? ,,  -- ---
+!!!!!! ???? ,,  --
 
 "Smartypants, double quotes" and 'single quotes'
 
@@ -256,14 +256,14 @@ console.log(foo(5));
 
 ```markdown source code
 | Option | Description |Description | Description | Description | Description |
-| ------ | ----------- |----------- | ----------- | ----------- | ----------- |
+|  | -- |-- | -- | -- | -- |
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 ```
 
 | Option | Description | Description | Description | Description | Description |
-| ------ | ----------- | ----------- | ----------- | ----------- | ----------- |
+|  | -- | -- | -- | -- | -- |
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
@@ -272,14 +272,14 @@ console.log(foo(5));
 
 ``` markdown source code
 | Option | Description |
-| ------:| -----------:|
+| :| --:|
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 ```
 
 | Option | Description |
-| ------:| -----------:|
+| :| --:|
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |

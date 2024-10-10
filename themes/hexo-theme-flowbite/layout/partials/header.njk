@@ -58,6 +58,14 @@
           {% endif %}
         </div>
       </div>
+      <!-- Search Icon -->
+      <div class="relative flex items-center sm:ml-6">
+        <button id="openSearchModal"
+                class="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white">
+          <i class="fa fa-search"></i>
+          <span class="sr-only">Open Search</span>
+        </button>
+      </div>
     </div>
   </div>
   <!-- Mobile menu, show/hide based on menu state. -->
@@ -86,3 +94,26 @@
     </div>
   </div>
 </nav>
+<!-- Search Modal -->
+<div id="searchModal"
+     class="fixed inset-0 z-50 hidden overflow-y-auto"
+     aria-labelledby="modal-title"
+     role="dialog"
+     aria-modal="true">
+  <div class="flex items-start justify-center min-h-screen px-4">
+    <div class="search-modal bg-gray-800 text-white p-6 rounded-lg shadow-lg relative">
+      <button id="closeSearchModal"
+              class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i class="fa fa-times"></i>
+      </button>
+      <h2 class="text-lg font-medium mb-4">Search</h2>
+      <input type="text"
+             id="searchInput"
+             class="w-full p-2 rounded bg-gray-700 text-white"
+             placeholder="Type to search..." />
+      <div id="searchResults" class="mt-4">
+        <!-- Search results will go here -->
+      </div>
+    </div>
+  </div>
+</div>

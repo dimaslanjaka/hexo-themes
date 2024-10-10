@@ -1,17 +1,23 @@
 import { load } from "cheerio";
 import hexoPostParser, { postMap } from "hexo-post-parser";
 import { renderMarkdownIt } from "hexo-post-parser/dist/markdown/toHtml";
+import { url_for } from "hexo-util";
 import path from "path";
 import sanitize from "sanitize-filename";
 import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
+import getHexoArgs from "../args";
+import { saveAsSearch } from "./search";
 
 hexoPostParser.setConfig(hexo.config);
 
 /**
  * Defines the callback type for the preprocess function.
  */
-type PreprocessCallback = (err: Error | null, data: { result: postMap; cachePath: string } | null) => void;
+type PreprocessCallback = (
+  err: Error | null,
+  data: { result: postMap & Record<string, any>; cachePath: string } | null
+) => void;
 
 // Queue to hold the pages to be processed
 const pageQueue: HexoPageSchema[] = [];
@@ -27,11 +33,12 @@ function getCachePath(page: HexoPageSchema) {
       hash = md5(page._content);
     }
   }
-  return path.join(
+  const result = path.join(
     process.cwd(),
-    "tmp/hexo-theme-flowbite/caches/post-" +
-      sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + hash)
+    "tmp/hexo-themes/caches/post-" + sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + hash)
   );
+  fs.ensureDirSync(path.dirname(result));
+  return result;
 }
 
 /**
@@ -47,11 +54,10 @@ export function metadataProcess(page: HexoPageSchema, callback: PreprocessCallba
   }
 
   const cachePath = getCachePath(page);
-  if (fs.existsSync(cachePath)) {
+  if (fs.existsSync(cachePath) && getHexoArgs() === "generate") {
     // skip already parsed metadata
     return;
   }
-  fs.ensureDirSync(path.dirname(cachePath));
 
   hexoPostParser
     .parsePost(page.full_source, { fix: true })
@@ -64,6 +70,9 @@ export function metadataProcess(page: HexoPageSchema, callback: PreprocessCallba
         if (result.metadata[key] === undefined || result.metadata[key] === null) {
           delete result.metadata[key];
         }
+      }
+      if (!result.metadata.permalink && page.permalink) {
+        result.metadata.permalink = url_for.bind(hexo)(page.path);
       }
       try {
         fs.writeFileSync(cachePath, jsonStringifyWithCircularRefs(result));
@@ -98,6 +107,14 @@ export function metadataProcess(page: HexoPageSchema, callback: PreprocessCallba
               } else {
                 parse.attributes.thumbnail =
                   "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
+              }
+            }
+            if (!parse.attributes.permalink) {
+              if (page.permalink) {
+                parse.attributes.permalink = page.permalink;
+              } else {
+                // const parsePermalink = hexoPostParser.parsePermalink(page.full_source as string, hexo.config as any);
+                // if (parsePermalink && parsePermalink.length > 0) parse.attributes.permalink = parsePermalink;
               }
             }
             const result = { metadata: parse.attributes, rawbody: parse.body };
@@ -137,11 +154,18 @@ function scheduleProcessing(): void {
   const page = pageQueue.shift(); // Get the first item in the queue
 
   if (page) {
-    metadataProcess(page, (err, _data) => {
+    metadataProcess(page, (err, data) => {
       if (err) {
         hexo.log.error("Error processing page:", err.message);
       } else {
         isProcessing = false;
+        if (data?.result && data.result.metadata) {
+          saveAsSearch({
+            url: data.result.metadata.permalink || "",
+            title: data.result.metadata.title || "",
+            description: data.result.metadata.description || ""
+          });
+        }
         setTimeout(scheduleProcessing, 500); // Continue to next item after delay (optional)
       }
     });

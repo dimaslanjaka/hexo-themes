@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
+import { searchFiles } from "./post/search";
 
 // clean build and temp folder on `hexo clean`
 hexo.extend.filter.register("after_clean", function () {
@@ -10,8 +11,11 @@ hexo.extend.filter.register("after_clean", function () {
     path.join(hexo.base_dir, "tmp/hexo-theme-claudia"),
     path.join(hexo.base_dir, "tmp/hexo-post-parser"),
     path.join(hexo.base_dir, "tmp/hexo-renderers"),
+    path.join(hexo.base_dir, "tmp/hexo-themes"),
     path.join(hexo.base_dir, "tmp/hexo-shortcodes")
-  ];
+  ]
+    .concat(searchFiles)
+    .flat();
   for (let i = 0; i < folders.length; i++) {
     const folder = folders[i];
     try {

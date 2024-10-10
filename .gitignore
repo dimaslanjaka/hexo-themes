@@ -144,3 +144,4 @@ yarn.lock
 /themes/**/scripts/helper.js
 /plugins/hexo-renderers
 /plugins/hexo-shortcodes
+/source/hexo-search.json
