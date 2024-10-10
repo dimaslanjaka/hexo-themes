@@ -38,7 +38,7 @@ const extractRepositoryUrl = (input) => {
  * @param {string} repoOwner - The owner of the repository.
  * @param {string} repoName - The name of the repository.
  * @param {string|null|undefined} [branch='pre-release'] - The branch to fetch the latest commit from (default is 'pre-release').
- * @returns {Promise<Object|null>} - The latest commit object or null if an error occurs.
+ * @returns {Promise<Record<string, any>|null>} - The latest commit object or null if an error occurs.
  */
 async function getLatestCommit(repoOwner, repoName, branch = "pre-release") {
   let url;
@@ -85,42 +85,54 @@ async function processPkg(packageName, version) {
     if (/^https?:\/\/github.com/.test(version) && version.includes("/release/") && version.includes(".tgz")) {
       const { repo, user, url: _url } = extractRepositoryUrl(version);
       if (repo && user) {
+        let updateVersion = null;
         const latestCommit = await getLatestCommit(user, repo);
         if (latestCommit) {
-          const { sha } = latestCommit;
-          const coloredVersion = version.replace(
-            /raw\/(.*?)\/release\//,
-            (match, p1) => `raw/${ansiColors.red(p1)}/release/`
-          );
-          const updateVersion = version.replace(/raw\/(.*)\/release\//, `raw/${sha}/release/`);
-          /**
-           * @type {import("axios").AxiosResponse<any, any>}
-           */
-          let response;
-          if (githubToken) {
-            response = await axios
-              .get(updateVersion, {
-                headers: {
-                  Authorization: `token ${githubToken}`,
-                  Accept: "application/vnd.github.v3+json"
-                }
-              })
-              .catch(() => {
+          const coloredVersion = version.replace(/\/raw\/(\w+)\//, `/raw/${ansiColors.redBright("$1")}/`);
+          const { sha = null } = latestCommit;
+          let needUpdate = typeof sha === "string";
+          if (sha) {
+            updateVersion = version.replace(/\/raw\/(\w+)\//, `/raw/${sha}/`);
+            /**
+             * @type {import("axios").AxiosResponse<any, any>}
+             */
+            let response;
+            if (githubToken) {
+              response = await axios
+                .get(updateVersion, {
+                  headers: {
+                    Authorization: `token ${githubToken}`,
+                    Accept: "application/vnd.github.v3+json"
+                  }
+                })
+                .catch(() => {
+                  return { status: 404 };
+                });
+            } else {
+              response = await axios.get(updateVersion).catch(() => {
                 return { status: 404 };
               });
+            }
+            const isSame = version.trim() == updateVersion.trim();
+            needUpdate = needUpdate && !isSame && response.status === 200;
+            if (!isSame) {
+              console.log(
+                ansiColors.magentaBright(packageName),
+                coloredVersion,
+                "->",
+                updateVersion.replace(sha, ansiColors.green(sha)),
+                needUpdate ? ansiColors.greenBright("updating...") : ansiColors.yellowBright("keep")
+              );
+            } else {
+              console.log(ansiColors.magentaBright(packageName), coloredVersion, ansiColors.yellowBright("keep"));
+            }
           } else {
-            response = await axios.get(updateVersion).catch(() => {
-              return { status: 404 };
-            });
+            console.log(
+              ansiColors.magentaBright(packageName),
+              coloredVersion,
+              ansiColors.redBright("fail fetch update")
+            );
           }
-          const needUpdate = version !== updateVersion && response.status === 200;
-          console.log(
-            ansiColors.magentaBright(packageName),
-            coloredVersion,
-            "->",
-            updateVersion.replace(sha, ansiColors.green(sha)),
-            needUpdate ? ansiColors.greenBright("updating...") : ansiColors.yellowBright("keep")
-          );
           return {
             packageName,
             needUpdate,
@@ -173,7 +185,7 @@ async function resolutions() {
       }
     }
   }
-  fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2));
+  fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2) + "\n");
 }
 
 deps()
