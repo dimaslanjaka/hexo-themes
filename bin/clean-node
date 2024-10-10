@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
+
+const fs = require("fs-extra");
+const glob = require("glob");
+
+const stream = glob.stream("**/node_modules");
+stream.on("data", function (file) {
+  fs.rm(file, { recursive: true, force: true }).catch(() => {
+    //
+  });
+});
