@@ -13,6 +13,24 @@ My HexoJS Theme Collections
 
 > for enable dynamic build on-fly like **hexo-theme-flowbite** add as **dev dependencies** (`yarn add -D hexo-theme-flowbite`)
 
+#### How to update markdown-it to latest for Hexo
+
+- install customized `markdown-it` [see why](https://github.com/dimaslanjaka/hexo-renderers/tree/esm#requirements)
+
+```bash
+yarn add markdown-it@https://github.com/dimaslanjaka/markdown-it/raw/2000d25dec653f6e62a545b30f6d58fad20e6d1f/release/markdown-it.tgz
+```
+
+#### How to enable auto SEO
+
+- install `hexo-seo`
+
+```bash
+yarn add hexo-seo
+```
+
+[Read how to configure hexo-seo](https://github.com/dimaslanjaka/hexo-seo#readme)
+
 #### How to update
 
 To update theme, just call `npx hexo-theme-name` on cwd hexo project. Sample:
