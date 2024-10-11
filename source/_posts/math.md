@@ -104,3 +104,10 @@ Escaped $ should not parse
 Escaped $ within math should not close
 
 $\$1 + \$1 = \$2$
+
+Colors
+
+\textcolor{blue}{F=ma}
+\textcolor{228B22}{F=ma}
+\colorbox{aqua}{$F=ma$}
+\fcolorbox{red}{aqua}{$F=ma$}
