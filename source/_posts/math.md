@@ -5,9 +5,6 @@ tags: [post, markdown]
 category: [engine]
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css"/>
-
 ## Inline math
 
 - $\sqrt{3x-1}+(1+x)^2$
