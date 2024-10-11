@@ -21,6 +21,8 @@ To update theme, just call `npx hexo-theme-name` on cwd hexo project. Sample:
 
 ### Features
 
+> [more detailed config here](./themes/hexo-theme-flowbite/_config.yml)
+
 #### Search data
 
 All post metadata on `{{ config.root }}/hexo-search.json` with contents
