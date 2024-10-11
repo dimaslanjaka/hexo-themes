@@ -53,14 +53,6 @@ const hexoThemeFlowbiteHelper = {
     sourcemap: false // Sourcemaps for easier debugging
   },
   plugins: [
-    json.default({ indent: "  " }),
-    resolve.nodeResolve({
-      preferBuiltins: true,
-      extensions: [".mjs", ".js", ".json", ".node", "ts", ".cjs", ".mjs"]
-    }),
-    commonjs.default({
-      // exclude: ["**/node_modules/**"],
-    }),
     typescript.default({
       tsconfig: false,
       compilerOptions: {
@@ -70,6 +62,14 @@ const hexoThemeFlowbiteHelper = {
         esModuleInterop: true
       },
       include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
+    }),
+    json.default({ indent: "  " }),
+    resolve.nodeResolve({
+      preferBuiltins: true,
+      extensions: [".mjs", ".js", ".json", ".node", ".cjs", ".mjs"]
+    }),
+    commonjs.default({
+      // exclude: ["**/node_modules/**"],
     })
   ],
   external: deps // Exclude external dependencies from the bundle
@@ -84,13 +84,6 @@ const hexoThemeFlowbiteCLI = {
     }
   ],
   plugins: [
-    json.default(),
-    resolve.nodeResolve({
-      extensions: [".mjs", ".js", ".json", ".node", "ts"] // Resolve both JavaScript and TypeScript
-    }),
-    commonjs.default({
-      include: "node_modules/**" // Include node_modules
-    }),
     typescript.default({
       tsconfig: false,
       compilerOptions: {
@@ -101,6 +94,13 @@ const hexoThemeFlowbiteCLI = {
       },
       include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"],
       exclude: ["**/*.test.js", "**/*.test.ts"]
+    }),
+    json.default(),
+    resolve.nodeResolve({
+      extensions: [".mjs", ".js", ".json", ".node"]
+    }),
+    commonjs.default({
+      include: "node_modules/**" // Include node_modules
     })
   ],
   external: deps // Exclude external dependencies from the bundle

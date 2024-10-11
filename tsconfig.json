@@ -9,12 +9,17 @@
   },
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES5",
-    "outDir": "tmp/dist",
+    "target": "ES2020",
+    "moduleResolution": "Node",
+    "outDir": "dist",
     "esModuleInterop": true,
+    "typeRoots": ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
     "lib": ["ES2015", "ES6", "ES5", "ES2022"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "tmp", "dist", "themes/**/scripts/**"],
-  "include": ["bin", "*.ts", "*.js", "*.cjs"]
+  "include": ["bin", "*.ts", "*.js", "*.cjs", "./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
 }

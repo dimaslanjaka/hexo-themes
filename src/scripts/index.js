@@ -9,3 +9,4 @@ require("./post/thumbnail");
 require("./utils");
 require("./config");
 require("./clean");
+require("./post/labels");

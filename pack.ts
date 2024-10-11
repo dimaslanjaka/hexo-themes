@@ -1,4 +1,4 @@
-import * as croSpawn from "cross-spawn";
+import { spawnAsync } from "cross-spawn";
 import { existsSync, mkdirSync, renameSync, rmSync } from "fs-extra";
 import minimist from "minimist";
 import path from "path";
@@ -6,21 +6,19 @@ import pc from "picocolors";
 
 const argv = minimist(process.argv.slice(2));
 
-const parseWorkspaces = croSpawn
-  .async("yarn", ["workspaces", "list", "--no-private", "--json"], {
-    cwd: process.cwd()
-  })
-  .then((o) =>
-    o.stdout
-      .split(/\r?\n/gm)
-      .filter((str) => str.length > 4)
-      .map((str) => {
-        const parse: { location: string; name: string } = JSON.parse(str.trim());
-        parse.location = path.join(__dirname, parse.location);
-        return parse;
-      })
-      .filter((o) => existsSync(o.location))
-  );
+const parseWorkspaces = spawnAsync("yarn", ["workspaces", "list", "--no-private", "--json"], {
+  cwd: process.cwd()
+}).then((o) =>
+  o.stdout
+    .split(/\r?\n/gm)
+    .filter((str) => str.length > 4)
+    .map((str) => {
+      const parse: { location: string; name: string } = JSON.parse(str.trim());
+      parse.location = path.join(__dirname, parse.location);
+      return parse;
+    })
+    .filter((o) => existsSync(o.location))
+);
 
 async function buildPack(workspaces: Awaited<typeof parseWorkspaces>) {
   if (workspaces.length === 0) return console.log("workspaces empty");
@@ -33,18 +31,18 @@ async function buildPack(workspaces: Awaited<typeof parseWorkspaces>) {
     if (!workspace) throw new Error("workspace " + wname + " not found");
 
     if (clean) {
-      await croSpawn.async("yarn", ["run", "clean"], {
+      await spawnAsync("yarn", ["run", "clean"], {
         cwd: workspace.location
       });
-      await croSpawn.async("yarn", ["run", "build"], {
+      await spawnAsync("yarn", ["run", "build"], {
         cwd: workspace.location
       });
     } else {
-      await croSpawn.async("yarn", ["run", "build"], {
+      await spawnAsync("yarn", ["run", "build"], {
         cwd: workspace.location
       });
     }
-    await croSpawn.async("yarn", ["workspace", wname, "pack"], {
+    await spawnAsync("yarn", ["workspace", wname, "pack"], {
       cwd: __dirname
     });
     if (typeof workspace === "object") {
