@@ -227,3 +227,12 @@ img + figcaption,
     color: var(--dark-parentheses-color, #60a5fa); /* Adjust parentheses color for dark theme */
   }
 }
+
+// Responsive image fix
+.post img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}

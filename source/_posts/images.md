@@ -1,7 +1,13 @@
-title: Images
-date: 2013-12-26 22:46:49
 ---
+title: Images responsive test
+date: 2013-12-26 22:46:49
+categories: []
+tags: [images]
+---
+
 This is a image test post.
+
+## Internal images
 
 ![](/assets/wallpaper-2572384.jpg)
 
@@ -9,9 +15,13 @@ This is a image test post.
 
 ![](/assets/wallpaper-878514.jpg)
 
-![Small Picture](https://via.placeholder.com/350x150.jpg)
-
 ![](/images/river.png)
 ![](/images/landscape-1.jpg)
 ![](/images/landscape-2.jpg)
 ![Caption](/images/leaf.jpg)
+
+## External images
+
+Small picture should be centered
+
+![Small Picture](https://via.placeholder.com/350x150.jpg)
