@@ -64,7 +64,11 @@ async function getLatestCommit(repoOwner, repoName, branch = "pre-release") {
       response = await axios.get(url);
     }
     const latestCommit = response.data; // The latest commit for the specified branch
-    return latestCommit;
+    if (!Array.isArray(latestCommit)) {
+      return latestCommit;
+    } else {
+      return latestCommit[0];
+    }
   } catch (error) {
     // retry fetch default branch
     if (branch === "pre-release") return getLatestCommit(repoOwner, repoName, null);
@@ -109,8 +113,8 @@ async function processPkg(packageName, version) {
                   return { status: 404 };
                 });
             } else {
-              response = await axios.get(updateVersion).catch(() => {
-                return { status: 404 };
+              response = await axios.get(updateVersion).catch((e) => {
+                return { status: 404, message: e.message };
               });
             }
             const isSame = version.trim() == updateVersion.trim();
