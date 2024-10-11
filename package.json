@@ -18,7 +18,7 @@
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
     "pack": "node -r ts-node/register pack.ts",
     "clean:post": "rimraf source/_posts && git restore source/_posts",
-    "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && ./bin/deploy",
+    "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && node bin/deploy",
     "post-install": "node postinstall-yarn.cjs"
   },
   "keywords": [
@@ -39,6 +39,7 @@
     "deepmerge-ts": "^7.1.1",
     "hexo": "^7.3.0",
     "hexo-asset-link": "^2.2.3",
+    "hexo-browsersync": "https://github.com/hexojs/hexo-browsersync.git",
     "hexo-cli": "^4.3.2",
     "hexo-front-matter": "^4.2.1",
     "hexo-generator-archive": "^2.0.0",
@@ -60,6 +61,7 @@
     "nunjucks": "^3.2.4",
     "rimraf": "^6.0.1",
     "sanitize-filename": "^1.6.3",
+    "sbg-utility": "^1.1.8",
     "static-blog-generator": "^3.0.1",
     "tar": "^7.4.3",
     "tar-stream": "^3.1.7",

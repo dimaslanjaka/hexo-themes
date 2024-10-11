@@ -10,3 +10,4 @@ require("./utils");
 require("./config");
 require("./clean");
 require("./post/labels");
+require("./utils/url");
