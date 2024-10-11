@@ -20,10 +20,11 @@ jobs:
     permissions: read-all
     timeout-minutes: 120
     env:
-      NODE_OPTIONS: '--max_old_space_size=8192' #8192 4096 --expose-gc
+      NODE_OPTIONS: "--max_old_space_size=8192" #8192 4096 --expose-gc
       YARN_ENABLE_IMMUTABLE_INSTALLS: false
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       YARN_CHECKSUM_BEHAVIOR: update
+      TERM: xterm
 
     steps:
       - name: Checkout repository
