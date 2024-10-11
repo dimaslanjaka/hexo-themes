@@ -76,5 +76,5 @@
   ],
   "frontMatter.site.baseURL": "https://www.webmanajemen.com/",
   "frontMatter.framework.startCommand": "hexo server --ssl",
-  "frontMatter.git.enabled": true
+  "frontMatter.git.enabled": false
 }
