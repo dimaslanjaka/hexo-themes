@@ -15,7 +15,6 @@ jobs:
         with:
           ref: master
           repository: dimaslanjaka/hexo-themes
-          # submodules: recursive
           token: "${{ secrets.ACCESS_TOKEN }}"
           lfs: ""
       - name: Checkout repository
@@ -43,7 +42,7 @@ jobs:
         with:
           node-version: 20.x
 
-      - name: Cache yarn dependencies
+      - name: Initialize cache
         uses: actions/cache@v3
         id: cache
         with:
@@ -67,6 +66,7 @@ jobs:
           corepack enable
           touch yarn.lock
           yarn install
-      - run: yarn build
-      - run: yarn site:build
+      - run: yarn run build
+      - run: yarn run site:build
       - run: ./bin/deploy
+        shell: bash
