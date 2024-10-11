@@ -3,19 +3,19 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.webmanajemen.com</loc>
-    <lastmod>2024-10-11T04:53:28+07:00</lastmod>
+    <lastmod>2024-10-11T11:27:18+07:00</lastmod>
     <priority>1</priority>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://www.webmanajemen.com/markdown-it-emoji.html</loc>
-    <lastmod>2024-10-11T03:00:55+07:00</lastmod>
+    <lastmod>2024-10-11T09:05:41+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/matchematic.html</loc>
-    <lastmod>2024-10-11T03:02:18+07:00</lastmod>
+    <loc>https://www.webmanajemen.com/math.html</loc>
+    <lastmod>2024-10-11T09:05:41+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -32,14 +32,14 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/code-highlight.html</loc>
-    <lastmod>2024-10-09T09:13:07+07:00</lastmod>
+    <loc>https://www.webmanajemen.com/post-asset-link.html</loc>
+    <lastmod>2023-04-23T10:15:14+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/post-asset-link.html</loc>
-    <lastmod>2023-04-23T10:15:14+07:00</lastmod>
+    <loc>https://www.webmanajemen.com/code-highlight.html</loc>
+    <lastmod>2024-10-09T09:13:07+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -92,14 +92,14 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
-    <lastmod>2024-10-10T06:47:30+07:00</lastmod>
+    <loc>https://www.webmanajemen.com/link-post-without-title.html</loc>
+    <lastmod>2024-10-10T06:44:48+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/link-post-without-title.html</loc>
-    <lastmod>2024-10-10T06:44:48+07:00</lastmod>
+    <loc>https://www.webmanajemen.com/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
+    <lastmod>2024-10-10T06:47:30+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -112,12 +112,6 @@
   <url>
     <loc>https://www.webmanajemen.com/long-title.html</loc>
     <lastmod>2024-10-10T06:44:48+07:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.webmanajemen.com/elements.html</loc>
-    <lastmod>2024-10-10T17:42:56+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -136,6 +130,12 @@
   <url>
     <loc>https://www.webmanajemen.com/tags.html</loc>
     <lastmod>2024-10-10T17:43:18+07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/elements.html</loc>
+    <lastmod>2024-10-10T17:42:56+07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
