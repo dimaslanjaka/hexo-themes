@@ -32,3 +32,11 @@ hexo.extend.helper.register("injectAfterPostHtml", function () {
   }
   return "";
 });
+
+hexo.extend.helper.register("injectAsideHtml", function () {
+  const file = path.join(hexo.base_dir, "source/_data/hexo-theme-flowbite/aside.html");
+  if (fs.existsSync(file)) {
+    return fs.readFileSync(file, "utf-8");
+  }
+  return "";
+});
