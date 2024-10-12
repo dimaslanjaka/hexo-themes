@@ -312,19 +312,19 @@ img + figcaption,
   max-height: 300px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjusts based on screen size */
-  grid-auto-rows: 150px; /* Set a base height for grid items */
-  gap: 8px; /* Adjust gap between grid items */
-}
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); // Adjusts based on screen size
+  // grid-template-columns: repeat(4, 1fr); // Creates 4 equal columns
+  grid-auto-rows: 150px; // Set a base height for grid items
+  gap: 8px; // Adjust gap between grid items
 
-.masonry-item {
-  // position: relative; /* Required for absolute positioning of hover effect */
-  @apply relative overflow-hidden rounded-lg;
-  min-height: 0;
-  height: auto;
-}
+  .masonry-item {
+    // position: relative; // Required for absolute positioning of hover effect
+    @apply relative overflow-hidden rounded-lg;
+    min-height: 0;
+    height: auto;
 
-/* Optional: For different image heights */
-.masonry-item:nth-child(odd) {
-  grid-row-end: span 2; /* Makes odd items taller */
+    &:nth-child(odd) {
+      grid-row-end: span 2; // Makes odd items taller
+    }
+  }
 }

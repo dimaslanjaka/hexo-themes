@@ -48,7 +48,7 @@ export function initFancybox() {
 export function processGalleryTag() {
   const wrapper = document.querySelector<HTMLElement>(".post");
   if (wrapper) {
-    const galleryItemsDivs = wrapper.querySelectorAll(".gallery-items");
+    const galleryItemsDivs = wrapper.querySelectorAll<HTMLDivElement>(".gallery-items");
 
     if (galleryItemsDivs.length > 0)
       galleryItemsDivs.forEach((galleryItemsDiv, index) => {
@@ -56,9 +56,9 @@ export function processGalleryTag() {
 
         try {
           galleryItemsDiv.classList.add("masonry-grid", "not-format");
-          const jsonData = JSON.parse(galleryItemsDiv.textContent);
+          const jsonData = JSON.parse(galleryItemsDiv.textContent) as { url: string; caption: any; alt: any }[];
 
-          jsonData.forEach((item: { url: string; caption: any; alt: any }) => {
+          jsonData.forEach((item) => {
             const itemDiv = document.createElement("div");
             itemDiv.className = "masonry-item relative overflow-hidden rounded-lg";
             const img = document.createElement("img");
