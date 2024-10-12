@@ -17,4 +17,5 @@ if (fs.existsSync(`_config.base.${themeName}.yml`)) {
   const themeConfig = yaml.parse(fs.readFileSync(`_config.base.${themeName}.yml`, "utf-8"));
   const config = Object.assign(baseConfig, themeConfig);
   fs.writeFileSync("_config.yml", yaml.stringify(config));
+  fs.copySync(`themes/${themeName}/readme.md`, "source/index.md", { overwrite: true });
 }

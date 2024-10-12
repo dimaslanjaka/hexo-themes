@@ -2,7 +2,12 @@
 
 HexoJS theme build with TailwindCSS and Flowbite
 
-[Read All Features](https://github.com/dimaslanjaka/hexo-themes?tab=readme-ov-file#features)
+## Features
+
+- Responsive
+- Auto SEO
+- Custom HTML Injection
+- FancyBox multimedia display
 
 ## Preview
 

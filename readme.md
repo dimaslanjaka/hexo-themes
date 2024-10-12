@@ -5,12 +5,6 @@ My HexoJS Theme Collections
 | :--- | :--- |
 | [hexo-theme-flowbite](./themes/hexo-theme-flowbite/) | Hexo theme build using **tailwind** and **flowbite** |
 
-## Features
-
-- Responsive
-- Auto SEO
-- Custom HTML Injection
-
 ### How to install
 
 - download `tgz` file from [Relase Folder](./releases/)
