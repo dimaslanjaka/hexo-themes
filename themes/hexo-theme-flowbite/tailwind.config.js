@@ -45,7 +45,17 @@ const tailwindConfig = {
               "background-color": "#22272e"
             },
             // drop styling for katex math
-            '[class^="katex"]': false
+            '[class^="katex"]': false,
+            // drop styling for images with any class
+            "img[class]": {
+              all: "initial", // Reset all styles
+              display: "inline", // Default display
+              "max-width": "100%", // Reset max-width
+              height: "auto" // Reset height
+            }
+            // "[class]": {
+            //   all: "initial"
+            // }
           }
         }
       }

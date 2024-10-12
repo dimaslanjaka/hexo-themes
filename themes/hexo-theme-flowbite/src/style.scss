@@ -229,10 +229,12 @@ img + figcaption,
 }
 
 // Responsive image fix
-.post img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
+.post {
+  img:not(.inline):not(.inline-block):not(.flex) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

@@ -2,7 +2,9 @@
 title: Images responsive test
 date: 2013-12-26 22:46:49
 categories: []
-tags: [images]
+tags:
+  - images
+updated: 2024-10-12T07:25:15+07:00
 ---
 
 This is a image test post.
@@ -25,3 +27,28 @@ This is a image test post.
 Small picture should be centered
 
 ![Small Picture](https://via.placeholder.com/350x150.jpg)
+
+## Images without markdown (HTML only)
+
+<div>
+    <h4 class="font-bold mb-2">Image Display: Inline</h4>
+    <img src="https://via.placeholder.com/150" alt="Inline Image" class="inline">
+    <img src="https://via.placeholder.com/150" alt="Inline Image" class="inline">
+    <img src="https://via.placeholder.com/150" alt="Inline Image" class="inline">
+</div>
+
+<div>
+    <h4 class="font-bold mb-2">Image Display: Inline-Block</h4>
+    <img src="https://via.placeholder.com/150" alt="Inline-Block Image" class="inline-block mr-2">
+    <img src="https://via.placeholder.com/150" alt="Inline-Block Image" class="inline-block mr-2">
+    <img src="https://via.placeholder.com/150" alt="Inline-Block Image" class="inline-block">
+</div>
+
+<div>
+    <h4 class="font-bold mb-2">Image Display: Flex</h4>
+    <div class="flex">
+        <img src="https://via.placeholder.com/150" alt="Flex Image" class="mr-2">
+        <img src="https://via.placeholder.com/150" alt="Flex Image" class="mr-2">
+        <img src="https://via.placeholder.com/150" alt="Flex Image">
+    </div>
+</div>
