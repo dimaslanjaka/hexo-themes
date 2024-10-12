@@ -3,6 +3,7 @@
 
 const fs = require("fs-extra");
 const minimist = require("minimist");
+const { marked } = require("marked");
 const yaml = require("yaml");
 
 // switch-theme flowbite
@@ -13,15 +14,19 @@ const baseConfig = yaml.parse(fs.readFileSync("_config.base.yml", "utf-8"));
 
 console.log("Switching theme to", themeName);
 
-const configFile = `_config.base.${themeName}.yml`;
-if (fs.existsSync(configFile)) {
-  const themeConfig = yaml.parse(fs.readFileSync(configFile, "utf-8"));
+const themeBaseConfigFile = `_config.base.${themeName}.yml`;
+if (fs.existsSync(themeBaseConfigFile)) {
+  const themeConfig = yaml.parse(fs.readFileSync(themeBaseConfigFile, "utf-8"));
   const config = Object.assign(baseConfig, themeConfig);
+  // change hexo theme
+  config.theme = themeName;
+  // rewrite
   fs.writeFileSync("_config.yml", yaml.stringify(config));
 }
 
-const body = fs.readFileSync(`themes/${themeName}/readme.md`, "utf-8");
+const readmeContent = fs.readFileSync(`themes/${themeName}/readme.md`, "utf-8");
+const htmlContent = marked(readmeContent);
 fs.writeFileSync(
   "source/index.md",
-  ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", body].join("\n")
+  ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", htmlContent].join("\n")
 );

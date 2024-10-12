@@ -1,0 +1,8 @@
+title: "WMI"
+subtitle: "Hexo Theme Buttefly"
+description: Website Management Indonesia - hexo-theme-butterfly
+keywords: javascript, typescript, scss, css, html, nunjucks
+url: https://www.webmanajemen.com/
+root: /hexo-themes/hexo-theme-butterfly/
+public_dir: public/hexo-theme-butterfly
+permalink: :title.html

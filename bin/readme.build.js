@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require("fs-extra");
-const { marked } = require("marked"); // Updated import
+const { marked } = require("marked");
 
 // Simple dark theme
 const simpleTheme = `
