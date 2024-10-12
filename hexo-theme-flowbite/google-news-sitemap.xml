@@ -67,17 +67,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/markdown.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>Markdown Style test</news:title>
-      <news:publication_date>2018-07-24T23:31:06+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://www.webmanajemen.com/Typography-and-tags.html</loc>
     <news:news>
       <news:publication>
@@ -86,6 +75,17 @@
       </news:publication>
       <news:title>Typography and tags</news:title>
       <news:publication_date>2017-12-20T13:51:07+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/markdown.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>Markdown Style test</news:title>
+      <news:publication_date>2018-07-24T23:31:06+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -100,17 +100,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/no-title.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>no-title.md</news:title>
-      <news:publication_date>2013-12-25T22:57:49+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://www.webmanajemen.com/excerpts.html</loc>
     <news:news>
       <news:publication>
@@ -122,14 +111,14 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/videos.html</loc>
+    <loc>https://www.webmanajemen.com/no-title.html</loc>
     <news:news>
       <news:publication>
         <news:language>en</news:language>
         <news:name>Dimas Lanjaka</news:name>
       </news:publication>
-      <news:title>Videos</news:title>
-      <news:publication_date>2013-12-25T00:19:15+07:00</news:publication_date>
+      <news:title>no-title.md</news:title>
+      <news:publication_date>2013-12-25T22:57:49+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -141,6 +130,17 @@
       </news:publication>
       <news:title>Gallery Post</news:title>
       <news:publication_date>2013-12-25T00:16:18+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/videos.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>Videos</news:title>
+      <news:publication_date>2013-12-25T00:19:15+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -188,17 +188,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/long-title.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Dimas Lanjaka</news:name>
-      </news:publication>
-      <news:title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.</news:title>
-      <news:publication_date>2013-12-24T23:31:06+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://www.webmanajemen.com/categories.html</loc>
     <news:news>
       <news:publication>
@@ -207,6 +196,17 @@
       </news:publication>
       <news:title>Categories</news:title>
       <news:publication_date>2013-12-24T23:30:09+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/long-title.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Dimas Lanjaka</news:name>
+      </news:publication>
+      <news:title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.</news:title>
+      <news:publication_date>2013-12-24T23:31:06+07:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -232,17 +232,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.webmanajemen.com/elements.html</loc>
-    <news:news>
-      <news:publication>
-        <news:language>en</news:language>
-        <news:name>Unknown Author</news:name>
-      </news:publication>
-      <news:title>Elements</news:title>
-      <news:publication_date>2013-12-24T23:29:08+07:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://www.webmanajemen.com/hello-world.html</loc>
     <news:news>
       <news:publication>
@@ -251,6 +240,17 @@
       </news:publication>
       <news:title>Hello World</news:title>
       <news:publication_date>2013-12-24T17:49:32+07:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.webmanajemen.com/elements.html</loc>
+    <news:news>
+      <news:publication>
+        <news:language>en</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>Elements</news:title>
+      <news:publication_date>2013-12-24T23:29:08+07:00</news:publication_date>
     </news:news>
   </url>
 </urlset>
