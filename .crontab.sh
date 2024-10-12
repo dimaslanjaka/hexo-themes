@@ -107,6 +107,6 @@ should_run_job() {
 mkdir -p tmp/crontab
 
 # run every 24 hours
-if should_run_job "tmp/crontab/24-h" 24; then
-  hexo clean
-fi
+# if should_run_job "tmp/crontab/24-h" 24; then
+#   hexo clean
+# fi
