@@ -30,3 +30,5 @@ fs.writeFileSync(
   "source/index.md",
   ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", htmlContent].join("\n")
 );
+
+fs.rmSync("db.json");
