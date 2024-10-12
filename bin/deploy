@@ -25,6 +25,10 @@ async function initializeGit() {
   await cp.spawnAsync("git", ["checkout", branch], cpOpt);
   await cp.spawnAsync("git", ["pull"], cpOpt);
   await cp.spawnAsync("git", ["rm", "-rf", "."], cpOpt);
+  if (process.env.CI) {
+    cp.spawnAsync("git", ["config", "--global", "user.email", "dimaslanjaka@gmail.com"]);
+    cp.spawnAsync("git", ["config", "--global", "user.name", "dimaslanjaka"]);
+  }
 }
 
 /**
