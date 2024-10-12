@@ -35,7 +35,10 @@ function getCachePath(page: HexoPageSchema) {
   }
   const result = path.join(
     process.cwd(),
-    "tmp/hexo-themes/caches/post-" + sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + hash)
+    "tmp",
+    "metadata",
+    hexo.config.theme,
+    "post-" + sanitize((page.title || new String(page._id)).substring(0, 100) + "-" + hash)
   );
   fs.ensureDirSync(path.dirname(result));
   return result;
