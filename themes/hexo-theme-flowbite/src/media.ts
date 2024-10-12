@@ -81,46 +81,19 @@ export function processGalleryTag() {
   }
 }
 
-// import Masonry from 'masonry-layout';
-// export function processGalleryTag() {
-//   const galleryItemsDivs = document.querySelectorAll<HTMLDivElement>(".gallery-items");
-
-//   galleryItemsDivs.forEach((galleryItemsDiv) => {
-//     const results: HTMLElement[] = [];
-
-//     try {
-//       const jsonData = JSON.parse(galleryItemsDiv.textContent || "[]");
-
-//       jsonData.forEach((item: { url: string; caption?: string; alt?: string }) => {
-//         const itemDiv = document.createElement("div");
-//         itemDiv.classList.add("item");
-//         const img = document.createElement("img");
-//         img.src = item.url;
-//         img.alt = item.alt || item.caption || "";
-
-//         itemDiv.appendChild(img);
-//         results.push(itemDiv);
-//       });
-//     } catch (e) {
-//       console.error("Failed to create gallery", e);
-//     }
-
-//     galleryItemsDiv.innerHTML = ""; // Clear existing content
-//     results.forEach((itemDiv) => galleryItemsDiv.appendChild(itemDiv));
-
-//     // Initialize Masonry
-//     new Masonry(galleryItemsDiv, {
-//       itemSelector: ".item",
-//       columnWidth: ".item",
-//       percentPosition: true,
-//       gutter: 10 // Adjust spacing between items
-//       // resize: true,
-//       // fitWidth: true
-//     });
-//   });
-// }
+export function fixMasonry() {
+  const masonryGrid = document.querySelectorAll<HTMLDivElement>(".masonry-grid");
+  masonryGrid.forEach((container) => {
+    const total = container.children.length;
+    for (let i = 1; i < total; i += 2) {
+      const item = container.querySelector<HTMLElement>(`div:nth-child(${i})`);
+      if (item) item.style.gridRowEnd = "span 2";
+    }
+  });
+}
 
 export default function initMedia() {
   processGalleryTag();
   initFancybox();
+  fixMasonry();
 }
