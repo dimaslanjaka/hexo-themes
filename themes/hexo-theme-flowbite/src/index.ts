@@ -1,4 +1,5 @@
 import { initClickable } from "./clickable";
+import initDisqus from "./disqus";
 import { highlightMain, initClipBoard } from "./highlight";
 import initKatex from "./katex";
 import initloader from "./loader";
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initClipBoard();
   initSearch();
   initKatex();
+  initDisqus();
 });
 
 window.addEventListener("load", function () {
