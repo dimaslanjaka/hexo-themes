@@ -215,7 +215,7 @@ img + figcaption,
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    &:not([id^="masonry"]) {
+    &:not([id^="masonry"]):not([class*="gallery-group-img"]) {
       height: auto;
     }
   }
