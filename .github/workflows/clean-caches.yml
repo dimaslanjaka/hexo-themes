@@ -29,8 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: "dimaslanjaka/static-blog-generator-hexo"
-          ref: master
           token: ${{ secrets.ACCESS_TOKEN }}
           lfs: true
 
@@ -90,6 +88,7 @@ jobs:
       - name: Install Dependencies
         run: |
           corepack enable
+          touch yarn.lock
           yarn install
 
       - name: Clean github actions cache
