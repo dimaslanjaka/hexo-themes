@@ -4,6 +4,7 @@ const resolve = require("@rollup/plugin-node-resolve");
 const typescript = require("@rollup/plugin-typescript");
 const fs = require("fs");
 const { dts } = require("rollup-plugin-dts");
+const terser = require("@rollup/plugin-terser");
 
 const pkg = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
 const deps = Object.keys(pkg.dependencies).concat(Object.keys(pkg.devDependencies));
@@ -48,7 +49,8 @@ const browserJS = {
     }),
     commonjs.default({
       include: "node_modules/**" // Include node_modules
-    })
+    }),
+    terser()
   ]
 };
 
