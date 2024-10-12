@@ -75,6 +75,9 @@ const hexoThemeFlowbiteHelper = {
   external: deps // Exclude external dependencies from the bundle
 };
 
+/**
+ * @type {import("rollup").RollupOptions}
+ */
 const hexoThemeFlowbiteCLI = {
   input: "src/cli/hexo-theme-flowbite.ts", // Replace with your entry file(s)
   output: [
@@ -106,4 +109,37 @@ const hexoThemeFlowbiteCLI = {
   external: deps // Exclude external dependencies from the bundle
 };
 
-module.exports = [hexoThemeFlowbiteHelper, hexoThemeFlowbiteCLI];
+/**
+ * @type {import("rollup").RollupOptions}
+ */
+const hexoThemeButterflyHelper = {
+  input: "src/scripts/hexo-theme-butterfly.js", // Replace with your entry file(s)
+  output: {
+    file: "themes/hexo-theme-butterfly/scripts/helper.js", // Output file
+    format: "cjs", // Output format
+    sourcemap: false // Sourcemaps for easier debugging
+  },
+  plugins: [
+    typescript.default({
+      tsconfig: false,
+      compilerOptions: {
+        lib: ["DOM", "DOM.Iterable", "ES2020"],
+        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+        allowSyntheticDefaultImports: true,
+        esModuleInterop: true
+      },
+      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
+    }),
+    json.default({ indent: "  " }),
+    resolve.nodeResolve({
+      preferBuiltins: true,
+      extensions: [".mjs", ".js", ".json", ".node", ".cjs", ".mjs"]
+    }),
+    commonjs.default({
+      // exclude: ["**/node_modules/**"],
+    })
+  ],
+  external: deps // Exclude external dependencies from the bundle
+};
+
+module.exports = [hexoThemeFlowbiteHelper, hexoThemeFlowbiteCLI, hexoThemeButterflyHelper];

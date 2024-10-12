@@ -17,5 +17,9 @@ if (fs.existsSync(`_config.base.${themeName}.yml`)) {
   const themeConfig = yaml.parse(fs.readFileSync(`_config.base.${themeName}.yml`, "utf-8"));
   const config = Object.assign(baseConfig, themeConfig);
   fs.writeFileSync("_config.yml", yaml.stringify(config));
-  fs.copySync(`themes/${themeName}/readme.md`, "source/index.md", { overwrite: true });
+  const body = fs.readFileSync(`themes/${themeName}/readme.md`, "utf-8");
+  fs.writeFileSync(
+    "source/index.md",
+    ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", body].join("\n")
+  );
 }
