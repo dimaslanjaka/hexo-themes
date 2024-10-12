@@ -1,11 +1,30 @@
-// re-implementation fixer of hexo-seo
-
 import { load } from "cheerio";
 import { StoreFunction } from "hexo/dist/extend/renderer-d";
 import { HexoPageSchema } from "../../types/post";
 
-export function fixAnchor() {
-  //
+// re-implementation fixer of hexo-seo
+
+/**
+ * fix SEO on anchors
+ * @param $ CherrioAPI
+ * @returns
+ */
+export function fixAnchor($: ReturnType<typeof load>, data: HexoPageSchema) {
+  $("a").each(function () {
+    // avoid duplicate rels
+    const currentRel = $(this).attr("rel");
+    if (currentRel) {
+      // Create a Set to store unique rels
+      const rels = new Set(currentRel.split(" "));
+      // Update the rel attribute with unique values
+      $(this).attr("rel", Array.from(rels).join(" "));
+    }
+    // add anchor title
+    if ($(this).attr("title")) {
+      $(this).attr("title", data.title ? `${data.title} ${$(this).attr("href")}` : $(this).attr("href"));
+    }
+  });
+  return $;
 }
 
 /**
@@ -13,19 +32,9 @@ export function fixAnchor() {
  * @param content rendered html string
  * @param data current page data
  */
-export default function htmlSeoFixer(content: string, _data: HexoPageSchema) {
-  const $ = load(content);
-
-  $("a").each(function () {
-    const currentRel = $(this).attr("rel");
-
-    // Create a Set to store unique rels
-    const rels = currentRel ? new Set(currentRel.split(" ")) : new Set();
-
-    // Update the rel attribute with unique values
-    $(this).attr("rel", Array.from(rels).join(" "));
-  });
-
+export default function htmlSeoFixer(content: string, data: HexoPageSchema) {
+  let $ = load(content);
+  $ = fixAnchor($, data);
   return $.html();
 }
 
