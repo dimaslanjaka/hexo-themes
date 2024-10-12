@@ -10,3 +10,7 @@
 	path = themes/hexo-theme-claudia
 	url = https://github.com/dimaslanjaka/hexo-theme-claudia.git
 	branch = private
+[submodule "themes/hexo-theme-butterfly"]
+	path = themes/hexo-theme-butterfly
+	url = https://github.com/dimaslanjaka/hexo-theme-butterfly.git
+	branch = private
