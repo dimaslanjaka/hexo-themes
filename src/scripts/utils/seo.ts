@@ -24,6 +24,26 @@ export function fixAnchor($: ReturnType<typeof load>, data: HexoPageSchema) {
       $(this).attr("title", data.title ? `${data.title} ${$(this).attr("href")}` : $(this).attr("href"));
     }
   });
+
+  return $;
+}
+
+export function fixImages($: ReturnType<typeof load>, data: HexoPageSchema) {
+  $("img").each(function () {
+    const src = $(this).attr("src") || $(this).attr("data-src");
+    const alt = $(this).attr("alt") || "";
+    if (alt.length === 0) {
+      $(this).attr("alt", data.title ? `${data.title} ${src}` : src);
+    }
+    const title = $(this).attr("title") || "";
+    if (title.length === 0) {
+      $(this).attr("title", data.title ? `${data.title} ${src}` : src);
+    }
+    const itemprop = $(this).attr("itemprop");
+    if (!itemprop || itemprop.trim() === "") {
+      $(this).attr("itemprop", "image");
+    }
+  });
   return $;
 }
 
@@ -35,6 +55,7 @@ export function fixAnchor($: ReturnType<typeof load>, data: HexoPageSchema) {
 export default function htmlSeoFixer(content: string, data: HexoPageSchema) {
   let $ = load(content);
   $ = fixAnchor($, data);
+  $ = fixImages($, data);
   return $.html();
 }
 
