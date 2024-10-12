@@ -2,6 +2,11 @@
 
 - [https://www.webmanajemen.com/hexo-themes/hexo-theme-flowbite/](https://www.webmanajemen.com/hexo-themes/hexo-theme-flowbite/)
 
+## Features
+
+- Responsive
+- Auto SEO
+
 ## Installation
 
 [Read Here](https://github.com/dimaslanjaka/hexo-themes?tab=readme-ov-file#how-to-install)

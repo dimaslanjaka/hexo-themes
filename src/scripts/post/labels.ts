@@ -1,11 +1,11 @@
-import { PageSchema } from "hexo/dist/types";
+import { HexoPageSchema } from "../../types/post";
 
 interface Label {
   name: string;
   permalink: string;
 }
 
-export function getKeywords(page: PageSchema & Record<string, any>) {
+export function getKeywords(page: HexoPageSchema) {
   const results = [] as string[];
   if (page.tags) {
     page.tags.each((label: Label) => {
