@@ -12,3 +12,4 @@ require("./clean");
 require("./post/labels");
 require("./utils/url");
 require("./utils/seo");
+require("./post/custom-nunjucks-tags");

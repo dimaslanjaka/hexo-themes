@@ -302,7 +302,7 @@ markdown:
     xhtmlOut: false
     langPrefix: language-
     breaks: true
-    linkify: true
+    linkify: false
     typographer: true
     quotes: “”‘’
   enable_rules: null
@@ -379,6 +379,7 @@ browsersync:
   port: 3001
   browser: "firefox"
   open: false
+  files: ["source/**/*"]
 
 # https://www.npmjs.com/package/hexo-excerpt
 excerpt:

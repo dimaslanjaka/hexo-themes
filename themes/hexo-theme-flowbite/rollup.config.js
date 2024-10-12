@@ -29,6 +29,18 @@ const browserJS = {
     }
   ],
   plugins: [
+    typescript.default({
+      tsconfig: false,
+      compilerOptions: {
+        lib: ["DOM", "DOM.Iterable", "ES2020"],
+        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+        skipDefaultLibCheck: true,
+        skipLibCheck: true,
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true
+      },
+      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
+    }),
     json.default(),
     resolve.nodeResolve({
       browser: true, // Resolve for browser environment
@@ -36,14 +48,6 @@ const browserJS = {
     }),
     commonjs.default({
       include: "node_modules/**" // Include node_modules
-    }),
-    typescript.default({
-      tsconfig: false,
-      compilerOptions: {
-        lib: ["DOM", "DOM.Iterable", "ES2020"],
-        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"]
-      },
-      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
     })
   ]
 };
@@ -59,6 +63,18 @@ const apiJS = {
     sourcemap: false // Enable sourcemaps for easier debugging
   },
   plugins: [
+    typescript.default({
+      tsconfig: false,
+      compilerOptions: {
+        lib: ["DOM", "DOM.Iterable", "ES2020"],
+        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+        skipDefaultLibCheck: true,
+        skipLibCheck: true,
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true
+      },
+      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
+    }),
     json.default(),
     resolve.nodeResolve({
       browser: true, // Resolve for browser environment
@@ -66,14 +82,6 @@ const apiJS = {
     }),
     commonjs.default({
       include: "node_modules/**" // Include node_modules
-    }),
-    typescript.default({
-      tsconfig: false,
-      compilerOptions: {
-        lib: ["DOM", "DOM.Iterable", "ES2020"],
-        typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"]
-      },
-      include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"]
     })
   ],
   external: deps // Exclude external dependencies from the bundle

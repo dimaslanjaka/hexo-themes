@@ -1,0 +1,18 @@
+# Choose: fancybox / medium_zoom
+# https://github.com/francoischalifour/medium-zoom
+# https://fancyapps.com/fancybox/
+# Leave it empty if you don't need lightbox
+lightbox: true
+
+menu:
+  Home: / || fas fa-home
+  Archives||fa fa-archive:
+    Timeline: /archives/ || fas fa-archive
+    Tags: /tags/ || fas fa-tags
+    Categories: /categories/ || fas fa-folder-open
+  Site Overview||fa fa-heartbeat:
+    About: /about/ || fas fa-address-card
+    Privacy Policy: https://www.webmanajemen.com/p/privacy.html || fas fa-shield
+    TOS: https://www.webmanajemen.com/p/tos.html || fas fa-shield
+  Games||fa fa-gamepad:
+    Quiz The Legend Of Neverland: https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html | fas fa-gamepad
