@@ -11,15 +11,17 @@ const argv = minimist(process.argv.slice(2));
 const themeName = argv._[0].includes("hexo-theme") ? argv._[0] : "hexo-theme-" + argv._[0];
 const baseConfig = yaml.parse(fs.readFileSync("_config.base.yml", "utf-8"));
 
-console.log("switching theme to", themeName);
+console.log("Switching theme to", themeName);
 
-if (fs.existsSync(`_config.base.${themeName}.yml`)) {
-  const themeConfig = yaml.parse(fs.readFileSync(`_config.base.${themeName}.yml`, "utf-8"));
+const configFile = `_config.base.${themeName}.yml`;
+if (fs.existsSync(configFile)) {
+  const themeConfig = yaml.parse(fs.readFileSync(configFile, "utf-8"));
   const config = Object.assign(baseConfig, themeConfig);
   fs.writeFileSync("_config.yml", yaml.stringify(config));
-  const body = fs.readFileSync(`themes/${themeName}/readme.md`, "utf-8");
-  fs.writeFileSync(
-    "source/index.md",
-    ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", body].join("\n")
-  );
 }
+
+const body = fs.readFileSync(`themes/${themeName}/readme.md`, "utf-8");
+fs.writeFileSync(
+  "source/index.md",
+  ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", body].join("\n")
+);

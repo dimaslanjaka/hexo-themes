@@ -145,3 +145,4 @@ yarn.lock
 /plugins/hexo-renderers
 /plugins/hexo-shortcodes
 /source/hexo-search.json
+_config.yml
