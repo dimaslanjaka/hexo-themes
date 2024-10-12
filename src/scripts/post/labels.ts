@@ -7,6 +7,7 @@ interface Label {
 
 export function getKeywords(page: HexoPageSchema) {
   const results = [] as string[];
+  if (page.keywords && Array.isArray(page.keywords)) return page.keywords;
   if (page.tags) {
     page.tags.each((label: Label) => {
       results.push(label.name);
