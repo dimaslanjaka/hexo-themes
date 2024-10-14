@@ -21,6 +21,8 @@ My HexoJS Theme Collections
 yarn add markdown-it@https://github.com/dimaslanjaka/markdown-it/raw/2000d25dec653f6e62a545b30f6d58fad20e6d1f/release/markdown-it.tgz
 ```
 
+> OR just using `hexo-renderers` to using built-in `markdown-it`
+
 #### How to enable auto SEO
 
 - install `hexo-seo`
