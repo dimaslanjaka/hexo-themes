@@ -5,7 +5,8 @@
   "types": "dist/hexo-theme-flowbite-api.d.ts",
   "bin": "bin/hexo-theme-flowbite.js",
   "scripts": {
-    "build": "node build.cjs"
+    "build": "node build.cjs",
+    "postinstall": "node build.cjs"
   },
   "keywords": [
     "hexo",
@@ -19,16 +20,17 @@
     "directory": "themes/hexo-theme-flowbite"
   },
   "files": [
-    "bin",
-    "languages",
-    "layout",
-    "scripts",
-    "source",
+    "dist/",
+    "bin/",
+    "languages/",
+    "layout/",
+    "scripts/",
+    "source/",
     "_config.yml",
-    "src",
+    "src/",
     "*.cjs",
     "*.js",
-    "dist"
+    "*.json"
   ],
   "directories": {
     "bin": "bin",
@@ -57,7 +59,7 @@
     "lodash": "^4.17.21",
     "masonry-layout": "^4.2.2",
     "remove": "^0.1.5",
-    "sbg-utility": "^1.1.8",
+    "sbg-utility": "^2.0.3",
     "upath": "^2.0.1",
     "yaml": "^2.5.1"
   },
