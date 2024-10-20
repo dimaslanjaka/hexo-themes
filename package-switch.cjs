@@ -116,14 +116,26 @@ async function getLatestCommit(repoOwner, repoName, branch = "") {
  * @param {string} urlFormat - Custom URL format for the .tgz file.
  */
 async function updatePackageSha(repoOwner, repoName, branch, packageName, urlFormat) {
-  const { sha } = (await getLatestCommit(repoOwner, repoName, branch)) || {};
-  if (sha) {
-    const url = urlFormat.replace("{sha}", sha);
+  try {
+    const { sha } = (await getLatestCommit(repoOwner, repoName, branch)) || {};
+    if (sha) {
+      const url = urlFormat.replace("{sha}", sha);
 
-    const res = await axios.get(url, { maxRedirects: 10 });
-    if (res.status === 200) {
-      production[packageName] = url;
+      const res = await axios.get(url, { maxRedirects: 10 });
+      if (res.status === 200) {
+        if (res.headers["content-type"] === "application/octet-stream") {
+          production[packageName] = url;
+        } else {
+          console.error(
+            `Error updating package SHA for ${packageName}: Unexpected content-type "${res.headers["content-type"]}" at ${url}`
+          );
+        }
+      }
     }
+  } catch (error) {
+    const errorUrl = error.config?.url;
+    const message = error.response?.data?.message || error.message;
+    console.error(`Error updating package SHA for ${packageName}:`, message, errorUrl);
   }
 }
 
@@ -147,6 +159,27 @@ async function main() {
       "master",
       "markdown-it",
       "https://github.com/dimaslanjaka/markdown-it/raw/{sha}/release/markdown-it.tgz"
+    );
+    await updatePackageSha(
+      "dimaslanjaka",
+      "static-blog-generator",
+      "sbg-api",
+      "sbg-api",
+      "https://github.com/dimaslanjaka/static-blog-generator/raw/{sha}/packages/sbg-api/release/sbg-api.tgz"
+    );
+    await updatePackageSha(
+      "dimaslanjaka",
+      "static-blog-generator",
+      "sbg-utility",
+      "sbg-utility",
+      "https://github.com/dimaslanjaka/static-blog-generator/raw/{sha}/packages/sbg-utility/release/sbg-utility.tgz"
+    );
+    await updatePackageSha(
+      "dimaslanjaka",
+      "static-blog-generator",
+      "master",
+      "sbg-cli",
+      "https://github.com/dimaslanjaka/static-blog-generator/raw/{sha}/packages/sbg-cli/release/sbg-cli.tgz"
     );
 
     pkg.resolutions = production;
