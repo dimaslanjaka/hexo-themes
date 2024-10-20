@@ -3,7 +3,7 @@ title: Images responsive test
 date: 2013-12-26 22:46:49
 categories: []
 tags:
-    - images
+    - assets
 updated: 2024-10-12T10:26:16+07:00
 ---
 

@@ -1,5 +1,6 @@
 title: Gallery Post
 date: 2013-12-25 00:16:18
+tags: [assets]
 photos:
   - /assets/wallpaper-2572384.jpg
   - /assets/wallpaper-2311325.jpg
