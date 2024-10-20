@@ -82,8 +82,12 @@ const hexoThemeFlowbiteCLI = {
   input: "src/cli/hexo-theme-flowbite.ts", // Replace with your entry file(s)
   output: [
     {
-      file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.js", // Output file
-      format: "cjs" // Browser-compatible format
+      file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.cjs", // Output file
+      format: "cjs"
+    },
+    {
+      file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.mjs", // Output file
+      format: "esm"
     }
   ],
   plugins: [

@@ -67,3 +67,5 @@ venv/
 /source/css
 /scripts/helper.js
 /dist
+/bin/*.mjs
+/bin/*.cjs
