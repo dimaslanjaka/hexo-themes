@@ -1,6 +1,7 @@
 const fs = require("fs");
 const pkg = require("./package.json");
 const path = require("path");
+const axios = require("axios").default;
 
 // node package-switch.cjs [local|production]
 
@@ -16,7 +17,9 @@ const local = {
   "hexo-log": "file:../hexo/releases/hexo-log.tgz",
   "hexo-util": "file:../hexo/releases/hexo-util.tgz",
   warehouse: "file:../hexo/releases/warehouse.tgz",
-  "hexo-post-parser": "file:../hexo-post-parser/release/hexo-post-parser.tgz"
+  "hexo-post-parser": "file:../hexo-post-parser/release/hexo-post-parser.tgz",
+  "git-command-helper": "file:../git-command-helper/release/git-command-helper.tgz",
+  "markdown-it": "file:../markdown-it/release/markdown-it.tgz"
 };
 
 const production = {
@@ -55,13 +58,68 @@ const production = {
     "https://github.com/dimaslanjaka/hexo-generator-redirect/raw/0885394/release/hexo-generator-redirect.tgz"
 };
 
-// node package-switch.js [local|production]
-const args = process.argv.slice(2);
+/**
+ * Fetches the latest commit from a specified GitHub repository and branch.
+ *
+ * @param {string} repoOwner - The owner of the repository.
+ * @param {string} repoName - The name of the repository.
+ * @param {string|null|undefined} [branch] - The branch to fetch the latest commit from (default is 'pre-release').
+ * @returns {Promise<Record<string, any>|null>} - The latest commit object or null if an error occurs.
+ */
+async function getLatestCommit(repoOwner, repoName, branch = "") {
+  const githubToken = process.env.ACCESS_TOKEN || process.env.GH_TOKEN;
+  let url;
+  if (typeof branch === "string" && branch.length > 0) {
+    url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits/${branch}`;
+  } else {
+    url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits`;
+  }
 
-if (args.includes("local")) {
-  pkg.resolutions = Object.assign(production, local);
-} else {
-  pkg.resolutions = production;
+  try {
+    /**
+     * @type {import("axios").AxiosResponse<any, any>}
+     */
+    let response;
+    if (githubToken) {
+      response = await axios.get(url, {
+        headers: {
+          Authorization: `token ${githubToken}`,
+          Accept: "application/vnd.github.v3+json"
+        }
+      });
+    } else {
+      response = await axios.get(url);
+    }
+    const latestCommit = response.data; // The latest commit for the specified branch
+    if (!Array.isArray(latestCommit)) {
+      return latestCommit;
+    } else {
+      return latestCommit[0];
+    }
+  } catch (error) {
+    // retry fetch default branch
+    // if (branch === "pre-release") return getLatestCommit(repoOwner, repoName, null);
+    console.error("Error fetching the latest commit:", repoOwner, repoName, branch, error.message);
+    return null;
+  }
 }
 
-fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2) + "\n");
+async function main() {
+  const args = process.argv.slice(2);
+
+  if (args.includes("local")) {
+    pkg.resolutions = Object.assign(production, local);
+  } else {
+    const { sha = undefined } = (await getLatestCommit("dimaslanjaka", "hexo-post-parser", "pre-release")) || {};
+    if (sha) {
+      const hppUrl = `https://github.com/dimaslanjaka/hexo-post-parser/raw/${sha}/release/hexo-post-parser.tgz`;
+      const res = await axios.get(hppUrl, { maxRedirects: 10 });
+      if (res.status === 200) production["hexo-post-parser"] = hppUrl;
+    }
+    pkg.resolutions = production;
+  }
+
+  fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2) + "\n");
+}
+
+main();
