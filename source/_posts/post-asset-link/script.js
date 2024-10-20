@@ -1,1 +1,1 @@
-console.log('post asset link');
+alert("message from post-asset-link/script.js");
