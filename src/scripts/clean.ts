@@ -9,7 +9,8 @@ hexo.extend.filter.register("after_clean", function () {
   const folders = [
     path.join(hexo.base_dir, "tmp/hexo-theme-flowbite"),
     path.join(hexo.base_dir, "tmp/hexo-theme-claudia"),
-    path.join(hexo.base_dir, "tmp/hexo-theme-butterfly")
+    path.join(hexo.base_dir, "tmp/hexo-theme-butterfly"),
+    path.join(hexo.base_dir, "tmp/hexo-themes")
   ]
     .concat(searchFiles)
     .flat();

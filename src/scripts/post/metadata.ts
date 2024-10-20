@@ -5,6 +5,7 @@ import path from "path";
 import sanitize from "sanitize-filename";
 import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
+import { hexoThemesCache } from "../utils/cache";
 import { saveAsSearch } from "./search";
 
 hpp.setConfig(hexo.config);
@@ -90,30 +91,39 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
     try {
       if (page.full_source) {
         const parse = await hpp.parsePost(page.full_source);
-        if (parse.attributes) {
+        if (parse.metadata) {
           const html = hpp.renderMarked(parse.body);
-          const $ = load(html);
-
-          if (!parse.attributes.description) {
-            parse.attributes.description = $.text().slice(0, 150);
-          }
-
-          if (!parse.attributes.thumbnail) {
-            parse.attributes.thumbnail =
-              "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
-            const imgTags = $("img").filter((i, el) => $(el).attr("src")?.trim() !== "");
-
-            if (imgTags.length > 0) {
-              const randomIndex = Math.floor(Math.random() * imgTags.length);
-              parse.attributes.thumbnail = $(imgTags[randomIndex]).attr("src");
+          const cacheKey = "metadataProcess-" + md5(parse.body);
+          const cacheValue = await hexoThemesCache.get<Partial<typeof parse>>(cacheKey, {});
+          if (Object.keys(cacheValue).length > 0) {
+            //
+          } else {
+            const $ = load(html);
+            if (!cacheValue.metadata) cacheValue.metadata = {} as any;
+            if (!parse.metadata.description) {
+              parse.metadata.description = $.text().slice(0, 150);
+              cacheValue.metadata.description = parse.metadata.description;
             }
+
+            if (!parse.metadata.thumbnail) {
+              parse.metadata.thumbnail =
+                "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
+              const imgTags = $("img").filter((i, el) => $(el).attr("src")?.trim() !== "");
+
+              if (imgTags.length > 0) {
+                const randomIndex = Math.floor(Math.random() * imgTags.length);
+                parse.metadata.thumbnail = $(imgTags[randomIndex]).attr("src");
+                cacheValue.metadata.thumbnail = parse.metadata.thumbnail;
+              }
+            }
+            hexoThemesCache.set(cacheKey, cacheValue);
           }
 
-          if (!parse.attributes.permalink && page.permalink) {
-            parse.attributes.permalink = page.permalink;
+          if (!parse.metadata.permalink && page.permalink) {
+            parse.metadata.permalink = page.permalink;
           }
 
-          const result = { metadata: parse.attributes, rawbody: parse.body };
+          const result = { metadata: parse.metadata, rawbody: parse.body };
           cleanMetadata(result.metadata);
 
           try {

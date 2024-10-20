@@ -1,5 +1,5 @@
-const fs = require("fs-extra");
-const path = require("path");
+import fs from "fs-extra";
+import path from "path";
 
 hexo.extend.helper.register("injectHeadHtml", function () {
   const file = path.join(hexo.base_dir, "source/_data/hexo-theme-flowbite/head.html");

@@ -1,9 +1,10 @@
 "use strict";
 
 hexo.extend.helper.register("next_paginator", function () {
-  const prev = this.__("accessibility.prev_page");
-  const next = this.__("accessibility.next_page");
-  let paginator = this.paginator({
+  const { __, paginator: hexoPaginator } = this as any;
+  const prev = __("accessibility.prev_page");
+  const next = __("accessibility.next_page");
+  let paginator = hexoPaginator({
     prev_text: '<i class="fa-solid fa-angle-left"></i>',
     next_text: '<i class="fa-solid fa-angle-right"></i>',
     mid_size: 1,

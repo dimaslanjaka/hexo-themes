@@ -1,6 +1,8 @@
-import { load } from "cheerio";
+import * as cheerio from "cheerio";
 import { StoreFunction } from "hexo/dist/extend/renderer-d";
+import { md5 } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
+import { hexoThemesCache } from "./cache";
 
 // re-implementation fixer of hexo-seo
 
@@ -9,7 +11,7 @@ import { HexoPageSchema } from "../../types/post";
  * @param $ CherrioAPI
  * @returns
  */
-export function fixAnchor($: ReturnType<typeof load>, data: HexoPageSchema) {
+export function fixAnchor($: ReturnType<typeof cheerio.load>, data: HexoPageSchema) {
   $("a").each(function () {
     // avoid duplicate rels
     const currentRel = $(this).attr("rel");
@@ -28,7 +30,7 @@ export function fixAnchor($: ReturnType<typeof load>, data: HexoPageSchema) {
   return $;
 }
 
-export function fixImages($: ReturnType<typeof load>, data: HexoPageSchema) {
+export function fixImages($: ReturnType<typeof cheerio.load>, data: HexoPageSchema) {
   $("img").each(function () {
     const src = $(this).attr("src") || $(this).attr("data-src");
     const alt = $(this).attr("alt") || "";
@@ -52,11 +54,16 @@ export function fixImages($: ReturnType<typeof load>, data: HexoPageSchema) {
  * @param content rendered html string
  * @param data current page data
  */
-export default function htmlSeoFixer(content: string, data: HexoPageSchema) {
-  let $ = load(content);
+export default async function htmlSeoFixer(content: string, data: HexoPageSchema) {
+  const cacheKey = "seo-" + md5(content);
+  const cacheValue = await hexoThemesCache.get<string>(cacheKey, null);
+  if (cacheValue) return cacheValue;
+  let $ = cheerio.load(content);
   $ = fixAnchor($, data);
   $ = fixImages($, data);
-  return $.html();
+  const result = $.html();
+  hexoThemesCache.set(cacheKey, result);
+  return result;
 }
 
 hexo.extend.filter.register("after_render:html", htmlSeoFixer as StoreFunction);
