@@ -295,6 +295,8 @@ sitemap:
   categories: true
 
 # https://github.com/dimaslanjaka/hexo-renderers
+renderers:
+  html_tags: [strike, summary, details, detail]
 markdown:
   preset: default
   render:
