@@ -2,8 +2,8 @@
 
 "use strict";
 
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json")));
 const isESM = pkg.type === "module";
@@ -11,7 +11,10 @@ const isESM = pkg.type === "module";
 console.log("hexo-theme-flowbite cli running on", isESM ? "ESM" : "CJS");
 
 if (isESM) {
-  import("./hexo-theme-flowbite.mjs");
+  // Using dynamic import in CommonJS
+  (async () => {
+    await import("./hexo-theme-flowbite.mjs");
+  })();
 } else {
-  import("./hexo-theme-flowbite.cjs");
+  require("./hexo-theme-flowbite.cjs");
 }
