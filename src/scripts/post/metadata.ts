@@ -5,7 +5,6 @@ import path from "path";
 import sanitize from "sanitize-filename";
 import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
-import getHexoArgs from "../utils/args";
 import { saveAsSearch } from "./search";
 
 hpp.setConfig(hexo.config);
@@ -56,7 +55,7 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
   }
 
   const cachePath = getCachePath(page);
-  if (fs.existsSync(cachePath) && getHexoArgs() === "generate") {
+  if (fs.existsSync(cachePath) /* && getHexoArgs() === "generate"*/) {
     return; // Skip if already parsed
   }
 
@@ -151,11 +150,17 @@ function scheduleProcessing(): void {
       } else {
         isProcessing = false;
         if (data?.result && data.result.metadata) {
-          saveAsSearch({
-            url: data.result.metadata.permalink || "",
-            title: data.result.metadata.title || "",
-            description: data.result.metadata.description || ""
-          });
+          if (!data.result.metadata.permalink) {
+            if (typeof hexo !== "undefined") {
+              hexo.log.error(`permalink empty for ${data.result.metadata.title}`);
+            }
+          } else {
+            saveAsSearch({
+              url: data.result.metadata.permalink,
+              title: data.result.metadata.title || "",
+              description: data.result.metadata.description || ""
+            });
+          }
         }
         setTimeout(scheduleProcessing, 500); // Continue to next item after delay (optional)
       }
