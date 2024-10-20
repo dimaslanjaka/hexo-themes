@@ -146,3 +146,4 @@ yarn.lock
 /plugins/hexo-shortcodes
 /source/hexo-search.json
 _config.yml
+**/.frontmatter/
