@@ -1,5 +1,6 @@
 title: Gallery Post
 date: 2013-12-25 00:16:18
+updated: 2024-10-20T16:59:56+07:00
 tags: [assets]
 photos:
   - /assets/wallpaper-2572384.jpg
@@ -20,15 +21,22 @@ photos:
   - https://picsum.photos/500/300?random=2
   - https://picsum.photos/500/300?random=3
   - https://picsum.photos/500/300?random=4
+  - https://wallhalla.com/thumbs/53
 ---
 
-This post contains 4 photos:
+This post contains more than 4 photos:
 
 - Widescreen wallpaper
 - Portrait photo
 - Dual widescreen wallpaper
 - Small photo
+- And more
 
 All photos should be displayed properly.
 
-*From [Wallbase.cc](http://wallbase.cc)*
+Sources
+
+- *From [Wallbase.cc](http://wallbase.cc)*
+- *From [Picsum.photos](http://picsum.photos)*
+- *From [Wallhalla.com](http://wallhalla.com)*
+- *From [Placeholder.com](http://placeholder.com)*
