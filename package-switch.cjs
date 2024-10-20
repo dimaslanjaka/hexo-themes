@@ -2,6 +2,13 @@ const fs = require("fs");
 const pkg = require("./package.json");
 const path = require("path");
 const axios = require("axios").default;
+try {
+  require.resolve("dotenv"); // Check if dotenv is installed
+  require("dotenv").config({ override: true }); // Load environment variables if installed
+  console.log("dotenv loaded successfully");
+} catch (_e) {
+  console.log("dotenv is not installed, skipping loading .env file");
+}
 
 // node package-switch.cjs [local|production]
 
