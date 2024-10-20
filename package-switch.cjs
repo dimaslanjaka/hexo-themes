@@ -104,18 +104,48 @@ async function getLatestCommit(repoOwner, repoName, branch = "") {
   }
 }
 
+/**
+ * Fetches the latest commit SHA and updates the production URL for the specified repository.
+ * @param {string} repoOwner - The owner of the repository.
+ * @param {string} repoName - The name of the repository.
+ * @param {string} branch - The branch to fetch from.
+ * @param {string} packageName - The name of the package in production.
+ * @param {string} urlFormat - Custom URL format for the .tgz file.
+ */
+async function updatePackageSha(repoOwner, repoName, branch, packageName, urlFormat) {
+  const { sha } = (await getLatestCommit(repoOwner, repoName, branch)) || {};
+  if (sha) {
+    const url = urlFormat.replace("{sha}", sha);
+
+    const res = await axios.get(url, { maxRedirects: 10 });
+    if (res.status === 200) {
+      production[packageName] = url;
+    }
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2);
 
   if (args.includes("local")) {
     pkg.resolutions = Object.assign(production, local);
   } else {
-    const { sha = undefined } = (await getLatestCommit("dimaslanjaka", "hexo-post-parser", "pre-release")) || {};
-    if (sha) {
-      const hppUrl = `https://github.com/dimaslanjaka/hexo-post-parser/raw/${sha}/release/hexo-post-parser.tgz`;
-      const res = await axios.get(hppUrl, { maxRedirects: 10 });
-      if (res.status === 200) production["hexo-post-parser"] = hppUrl;
-    }
+    // Update specific packages with their latest commit SHA
+    await updatePackageSha(
+      "dimaslanjaka",
+      "hexo-post-parser",
+      "pre-release",
+      "hexo-post-parser",
+      "https://github.com/dimaslanjaka/hexo-post-parser/raw/{sha}/release/hexo-post-parser.tgz"
+    );
+    await updatePackageSha(
+      "dimaslanjaka",
+      "markdown-it",
+      "master",
+      "markdown-it",
+      "https://github.com/dimaslanjaka/markdown-it/raw/{sha}/release/markdown-it.tgz"
+    );
+
     pkg.resolutions = production;
   }
 
