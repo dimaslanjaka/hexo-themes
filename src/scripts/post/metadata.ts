@@ -1,6 +1,5 @@
 import { load } from "cheerio";
-import hexoPostParser, { postMap } from "hexo-post-parser";
-import { renderMarkdownIt } from "hexo-post-parser/dist/markdown/toHtml";
+import hpp from "hexo-post-parser";
 import { url_for } from "hexo-util";
 import path from "path";
 import sanitize from "sanitize-filename";
@@ -9,14 +8,14 @@ import { HexoPageSchema } from "../../types/post";
 import getHexoArgs from "../utils/args";
 import { saveAsSearch } from "./search";
 
-hexoPostParser.setConfig(hexo.config);
+hpp.setConfig(hexo.config);
 
 /**
  * Defines the callback type for the preprocess function.
  */
 type PreprocessCallback = (
   err: Error | null,
-  data: { result: postMap & Record<string, any>; cachePath: string } | null
+  data: { result: hpp.postMap & Record<string, any>; cachePath: string } | null
 ) => void;
 
 // Queue to hold the pages to be processed
@@ -62,9 +61,9 @@ export function metadataProcess(page: HexoPageSchema, callback: PreprocessCallba
     return;
   }
 
-  hexoPostParser
-    .parsePost(page.full_source, { fix: true })
-    .then((result: postMap) => {
+  hpp
+    .parsePost(page.full_source, { fix: true, cache: true })
+    .then((result: hpp.postMap) => {
       if (!result.metadata) return;
       // Remove keys with undefined or null values
       const keys = Object.keys(result.metadata);
@@ -89,9 +88,9 @@ export function metadataProcess(page: HexoPageSchema, callback: PreprocessCallba
     .catch((_err: Error) => {
       try {
         if (page.full_source) {
-          const parse = hexoPostParser.parsePostFM(page.full_source);
+          const parse = hpp.parsePostFM(page.full_source);
           if (parse.attributes) {
-            const html = renderMarkdownIt(parse.body);
+            const html = hpp.renderMarked(parse.body);
             const $ = load(html);
             if (!parse.attributes.description) parse.attributes.description = $.text().slice(0, 150);
             if (!parse.attributes.thumbnail) {
