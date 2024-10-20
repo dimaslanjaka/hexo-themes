@@ -19,7 +19,10 @@ const local = {
   warehouse: "file:../hexo/releases/warehouse.tgz",
   "hexo-post-parser": "file:../hexo-post-parser/release/hexo-post-parser.tgz",
   "git-command-helper": "file:../git-command-helper/release/git-command-helper.tgz",
-  "markdown-it": "file:../markdown-it/release/markdown-it.tgz"
+  "markdown-it": "file:../markdown-it/release/markdown-it.tgz",
+  "hexo-renderers": "file:../hexo-renderers/release/hexo-renderers.tgz",
+  "hexo-shortcodes": "file:../hexo-shortcodes/release/hexo-shortcodes.tgz",
+  "hexo-seo": "file:../hexo-seo/release/hexo-seo.tgz"
 };
 
 const production = {
@@ -41,8 +44,8 @@ const production = {
   "instant-indexing":
     "https://github.com/dimaslanjaka/static-blog-generator/raw/master/packages/instant-indexing/release/instant-indexing.tgz",
   "sbg-utility":
-    "https://github.com/dimaslanjaka/static-blog-generator/raw/master/packages/sbg-utility/release/sbg-utility.tgz",
-  "sbg-api": "https://github.com/dimaslanjaka/static-blog-generator/raw/master/packages/sbg-api/release/sbg-api.tgz",
+    "https://github.com/dimaslanjaka/static-blog-generator/raw/sbg-utility/packages/sbg-utility/release/sbg-utility.tgz",
+  "sbg-api": "https://github.com/dimaslanjaka/static-blog-generator/raw/sbg-api/packages/sbg-api/release/sbg-api.tgz",
   "sbg-cli": "https://github.com/dimaslanjaka/static-blog-generator/raw/master/packages/sbg-cli/release/sbg-cli.tgz",
   "sbg-server":
     "https://github.com/dimaslanjaka/static-blog-generator/raw/master/packages/sbg-server/release/sbg-server.tgz",
@@ -148,6 +151,10 @@ async function main() {
 
     pkg.resolutions = production;
   }
+
+  pkg.resolutions = Object.fromEntries(
+    Object.entries(pkg.resolutions).sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+  );
 
   fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2) + "\n");
 }
