@@ -296,7 +296,7 @@ sitemap:
 
 # https://github.com/dimaslanjaka/hexo-renderers
 renderers:
-  html_tags: [strike, summary, details, detail]
+  html_tags: [strike, summary, details, detail, "amp-social-share"]
 markdown:
   preset: default
   render:
