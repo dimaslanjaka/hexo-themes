@@ -51,6 +51,7 @@
     "hexo-generator-tag": "^2.0.0",
     "hexo-log": "^4.1.0",
     "hexo-renderers": "*",
+    "hexo-seo": "*",
     "hexo-server": "*",
     "hexo-shortcodes": "*",
     "hexo-theme-flowbite": "*",
