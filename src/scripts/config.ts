@@ -12,7 +12,12 @@ export function themeConfig(this: Hexo | undefined) {
   const theme_names = [instance.config.theme, "hexo-theme-" + instance.config.theme];
   const theme_dirs = theme_names
     .map((name) => {
-      return [path.join(instance.base_dir, "themes", name), path.join(instance.base_dir, "node_modules", name)];
+      return [
+        path.join(instance.base_dir, "themes", name),
+        path.join(instance.base_dir, "node_modules", name),
+        path.join(process.cwd(), "themes", name),
+        path.join(process.cwd(), "node_modules", name)
+      ];
     })
     .flat()
     .filter(fs.existsSync);
