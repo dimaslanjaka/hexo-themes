@@ -1,6 +1,10 @@
 # hexo-theme-flowbite
 
-HexoJS theme build with TailwindCSS and Flowbite
+HexoJS theme build with TailwindCSS and Flowbite.
+
+<div style="text-align: center;">
+  <img src="https://rawcdn.githack.com/dimaslanjaka/site/fc74340976ee56f1ea362506f98b0218ffa1615e/source/themes/screenshots/Flowbite.png" alt="Flowbite Screenshot" />
+</div>
 
 ## Features
 
