@@ -32,6 +32,9 @@ const local = {
   "hexo-seo": "file:../hexo-seo/release/hexo-seo.tgz"
 };
 
+if (local[pkg.name]) delete local[pkg.name];
+if (local[`@types/${pkg.name}`]) delete local[`@types/${pkg.name}`];
+
 const production = {
   "binary-collections": "https://github.com/dimaslanjaka/bin/raw/fcd1121/releases/bin.tgz",
   "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/fc1f9b7/releases/hexo.tgz",
@@ -67,6 +70,9 @@ const production = {
   "hexo-generator-redirect":
     "https://github.com/dimaslanjaka/hexo-generator-redirect/raw/0885394/release/hexo-generator-redirect.tgz"
 };
+
+if (production[pkg.name]) delete production[pkg.name];
+if (production[`@types/${pkg.name}`]) delete production[`@types/${pkg.name}`];
 
 /**
  * Fetches the latest commit from a specified GitHub repository and branch.

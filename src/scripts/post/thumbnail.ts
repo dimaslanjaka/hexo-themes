@@ -1,6 +1,7 @@
 import { load } from "cheerio";
+import { HexoLocalsData } from "hexo/dist/hexo/locals-d";
 import _ from "lodash";
-import { md5 } from "sbg-utility";
+import { array_random, md5 } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "../utils/cache";
 
@@ -8,7 +9,7 @@ import { hexoThemesCache } from "../utils/cache";
  * get all images from page/post
  * @param page
  */
-async function getImages(page: Partial<HexoPageSchema>) {
+function getImages(page: Partial<HexoPageSchema>) {
   const results: string[] = [];
   if (page && typeof page === "object") {
     if (typeof page.thumbnail === "string") results.push(page.thumbnail);
@@ -20,7 +21,7 @@ async function getImages(page: Partial<HexoPageSchema>) {
   if (page.content || page._content) {
     const pageContent = page.content || page._content;
     const cacheKey = "getImages-" + md5(pageContent);
-    const cacheValue = await hexoThemesCache.get<string[]>(cacheKey, []);
+    const cacheValue = hexoThemesCache.get<string[]>(cacheKey, []);
     if (cacheValue.length === 0) {
       // Collect all image URLs from url
       const $ = load(pageContent);
@@ -54,15 +55,15 @@ hexo.extend.helper.register("getImages", getImages);
 
 /**
  * get thumbnail url
- * @param {import("hexo/dist/hexo/locals-d").HexoLocalsData} page
+ * @param page
  */
-function getThumbnail(page) {
+function getThumbnail(page: HexoLocalsData) {
   if (page && typeof page === "object") {
     // priority defined thumbnail in frontmatter
     if (typeof page.thumbnail === "string") return page.thumbnail;
     if (typeof page.cover === "string") return page.cover;
   }
-  return _.sample(getImages(page));
+  return array_random(getImages(page));
 }
 
 hexo.extend.helper.register("getThumbnail", function (page) {

@@ -134,7 +134,7 @@ hexo.extend.filter.register("template_locals", function (locals: any) {
 });
 
 // Register helper to parse table of contents
-hexo.extend.helper.register("parseToc", async function (content: string) {
+hexo.extend.helper.register("parseToc", function (content: string) {
   if (typeof content === "string") {
     const parseTOC = ($: cheerio.CheerioAPI) => {
       const toc: { title: string; link: string; subItems: any[] }[] = [];
@@ -164,7 +164,7 @@ hexo.extend.helper.register("parseToc", async function (content: string) {
       return toc;
     };
     const cacheKey = "parseToc-" + md5(content);
-    const cacheValue = await hexoThemesCache.get<ReturnType<typeof parseTOC>>(cacheKey, []);
+    const cacheValue = hexoThemesCache.get<ReturnType<typeof parseTOC>>(cacheKey, []);
     if (cacheValue.length > 0) return cacheValue;
 
     const $ = cheerio.load(content);

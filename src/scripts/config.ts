@@ -6,8 +6,8 @@ import yaml from "yaml";
 
 // themes/<your_theme>/scripts/example.js
 export function themeConfig(this: Hexo | undefined) {
-  let config = {};
   const instance = this instanceof Hexo ? this : hexo;
+  let config = instance.config.theme_config;
 
   const theme_names = [instance.config.theme, "hexo-theme-" + instance.config.theme];
   const theme_dirs = theme_names
@@ -27,23 +27,23 @@ export function themeConfig(this: Hexo | undefined) {
     .map((name) => {
       return [
         path.join(instance.base_dir, `_config.${name}.yml`),
-        path.join(instance.base_dir, `_config.hexo-theme-${name}.yml`)
+        path.join(instance.base_dir, `_config.hexo-theme-${name}.yml`),
+        path.join(process.cwd(), `_config.${name}.yml`),
+        path.join(process.cwd(), `_config.hexo-theme-${name}.yml`)
       ];
     })
     .flat()
     .filter((filePath) => fs.existsSync(filePath))[0];
   if (user_defined_theme_config_file) {
     config = Object.assign(config, yaml.parse(fs.readFileSync(user_defined_theme_config_file, "utf-8")));
+    if ("nav" in instance.config.theme_config) {
+      delete instance.config.theme_config.nav;
+    }
+    if ("footer_nav" in instance.config.theme_config) {
+      delete instance.config.theme_config.footer_nav;
+    }
+    config = deepmerge(instance.config.theme_config, config);
   }
-
-  if ("nav" in instance.config.theme_config) {
-    delete instance.config.theme_config.nav;
-  }
-  if ("footer_nav" in instance.config.theme_config) {
-    delete instance.config.theme_config.footer_nav;
-  }
-  config = deepmerge(instance.config.theme_config, config);
-
   return config;
 }
 
