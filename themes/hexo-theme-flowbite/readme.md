@@ -21,6 +21,15 @@ HexoJS theme build with TailwindCSS and Flowbite
 
 [Read Here](https://github.com/dimaslanjaka/hexo-themes?tab=readme-ov-file#how-to-install)
 
+## How to update
+
+```bash
+npx hexo-theme-flowbite
+```
+
+![image](https://github.com/user-attachments/assets/7a965587-6781-4ab2-b661-ae0109e6b593)
+
+
 ## Configuration
 
 > Before starting. Make sure the location of your theme is.
