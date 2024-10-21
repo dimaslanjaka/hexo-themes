@@ -1,11 +1,10 @@
+import fs from "fs";
 import path from "path";
 
 let base_dir = process.cwd();
 if (typeof hexo !== "undefined") {
   base_dir = hexo.base_dir;
 }
-
-import { promises as fs } from "fs";
 
 interface CacheOptions {
   expirationTime?: number; // Time in milliseconds
@@ -23,14 +22,14 @@ export class CacheHelper {
     return path.join(this.baseFolder, key);
   }
 
-  public async set(key: string, value: any, options?: CacheOptions): Promise<void> {
+  public set(key: string, value: any, options?: CacheOptions): void {
     const expiration = options?.expirationTime ? Date.now() + options.expirationTime : undefined;
 
     this.cache.set(key, { value, expiration });
-    await fs.writeFile(this.getCacheKey(key), JSON.stringify({ value, expiration }));
+    fs.writeFileSync(this.getCacheKey(key), JSON.stringify({ value, expiration }));
   }
 
-  public async get<V>(key: string, fallback: V): Promise<V> {
+  public get<V>(key: string, fallback: V): V {
     // Check memory cache first
     const cached = this.cache.get(key);
     if (cached) {
@@ -43,7 +42,7 @@ export class CacheHelper {
 
     // Check file cache
     try {
-      const data = await fs.readFile(this.getCacheKey(key), "utf-8");
+      const data = fs.readFileSync(this.getCacheKey(key), "utf-8");
       const parsed = JSON.parse(data);
       if (parsed.expiration === undefined || parsed.expiration > Date.now()) {
         this.cache.set(key, { value: parsed.value, expiration: parsed.expiration });
@@ -57,14 +56,14 @@ export class CacheHelper {
     return fallback;
   }
 
-  public async has(key: string): Promise<boolean> {
+  public has(key: string): boolean {
     const cached = this.cache.get(key);
     if (cached) {
       return cached.expiration === undefined || cached.expiration > Date.now();
     }
 
     try {
-      const data = await fs.readFile(this.getCacheKey(key), "utf-8");
+      const data = fs.readFileSync(this.getCacheKey(key), "utf-8");
       const parsed = JSON.parse(data);
       return parsed.expiration === undefined || parsed.expiration > Date.now();
     } catch (_error) {
@@ -72,7 +71,6 @@ export class CacheHelper {
     }
   }
 }
-
 /**
  * Reusable cache instance
  */
