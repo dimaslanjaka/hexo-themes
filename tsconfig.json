@@ -20,16 +20,14 @@
     "checkJs": false,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "tmp", "dist", "themes/**/scripts/**"],
-  "include": [
-    "bin",
-    "*.ts",
-    "*.js",
-    "*.cjs",
-    "./package.json",
-    "./src/**/*",
-    "./src/globals.d.ts",
-    "./src/**/*.json",
-    "eslint.config.mjs"
+  "exclude": [
+    "**/node_modules/**",
+    "**/.deploy_*/**",
+    "**/public/**",
+    "**/tmp/**",
+    "**/dist/**",
+    "./themes/**/*",
+    "./plugins/**/*",
+    "./site/**/*"
   ]
 }

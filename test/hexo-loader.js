@@ -10,6 +10,7 @@ async function main() {
   await hexo.load();
   // not working
   const postPath = path.join(hexo.base_dir, "source/_posts/images.md");
+  console.log(postPath);
   const result = await hexo.post.render(null, {
     engine: "markdown",
     content: fs.readFileSync(postPath, "utf-8")

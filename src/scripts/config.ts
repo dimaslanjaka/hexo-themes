@@ -5,7 +5,7 @@ import path from "path";
 import yaml from "yaml";
 
 // themes/<your_theme>/scripts/example.js
-export default function themeConfig(this: Hexo | undefined) {
+export function themeConfig(this: Hexo | undefined) {
   let config = {};
   const instance = this instanceof Hexo ? this : hexo;
 

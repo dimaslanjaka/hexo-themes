@@ -21,6 +21,12 @@
       "name": "clean-start",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "command": "node --expose-gc --require dotenv/config test/hexo-loader.js",
+      "name": "dtest",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }

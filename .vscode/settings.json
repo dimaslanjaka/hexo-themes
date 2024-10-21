@@ -156,9 +156,9 @@
     "db.json": true
   },
   "code-runner.executorMap": {
-    "typescriptreact": "cross-env-shell DEBUG=chimera-* ts-node --expose-gc",
+    "typescriptreact": "ts-node --expose-gc",
     "javascript": "node --expose-gc --require dotenv/config",
-    "typescript": "cross-env-shell DEBUG=git-command-helper,chimera-* ts-node --expose-gc",
+    "typescript": "ts-node",
     "coffeescript": "coffee",
     "sass": "sass --style expanded",
     "scss": "scss --style expanded",

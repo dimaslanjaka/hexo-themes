@@ -1,4 +1,4 @@
-export default function getHexoArgs() {
+export function getHexoArgs() {
   // detect hexo arguments
   let hexoCmd = "";
   if (hexo.env.args._ && hexo.env.args._.length > 0) {

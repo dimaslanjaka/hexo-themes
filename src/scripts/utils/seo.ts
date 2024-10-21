@@ -54,7 +54,7 @@ export function fixImages($: ReturnType<typeof cheerio.load>, data: HexoPageSche
  * @param content rendered html string
  * @param data current page data
  */
-export default async function htmlSeoFixer(content: string, data: HexoPageSchema) {
+export async function htmlSeoFixer(content: string, data: HexoPageSchema) {
   const cacheKey = "seo-" + md5(content);
   const cacheValue = await hexoThemesCache.get<string>(cacheKey, null);
   if (cacheValue) return cacheValue;
