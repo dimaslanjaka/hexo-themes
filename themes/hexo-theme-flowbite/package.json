@@ -1,6 +1,6 @@
 {
   "name": "hexo-theme-flowbite",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/hexo-theme-flowbite-api.js",
   "types": "dist/hexo-theme-flowbite-api.d.ts",
   "bin": "bin/hexo-theme-flowbite.js",
@@ -59,6 +59,7 @@
     "lodash": "^4.17.21",
     "masonry-layout": "^4.2.2",
     "remove": "^0.1.5",
+    "sanitize-filename": "^1.6.3",
     "sbg-utility": "^2.0.5",
     "tar": "^7.4.3",
     "upath": "^2.0.1",
