@@ -24,7 +24,7 @@ const deps = Array.from(
       ...Object.keys(pkg.devDependencies || {})
     ])
   )
-);
+).filter((pkgName) => !["deepmerge-ts", "p-limit", "sanitize-filename"].includes(pkgName));
 
 // Shared TypeScript options
 const tsOptions = {
