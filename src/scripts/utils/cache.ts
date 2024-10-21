@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs-extra";
 import path from "path";
 
 let base_dir = process.cwd();
@@ -6,7 +6,7 @@ if (typeof hexo !== "undefined") {
   base_dir = hexo.base_dir;
 }
 
-interface CacheOptions {
+export interface CacheOptions {
   expirationTime?: number; // Time in milliseconds
 }
 
@@ -19,7 +19,9 @@ export class CacheHelper {
   }
 
   private getCacheKey(key: string): string {
-    return path.join(this.baseFolder, key);
+    const result = path.join(this.baseFolder, key);
+    fs.ensureDirSync(path.dirname(result));
+    return result;
   }
 
   public set(key: string, value: any, options?: CacheOptions): void {
