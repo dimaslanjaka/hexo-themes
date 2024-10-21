@@ -1,5 +1,5 @@
 ---
-title: Typography and tags
+title: markdown-it
 date: 2017-12-20 13:51:07
 tags:
   - typography
@@ -7,6 +7,7 @@ tags:
 categories:
   - notes
 ---
+
 ![$cover](images/lake.png)
 
 # Installation
