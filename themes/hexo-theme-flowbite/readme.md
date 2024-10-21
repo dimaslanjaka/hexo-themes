@@ -9,6 +9,10 @@ HexoJS theme build with TailwindCSS and Flowbite
 - Custom HTML Injection
 - FancyBox multimedia display
 
+## Requirements
+
+- Hexo renderer nunjucks
+
 ## Preview
 
 - [https://www.webmanajemen.com/hexo-themes/hexo-theme-flowbite/](https://www.webmanajemen.com/hexo-themes/hexo-theme-flowbite/)
