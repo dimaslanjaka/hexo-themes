@@ -23,7 +23,23 @@ HexoJS theme build with TailwindCSS and Flowbite.
 
 ## Installation
 
-[Read Here](https://github.com/dimaslanjaka/hexo-themes?tab=readme-ov-file#how-to-install)
+<!-- [Read Here](https://github.com/dimaslanjaka/hexo-themes?tab=readme-ov-file#how-to-install) -->
+
+- [Download tarball](https://github.com/dimaslanjaka/hexo-themes/raw/refs/heads/master/releases/hexo-theme-flowbite.tgz)
+- Extract [downloaded tarball](https://github.com/dimaslanjaka/hexo-themes/raw/refs/heads/master/releases/hexo-theme-flowbite.tgz) into **themes/hexo-theme-flowbite**
+- Create **_config.hexo-theme-flowbite.yml** [see content configuration](./_config.yml) or using bash
+
+```bash
+curl https://raw.githubusercontent.com/dimaslanjaka/hexo-themes/refs/heads/master/themes/hexo-theme-flowbite/_config.yml > _config.hexo-theme-flowbite.yml
+```
+
+- Install dependencies
+
+```bash
+npm i -D hexo-theme-flowbite
+# OR using latest development
+# npm i -D hexo-theme-flowbite@https://github.com/dimaslanjaka/hexo-themes/raw/refs/heads/master/releases/hexo-theme-flowbite.tgz
+```
 
 ## How to update
 
