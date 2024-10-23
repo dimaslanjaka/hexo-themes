@@ -2,10 +2,6 @@
 	path = src-posts
 	url = https://github.com/dimaslanjaka/source-posts.git
 	branch = posts
-[submodule "plugins/hexo-server"]
-	path = plugins/hexo-server
-	url = https://github.com/dimaslanjaka/hexo-server.git
-	branch = private
 [submodule "themes/hexo-theme-claudia"]
 	path = themes/hexo-theme-claudia
 	url = https://github.com/dimaslanjaka/hexo-theme-claudia.git
