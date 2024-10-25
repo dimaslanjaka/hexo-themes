@@ -76,6 +76,8 @@ yarn build
 yarn run start
 ```
 
+Test responsive screenshoot at https://ui.dev/amiresponsive
+
 #### Bundle
 
 ```bash
