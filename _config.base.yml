@@ -297,7 +297,7 @@ sitemap:
 # https://github.com/dimaslanjaka/hexo-renderers
 renderers:
   html_tags: [strike, summary, details, detail, "amp-social-share"]
-  engines: [markdown-it]
+  engines: [markdown-it, nunjucks]
   generator: []
 markdown:
   preset: default
