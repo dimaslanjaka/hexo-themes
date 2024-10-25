@@ -13,25 +13,25 @@ try {
 // node package-switch.cjs [local|production]
 
 const local = {
-  'sbg-api': 'file:../sbg-api/packages/sbg-api/release/sbg-api.tgz',
-  'sbg-utility': 'file:../sbg-utility/packages/sbg-utility/release/sbg-utility.tgz',
-  'sbg-server': 'file:../static-blog-generator/packages/sbg-server/release/sbg-server.tgz',
-  'sbg-cli': 'file:../static-blog-generator/packages/sbg-cli/release/sbg-cli.tgz',
-  'hexo-asset-link': 'file:../hexo/releases/hexo-asset-link.tgz',
-  hexo: 'file:../hexo/releases/hexo.tgz',
-  'hexo-cli': 'file:../hexo/releases/hexo-cli.tgz',
-  'hexo-server': 'file:../hexo/releases/hexo-server.tgz',
-  'hexo-front-matter': 'file:../hexo/releases/hexo-front-matter.tgz',
-  'hexo-log': 'file:../hexo/releases/hexo-log.tgz',
-  'hexo-util': 'file:../hexo/releases/hexo-util.tgz',
-  warehouse: 'file:../hexo/releases/warehouse.tgz',
-  'hexo-post-parser': 'file:../hexo-post-parser/release/hexo-post-parser.tgz',
-  'git-command-helper': 'file:../git-command-helper/release/git-command-helper.tgz',
-  'markdown-it': 'file:../markdown-it/release/markdown-it.tgz',
-  'hexo-renderers': 'file:../hexo-renderers/release/hexo-renderers.tgz',
-  'hexo-shortcodes': 'file:../hexo-shortcodes/release/hexo-shortcodes.tgz',
-  'hexo-seo': 'file:../hexo-seo/release/hexo-seo.tgz',
-  'google-news-sitemap': 'file:../google-news-sitemap/release/google-news-sitemap.tgz'
+  "sbg-api": "file:../sbg-api/packages/sbg-api/release/sbg-api.tgz",
+  "sbg-utility": "file:../sbg-utility/packages/sbg-utility/release/sbg-utility.tgz",
+  "sbg-server": "file:../static-blog-generator/packages/sbg-server/release/sbg-server.tgz",
+  "sbg-cli": "file:../static-blog-generator/packages/sbg-cli/release/sbg-cli.tgz",
+  "hexo-asset-link": "file:../hexo/releases/hexo-asset-link.tgz",
+  hexo: "file:../hexo/releases/hexo.tgz",
+  "hexo-cli": "file:../hexo/releases/hexo-cli.tgz",
+  "hexo-server": "file:../hexo/releases/hexo-server.tgz",
+  "hexo-front-matter": "file:../hexo/releases/hexo-front-matter.tgz",
+  "hexo-log": "file:../hexo/releases/hexo-log.tgz",
+  "hexo-util": "file:../hexo/releases/hexo-util.tgz",
+  warehouse: "file:../hexo/releases/warehouse.tgz",
+  "hexo-post-parser": "file:../hexo-post-parser/release/hexo-post-parser.tgz",
+  "git-command-helper": "file:../git-command-helper/release/git-command-helper.tgz",
+  "markdown-it": "file:../markdown-it/release/markdown-it.tgz",
+  "hexo-renderers": "file:../hexo-renderers/release/hexo-renderers.tgz",
+  "hexo-shortcodes": "file:../hexo-shortcodes/release/hexo-shortcodes.tgz",
+  "hexo-seo": "file:../hexo-seo/release/hexo-seo.tgz",
+  "google-news-sitemap": "file:../google-news-sitemap/release/google-news-sitemap.tgz"
 };
 
 if (local[pkg.name]) delete local[pkg.name];
@@ -49,7 +49,7 @@ const production = {
   "hexo-server": "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/hexo-server.tgz",
   warehouse: "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/warehouse.tgz",
   "hexo-seo": "https://github.com/dimaslanjaka/hexo-seo/raw/8c814eb/release/hexo-seo.tgz",
-  "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/95599a5/release/markdown-it.tgz",
+  "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/17ccc82/release/markdown-it.tgz",
   "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/3f727de/release/hexo-renderers.tgz",
   "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/raw/f70a1c0/release/hexo-shortcodes.tgz",
   "static-blog-generator":
@@ -142,7 +142,7 @@ async function updatePackageSha(repoOwner, repoName, branch, packageName, urlFor
         if (res.headers["content-type"] === "application/octet-stream") {
           production[packageName] = url;
         } else {
-          console.error(
+          throw new Error(
             `Error updating package SHA for ${packageName}: Unexpected content-type "${res.headers["content-type"]}" at ${url}`
           );
         }
@@ -151,7 +151,7 @@ async function updatePackageSha(repoOwner, repoName, branch, packageName, urlFor
   } catch (error) {
     const errorUrl = error.config?.url;
     const message = error.response?.data?.message || error.message;
-    console.error(`Error updating package SHA for ${packageName}:`, message, errorUrl);
+    throw new Error(`Error updating package SHA for ${packageName}:`, message, errorUrl);
   }
 }
 
@@ -160,6 +160,7 @@ async function main() {
 
   if (args.includes("local")) {
     pkg.resolutions = Object.assign(production, local);
+    pkg.overrides = Object.assign(production, local);
   } else {
     // Update specific packages with their latest commit SHA
     await updatePackageSha(
@@ -199,11 +200,15 @@ async function main() {
     );
 
     pkg.resolutions = production;
+    // npm overrides sometimes give you error installation
+    // pkg.overrides = production;
   }
 
-  pkg.resolutions = Object.fromEntries(
-    Object.entries(pkg.resolutions).sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
-  );
+  // Sort by keys
+  if (pkg.dependencies) pkg.dependencies = Object.fromEntries(Object.entries(pkg.dependencies).sort());
+  if (pkg.devDependencies) pkg.devDependencies = Object.fromEntries(Object.entries(pkg.devDependencies).sort());
+  if (pkg.resolutions) pkg.resolutions = Object.fromEntries(Object.entries(pkg.resolutions).sort());
+  if (pkg.overrides) pkg.overrides = Object.fromEntries(Object.entries(pkg.overrides).sort());
 
   fs.writeFileSync(path.join(__dirname, "package.json"), JSON.stringify(pkg, null, 2) + "\n");
 }
