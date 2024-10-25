@@ -21,7 +21,6 @@
     "prepack": "node package-switch.cjs production",
     "pack": "node -r ts-node/register pack.ts",
     "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && node bin/deploy",
-    "post-install": "node postinstall-yarn.cjs",
     "start:flowbite": "node bin/switch-theme flowbite && npm run start"
   },
   "keywords": [
@@ -123,8 +122,8 @@
     "hexo-generator-redirect": "https://github.com/dimaslanjaka/hexo-generator-redirect/raw/0885394/release/hexo-generator-redirect.tgz",
     "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/hexo-log.tgz",
     "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/8c4e98159e4407b77e1c25e028c1fd4a0073a8e3/release/hexo-post-parser.tgz",
-    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/3f727de/release/hexo-renderers.tgz",
-    "hexo-seo": "https://github.com/dimaslanjaka/hexo-seo/raw/8c814eb/release/hexo-seo.tgz",
+    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/c422e298110793b49322e2bfde267a6a417615d5/release/hexo-renderers.tgz",
+    "hexo-seo": "https://github.com/dimaslanjaka/hexo-seo/raw/e9af1fab5d9baa123681450b0258db1c97b2e9e4/release/hexo-seo.tgz",
     "hexo-server": "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/hexo-server.tgz",
     "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/raw/f70a1c0/release/hexo-shortcodes.tgz",
     "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/hexo-util.tgz",
