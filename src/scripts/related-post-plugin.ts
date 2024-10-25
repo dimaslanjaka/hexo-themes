@@ -112,11 +112,15 @@ function listRelatedPosts(_post: any, options?: any, _hexo?: any): any[] {
 
   let postList: any[] = [];
 
-  _post.tags.each((tag: any) => {
-    tag.posts.each((post: any) => {
-      postList.push(post);
+  if (_post.tags && typeof _post.tags.each === "function") {
+    _post.tags.each((tag: any) => {
+      if (tag.posts && typeof tag.posts.each === "function") {
+        tag.posts.each((post: any) => {
+          postList.push(post);
+        });
+      }
     });
-  });
+  }
 
   postList = addCount(postList, "_id", "count");
   const thisPostPosition = objectArrayIndexOf(postList, _post._id, "_id");
@@ -133,5 +137,9 @@ function listRelatedPosts(_post: any, options?: any, _hexo?: any): any[] {
 }
 
 hexo.extend.helper.register("list_related_posts", (post: any, options: any, hexo: any) => {
-  return listRelatedPosts(post, options, hexo);
+  if (typeof hexo !== "undefined") {
+    return listRelatedPosts(post, options, hexo);
+  } else {
+    return listRelatedPosts(post, options, hexo);
+  }
 });
