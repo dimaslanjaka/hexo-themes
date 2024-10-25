@@ -1,5 +1,7 @@
 "use strict";
 
+import Hexo from "hexo";
+
 const assign = Object.assign;
 
 /**
@@ -136,9 +138,11 @@ function listRelatedPosts(_post: any, options?: any, _hexo?: any): any[] {
   return postList;
 }
 
-hexo.extend.helper.register("list_related_posts", (post: any, options: any, hexo: any) => {
-  if (typeof hexo !== "undefined") {
-    return listRelatedPosts(post, options, hexo);
+hexo.extend.helper.register("list_related_posts", function (post: any, options: any, hexoInstance: any) {
+  if (typeof hexoInstance !== "undefined") {
+    return listRelatedPosts(post, options, hexoInstance);
+  } else if (this instanceof Hexo) {
+    return listRelatedPosts(post, options, this);
   } else {
     return listRelatedPosts(post, options, hexo);
   }
