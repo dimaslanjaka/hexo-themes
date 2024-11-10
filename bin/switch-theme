@@ -29,6 +29,12 @@ if (fs.existsSync(themeBaseConfigFile)) {
   const themeConfig = yaml.parse(fs.readFileSync(themeBaseConfigFile, "utf-8"));
   const config = Object.assign(baseConfig, themeConfig);
   config.theme = themeName; // Update theme
+  if (!config.renderers) config.renderers = {};
+  // --renderers=nunjucks,markdown-it
+  if (argv.renderers) {
+    config.renderers.engines = argv.renderers.split(",");
+    console.log("renderers", config.renderers.engines, "applied");
+  }
   fs.writeFileSync("_config.yml", yaml.stringify(config));
 }
 
