@@ -21,7 +21,8 @@ const deps = Array.from(
   new Set(
     getPackageJsonFiles().flatMap((pkg) => [
       ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.devDependencies || {})
+      ...Object.keys(pkg.devDependencies || {}),
+      ...["cheerio", "lodash", "jquery"]
     ])
   )
 ).filter((pkgName) => !["deepmerge-ts", "p-limit", "sanitize-filename"].includes(pkgName));
