@@ -14,7 +14,7 @@
     "site:build": "hexo generate",
     "site:clean": "hexo clean",
     "post:standalone": "sbg post standalone",
-    "post:copy": "sbg post copy",
+    "post:copy": "sbg post copy --expose-gc",
     "post": "run-s \"post:**\"",
     "update:ncu": "npx npm-check-updates -u -x async,progress,cheerio,jsdom,deepmerge-ts",
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
