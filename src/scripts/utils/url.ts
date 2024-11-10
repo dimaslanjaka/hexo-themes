@@ -1,6 +1,6 @@
 import Hexo from "hexo";
 import { url_for } from "hexo-util";
-import utility from "sbg-utility";
+import * as utility from "sbg-utility";
 
 export function fix_url_for(source: string) {
   const instance: Hexo = this instanceof Hexo ? this : hexo;

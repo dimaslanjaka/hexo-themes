@@ -3,10 +3,11 @@ import hpp from "hexo-post-parser";
 import { url_for } from "hexo-util";
 import path from "path";
 import sanitize from "sanitize-filename";
-import { fs, jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
+import { jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileSync } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "../utils/cache";
 import { saveAsSearch } from "./search";
+import fs from "fs-extra";
 
 hpp.setConfig(hexo.config);
 
