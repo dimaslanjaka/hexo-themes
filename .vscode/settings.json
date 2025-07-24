@@ -152,17 +152,12 @@
   "files.exclude": {
     "**/node_modules": true,
     "**/vendor": true,
-    "**/tmp/yarn": true,
-    "db.json": true
+    "**/db.json": true
   },
   "code-runner.executorMap": {
-    "typescriptreact": "ts-node --expose-gc",
+    "typescriptreact": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config --expose-gc",
     "javascript": "node --expose-gc --require dotenv/config",
-    "typescript": "ts-node",
-    "coffeescript": "coffee",
-    "sass": "sass --style expanded",
-    "scss": "scss --style expanded",
-    "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css"
+    "typescript": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config"
   },
   "code-runner.runInTerminal": true,
   "code-runner.cwd": "${workspaceFolder}",
