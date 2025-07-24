@@ -1,10 +1,14 @@
-const commonjs = require("@rollup/plugin-commonjs").default;
-const json = require("@rollup/plugin-json").default;
-const resolve = require("@rollup/plugin-node-resolve").default;
-const typescript = require("@rollup/plugin-typescript").default; // Using .default as specified
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
+import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
+import { execSync } from "child_process";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const getPackageJsonFiles = () => {
   const workspaces = execSync("yarn workspaces list --json", { encoding: "utf8" })
@@ -27,7 +31,9 @@ const deps = Array.from(
   )
 ).filter((pkgName) => !["deepmerge-ts", "p-limit", "sanitize-filename"].includes(pkgName));
 
-// Shared TypeScript options
+/**
+ * Shared TypeScript options
+ */
 const tsOptions = {
   tsconfig: false,
   compilerOptions: {
@@ -106,4 +112,4 @@ const hexoThemeButterflyHelper = {
   external: deps
 };
 
-module.exports = [hexoThemeFlowbiteHelper, hexoThemeFlowbiteCLI, hexoThemeButterflyHelper];
+export default [hexoThemeFlowbiteHelper, hexoThemeFlowbiteCLI, hexoThemeButterflyHelper];

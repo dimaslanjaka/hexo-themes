@@ -1,4 +1,5 @@
 {
+  /* (BASE TSCONFIG) ONLY FOR VSCODE */
   "ts-node": {
     "compilerOptions": {
       "skipDefaultLibCheck": true,
@@ -8,10 +9,10 @@
     }
   },
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2020",
+    "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "Node",
-    "outDir": "dist",
+    "outDir": "tmp/hexo-themes-dist",
     "esModuleInterop": true,
     "typeRoots": ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
     "lib": ["ES2015", "ES6", "ES5", "ES2022"],

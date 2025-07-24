@@ -1,14 +1,22 @@
-const { spawnAsync } = require("cross-spawn");
-const gulp = require("gulp");
+import { spawnAsync } from "cross-spawn";
+import gulp from "gulp";
+import path from "path";
+import { fileURLToPath } from "url";
 
-async function build() {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export async function build() {
   // yarn workspaces foreach --no-private --all run build
   await spawnAsync("yarn", ["workspace", "hexo-theme-flowbite", "run", "build"], { stdio: "inherit", cwd: __dirname });
 }
+
 const buildRollup = () => spawnAsync("rollup", ["-c"], { cwd: __dirname, stdio: "inherit" });
+
 const buildFlowbite = () =>
   spawnAsync("yarn", ["workspace", "hexo-theme-flowbite", "run", "build"], { stdio: "inherit", cwd: __dirname });
-function watch() {
+
+export function watch() {
   gulp.watch(
     [
       "themes/hexo-theme-flowbite/layout/**/*",
@@ -19,6 +27,3 @@ function watch() {
   );
   gulp.watch(["./src/**/*", "./rollup.config.*"], buildRollup);
 }
-
-exports.watch = watch;
-exports.build = build;
