@@ -9,7 +9,7 @@ import { hexoThemesCache } from "../utils/cache";
  * get all images from page/post
  * @param page
  */
-function getImages(page: Partial<HexoPageSchema>) {
+function getImages(page: Partial<HexoPageSchema | HexoLocalsData>) {
   const results: string[] = [];
   if (page && typeof page === "object") {
     if (typeof page.thumbnail === "string") results.push(page.thumbnail);
