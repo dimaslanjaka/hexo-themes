@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { StoreFunction } from "hexo/dist/extend/renderer-d";
+import { StoreFunction } from "hexo/dist/types";
 import { md5 } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "./cache";
