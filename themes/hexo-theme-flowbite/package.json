@@ -79,6 +79,7 @@
     "@types/masonry-layout": "^4",
     "autoprefixer": "^10.4.23",
     "baseline-browser-mapping": "^2.9.11",
+    "binary-collections": "^2.0.10",
     "cssnano": "^7.1.2",
     "flowbite": "^4.0.1",
     "flowbite-typography": "^1.0.5",
