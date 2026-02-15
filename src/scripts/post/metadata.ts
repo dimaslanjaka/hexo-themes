@@ -1,4 +1,5 @@
 import { load } from "cheerio";
+import fs from "fs-extra";
 import hpp from "hexo-post-parser";
 import { url_for } from "hexo-util";
 import path from "path";
@@ -7,7 +8,6 @@ import { jsonParseWithCircularRefs, jsonStringifyWithCircularRefs, md5, md5FileS
 import { HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "../utils/cache";
 import { saveAsSearch } from "./search";
-import fs from "fs-extra";
 
 hpp.setConfig(hexo.config);
 
@@ -93,7 +93,7 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
       if (page.full_source) {
         const parse = await hpp.parsePost(page.full_source);
         if (parse.metadata) {
-          const html = hpp.renderMarked(parse.body);
+          const html = hpp.renderMarkdown(parse.body);
           const cacheKey = "metadataProcess-" + md5(parse.body);
           const cacheValue = hexoThemesCache.get<Partial<typeof parse>>(cacheKey, {});
           if (Object.keys(cacheValue).length > 0) {
