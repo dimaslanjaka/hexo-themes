@@ -1,4 +1,4 @@
 @echo off
 
-set "script_dir=%~dp0"
-node "%script_dir%clean-node" %*
+REM run clean-node.cjs with node within current script directory
+node "%~dp0clean-node.cjs" %*
