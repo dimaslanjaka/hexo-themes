@@ -92,8 +92,8 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
     try {
       if (page.full_source) {
         const parse = await hpp.parsePost(page.full_source);
-        if (parse.metadata) {
-          const html = hpp.renderMarkdown(parse.body);
+        if (parse.metadata && parse.body) {
+          const html = hpp.renderBodyMarkdown(parse as any);
           const cacheKey = "metadataProcess-" + md5(parse.body);
           const cacheValue = hexoThemesCache.get<Partial<typeof parse>>(cacheKey, {});
           if (Object.keys(cacheValue).length > 0) {
