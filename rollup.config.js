@@ -38,6 +38,7 @@ const tsOptions = {
   tsconfig: false,
   compilerOptions: {
     lib: ["DOM", "DOM.Iterable", "ES2020"],
+    rootDir: "src",
     typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
     allowSyntheticDefaultImports: true,
     esModuleInterop: true
@@ -60,7 +61,9 @@ const sharedPlugins = [
  * @type {import("rollup").RollupOptions}
  */
 const hexoThemeFlowbiteHelper = {
-  input: "src/scripts/index.ts",
+  input: fs.existsSync(path.join(__dirname, "tmp/tsc/src/scripts/index.js"))
+    ? "tmp/tsc/src/scripts/index.js"
+    : "src/scripts/index.ts",
   output: {
     file: "themes/hexo-theme-flowbite/scripts/helper.js",
     format: "cjs",
@@ -74,7 +77,9 @@ const hexoThemeFlowbiteHelper = {
  * @type {import("rollup").RollupOptions}
  */
 const hexoThemeFlowbiteCLI = {
-  input: "src/cli/hexo-theme-flowbite.ts",
+  input: fs.existsSync(path.join(__dirname, "tmp/tsc/src/cli/hexo-theme-flowbite.js"))
+    ? "tmp/tsc/src/cli/hexo-theme-flowbite.js"
+    : "src/cli/hexo-theme-flowbite.ts",
   output: [
     { file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.cjs", format: "cjs" },
     { file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.mjs", format: "esm" }
@@ -92,7 +97,9 @@ const hexoThemeFlowbiteCLI = {
  * @type {import("rollup").RollupOptions}
  */
 const hexoThemeButterflyHelper = {
-  input: "src/scripts/hexo-theme-butterfly.ts",
+  input: fs.existsSync(path.join(__dirname, "tmp/tsc/src/scripts/hexo-theme-butterfly.js"))
+    ? "tmp/tsc/src/scripts/hexo-theme-butterfly.js"
+    : "src/scripts/hexo-theme-butterfly.ts",
   output: {
     file: "themes/hexo-theme-butterfly/scripts/helper.js",
     format: "cjs",
