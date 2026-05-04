@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "rollup -c",
+      "name": "rollup",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "command": "npm run start",
       "name": "start",
       "request": "launch",
