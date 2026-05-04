@@ -1,0 +1,11 @@
+{
+  "@types/git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/bb9d6c795b8d00f9d7debae8ce1810a05d9c9c65/release/git-command-helper.tgz",
+  "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo.tgz",
+  "hexo": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo.tgz",
+  "hexo-server": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo-server.tgz",
+  "hexo-asset-link": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo-asset-link.tgz",
+  "hexo-front-matter": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo-front-matter.tgz",
+  "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo-log.tgz",
+  "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/hexo-util.tgz",
+  "warehouse": "https://github.com/dimaslanjaka/hexo/raw/62efb19b69dcb3b771e0d607eb77f573d97c2a77/releases/warehouse.tgz"
+}
