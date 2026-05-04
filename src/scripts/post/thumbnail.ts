@@ -51,7 +51,7 @@ function getImages(page: Partial<HexoPageSchema | HexoLocalsData>) {
   return final;
 }
 
-hexo.extend.helper.register("getImages", getImages);
+hexo.extend.helper.register("getImages", getImages as unknown as any);
 
 /**
  * get thumbnail url
@@ -70,4 +70,4 @@ hexo.extend.helper.register("getThumbnail", function (page) {
   const result = getThumbnail(page);
   if (result) return result;
   return "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";
-});
+} as unknown as any);

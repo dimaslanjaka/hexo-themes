@@ -15,4 +15,4 @@ export function fix_url_for(source: string) {
   return source;
 }
 
-hexo.extend.helper.register("urlFor", fix_url_for);
+hexo.extend.helper.register("urlFor", fix_url_for as unknown as any);

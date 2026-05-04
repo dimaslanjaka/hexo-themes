@@ -29,4 +29,4 @@ export function getKeywords(page: HexoPageSchema) {
   return results;
 }
 
-hexo.extend.helper.register("getKeywords", getKeywords);
+hexo.extend.helper.register("getKeywords", getKeywords as unknown as any);

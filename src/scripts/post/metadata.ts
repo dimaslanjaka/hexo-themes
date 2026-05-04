@@ -217,4 +217,4 @@ export const metadataHelper = (page: HexoPageSchema) => {
   return page; // Return the original page for now
 };
 
-hexo.extend.helper.register("pageInfo", metadataHelper);
+hexo.extend.helper.register("pageInfo", metadataHelper as unknown as any);

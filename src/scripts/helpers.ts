@@ -10,7 +10,7 @@ import { hexoThemesCache } from "./utils/cache";
 hexo.extend.helper.register("getPosts", function () {
   const { page } = this as unknown as { page: { posts: any[] } };
   return page.posts;
-});
+} as unknown as any);
 
 // Register helper to get the language setting
 hexo.extend.helper.register("getLanguage", function (page: any): string {
@@ -32,7 +32,7 @@ hexo.extend.helper.register("getLanguage", function (page: any): string {
     return lang[0];
   }
   return "en";
-});
+} as unknown as any);
 
 // Register helper to get posts by label
 hexo.extend.helper.register(
@@ -68,7 +68,7 @@ hexo.extend.helper.register(
           );
         });
     });
-  }
+  } as unknown as any
 );
 
 // Register JSON stringification helper
@@ -78,17 +78,17 @@ hexo.extend.helper.register("json_stringify", function (value: any, spaces?: num
   }
   const jsonString = JSON.stringify(value, null, spaces).replace(/</g, "\\u003c");
   return new nunjucks.runtime.SafeString(jsonString);
-});
+} as unknown as any);
 
 // Register helper to get object keys
 hexo.extend.helper.register("object_keys", function (obj: Record<string, any>) {
   return Object.keys(obj);
-});
+} as unknown as any);
 
 // Register helper to check if an object is an array
 hexo.extend.helper.register("is_array", function (obj: any) {
   return Array.isArray(obj);
-});
+} as unknown as any);
 
 /**
  * Fix URL by removing double slashes and optionally decoding it.
@@ -102,14 +102,14 @@ function fixURL(url: string, options: { decode?: boolean } = {}): string {
   return fixed;
 }
 
-hexo.extend.helper.register("fixURL", fixURL);
+hexo.extend.helper.register("fixURL", fixURL as unknown as any);
 
 // Register helper for canonical URL
 hexo.extend.helper.register("canonical_url", function (lang?: string) {
   let path = this.page.path;
   if (lang && lang !== "en") path = lang + "/" + path;
   return hutil.full_url_for(path);
-});
+} as unknown as any);
 
 // Register helper for URL with language
 hexo.extend.helper.register("url_for_lang", function (path: string) {
@@ -119,19 +119,19 @@ hexo.extend.helper.register("url_for_lang", function (path: string) {
   if (lang !== "en" && url[0] === "/") url = "/" + lang + url;
 
   return url;
-});
+} as unknown as any);
 
 // Register helper to get the name of the language
 hexo.extend.helper.register("lang_name", function (lang: string) {
   const data = (this as any).site.data.languages[lang];
   return data.name || data;
-});
+} as unknown as any);
 
 // Register filter to modify template locals
 hexo.extend.filter.register("template_locals", function (locals: any) {
   const { page } = locals;
   if (page.archive) page.title = "Archive";
-});
+} as unknown as any);
 
 // Register helper to parse table of contents
 hexo.extend.helper.register("parseToc", function (content: string) {
@@ -173,4 +173,4 @@ hexo.extend.helper.register("parseToc", function (content: string) {
     return result;
   }
   return [{ error: "Cannot parse table of content" }];
-});
+} as unknown as any);

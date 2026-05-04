@@ -14,4 +14,4 @@ hexo.extend.helper.register("next_paginator", function () {
     .replace('rel="prev"', `rel="prev" title="${prev}" aria-label="${prev}"`)
     .replace('rel="next"', `rel="next" title="${next}" aria-label="${next}"`);
   return paginator;
-});
+} as unknown as any);

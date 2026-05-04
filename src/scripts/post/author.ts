@@ -19,4 +19,4 @@ hexo.extend.helper.register("getAuthorName", function (author, fallback) {
   const resultFallback = getAuthorName(fallback);
   if (resultFallback) return resultFallback;
   return getAuthorName(hexo.config) || "Unknown";
-});
+} as unknown as any);

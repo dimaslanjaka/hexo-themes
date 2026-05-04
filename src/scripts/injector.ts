@@ -7,7 +7,7 @@ hexo.extend.helper.register("injectHeadHtml", function () {
     return fs.readFileSync(file, "utf-8");
   }
   return "";
-});
+} as unknown as any);
 
 hexo.extend.helper.register("injectBodyHtml", function () {
   const file = path.join(hexo.base_dir, "source/_data/hexo-theme-flowbite/body.html");
@@ -15,7 +15,7 @@ hexo.extend.helper.register("injectBodyHtml", function () {
     return fs.readFileSync(file, "utf-8");
   }
   return "";
-});
+} as unknown as any);
 
 hexo.extend.helper.register("injectBeforePostHtml", function () {
   const file = path.join(hexo.base_dir, "source/_data/hexo-theme-flowbite/before-post.html");
@@ -23,7 +23,7 @@ hexo.extend.helper.register("injectBeforePostHtml", function () {
     return fs.readFileSync(file, "utf-8");
   }
   return "";
-});
+} as unknown as any);
 
 hexo.extend.helper.register("injectAfterPostHtml", function () {
   const file = path.join(hexo.base_dir, "source/_data/hexo-theme-flowbite/after-post.html");
@@ -31,7 +31,7 @@ hexo.extend.helper.register("injectAfterPostHtml", function () {
     return fs.readFileSync(file, "utf-8");
   }
   return "";
-});
+} as unknown as any);
 
 hexo.extend.helper.register("injectAsideHtml", function () {
   const file = path.join(hexo.base_dir, "source/_data/hexo-theme-flowbite/aside.html");
@@ -39,4 +39,4 @@ hexo.extend.helper.register("injectAsideHtml", function () {
     return fs.readFileSync(file, "utf-8");
   }
   return "";
-});
+} as unknown as any);

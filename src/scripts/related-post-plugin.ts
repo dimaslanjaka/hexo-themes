@@ -146,4 +146,4 @@ hexo.extend.helper.register("list_related_posts", function (post: any, options: 
   } else {
     return listRelatedPosts(post, options, hexo);
   }
-});
+} as unknown as any);

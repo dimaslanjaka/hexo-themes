@@ -6,4 +6,4 @@ function chunkArray(array: any[], size: number) {
   return result;
 }
 
-hexo.extend.helper.register("chunkArray", chunkArray);
+hexo.extend.helper.register("chunkArray", chunkArray as unknown as any);
