@@ -14,8 +14,17 @@
     "moduleResolution": "Node",
     "outDir": "tmp/hexo-themes-dist",
     "esModuleInterop": true,
-    "typeRoots": ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
-    "lib": ["ES2015", "ES6", "ES5", "ES2022"],
+    "typeRoots": [
+      "./src/types",
+      "./node_modules/@types",
+      "./node_modules/nodejs-package-types/typings"
+    ],
+    "lib": [
+      "ES2015",
+      "ES6",
+      "ES5",
+      "ES2022"
+    ],
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "checkJs": false,
