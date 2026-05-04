@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-import { StoreFunction } from "hexo/dist/types";
 import { md5 } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "./cache";
@@ -66,4 +65,4 @@ export function htmlSeoFixer(content: string, data: HexoPageSchema) {
   return result;
 }
 
-hexo.extend.filter.register("after_render:html", htmlSeoFixer as StoreFunction);
+hexo.extend.filter.register("after_render:html", htmlSeoFixer);
