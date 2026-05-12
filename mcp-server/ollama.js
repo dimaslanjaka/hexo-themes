@@ -43,7 +43,7 @@ function sendError(id, code, message, data) {
 // ----------------------
 // MODEL CONFIG
 // ----------------------
-const MODEL = process.env.OLLAMA_MODEL || "deepseek-r1:latest";
+const MODEL = process.env.OLLAMA_MODEL || "gemma4:31b-cloud";
 
 // ----------------------
 // TOOL IMPLEMENTATION
