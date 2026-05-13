@@ -36,7 +36,7 @@
     "cheerio": "^1.0.0",
     "deepmerge-ts": "^7.1.1",
     "fs-extra": "^11.3.5",
-    "hexo": "*",
+    "hexo": "^8.1.2",
     "hexo-asset-link": "^2.2.3",
     "hexo-cli": "^4.3.2",
     "hexo-front-matter": "^4.2.1",
@@ -45,7 +45,9 @@
     "hexo-generator-index": "^4.0.0",
     "hexo-generator-tag": "^2.0.0",
     "hexo-log": "^4.1.0",
-    "hexo-renderers": "*",
+    "hexo-renderer-nunjucks": "^2.0.0",
+    "hexo-renderer-pug": "^3.0.0",
+    "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "*",
     "hexo-shortcodes": "^1.2.4",
     "hexo-theme-flowbite": "*",
@@ -104,7 +106,7 @@
     "typescript": "^5.8.3"
   },
   "hexo": {
-    "version": "8.1.1"
+    "version": "8.1.2"
   },
   "resolutions": {
     "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/79d642477766944815c32a2d09355d80844140f2/releases/hexo.tgz",
@@ -127,7 +129,8 @@
     "sbg-cli": "https://github.com/dimaslanjaka/static-blog-generator/raw/2dd6679e9bf12ae7d97c7cd0d37d8aa18cb8d054/packages/sbg-cli/release/sbg-cli.tgz",
     "sbg-server": "https://github.com/dimaslanjaka/static-blog-generator/raw/2dd6679e9bf12ae7d97c7cd0d37d8aa18cb8d054/packages/sbg-server/release/sbg-server.tgz",
     "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/3605a27eb43ca84e4d25c885af87626ad33b1816/packages/sbg-utility/release/sbg-utility.tgz",
-    "static-blog-generator": "https://github.com/dimaslanjaka/static-blog-generator/raw/2dd6679e9bf12ae7d97c7cd0d37d8aa18cb8d054/packages/static-blog-generator/release/static-blog-generator.tgz"
+    "static-blog-generator": "https://github.com/dimaslanjaka/static-blog-generator/raw/2dd6679e9bf12ae7d97c7cd0d37d8aa18cb8d054/packages/static-blog-generator/release/static-blog-generator.tgz",
+    "hexo": "8"
   },
   "workspaces": [
     "themes/hexo-theme-flowbite"
