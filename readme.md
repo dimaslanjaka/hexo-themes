@@ -5,7 +5,15 @@ My HexoJS Theme Collections
 | :--- | :--- |
 | [hexo-theme-flowbite](./themes/hexo-theme-flowbite/) | Hexo theme build using **tailwind** and **flowbite** |
 
-### How to install
+### How to install this repo locally
+
+```bash
+touch yarn.lock
+yarn install
+yarn serve
+```
+
+### How to install Theme
 
 - download `tgz` file from [Relase Folder](./releases/)
 - extract `<tgz>/package/<all files here>` file to `<hexo project>/themes/hexo-theme-name/<here>`
