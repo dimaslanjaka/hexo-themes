@@ -22,7 +22,8 @@
     "prepare": "husky && yarn workspaces foreach --worktree run prepare",
     "pack": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config pack.ts",
     "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && node bin/deploy",
-    "start:flowbite": "node bin/switch-theme flowbite && npm run start"
+    "start:flowbite": "node bin/switch-theme flowbite && npm run start",
+    "serve": "hexo server --ssl"
   },
   "keywords": [
     "hexo",
