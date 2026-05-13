@@ -1,19 +1,20 @@
 "use strict";
 
 import cheerio from "cheerio";
+import Hexo from "hexo";
 import * as hutil from "hexo-util";
 import nunjucks from "nunjucks";
 import { md5 } from "sbg-utility";
 import { hexoThemesCache } from "./utils/cache";
 
 // Register helper to get posts from the current page
-hexo.extend.helper.register("getPosts", function () {
+hexo.extend.helper.register("getPosts", function (this: Hexo) {
   const { page } = this as unknown as { page: { posts: any[] } };
   return page.posts;
 } as unknown as any);
 
 // Register helper to get the language setting
-hexo.extend.helper.register("getLanguage", function (page: any): string {
+hexo.extend.helper.register("getLanguage", function (this: Hexo, page: any): string {
   let lang: string | undefined;
 
   if ("lang" in page) {
@@ -43,8 +44,8 @@ hexo.extend.helper.register(
    * @param filternames - Array of filter names.
    * @returns Array of posts matching the filters.
    */
-  function (by: "tags" | "categories", filternames: string[]): Record<string, string>[] {
-    const hexo = this as any;
+  function (this: Hexo, by: "tags" | "categories", filternames: string[]): Record<string, string>[] {
+    const hexo = this as unknown as Record<string, any>;
     const data = hexo.site[by].data;
 
     return filternames.flatMap((filtername) => {
@@ -105,16 +106,18 @@ function fixURL(url: string, options: { decode?: boolean } = {}): string {
 hexo.extend.helper.register("fixURL", fixURL as unknown as any);
 
 // Register helper for canonical URL
-hexo.extend.helper.register("canonical_url", function (lang?: string) {
-  let path = this.page.path;
+hexo.extend.helper.register("canonical_url", function (this: Hexo, lang?: string) {
+  const hexo = this as unknown as Record<string, any>;
+  let path = hexo.page.path;
   if (lang && lang !== "en") path = lang + "/" + path;
   return hutil.full_url_for(path);
 } as unknown as any);
 
 // Register helper for URL with language
-hexo.extend.helper.register("url_for_lang", function (path: string) {
-  const lang = this.page.lang;
-  let url = this.url_for(path);
+hexo.extend.helper.register("url_for_lang", function (this: Hexo, path: string) {
+  const hexo = this as unknown as Record<string, any>;
+  const lang = hexo.page.lang;
+  let url = hexo.url_for(path);
 
   if (lang !== "en" && url[0] === "/") url = "/" + lang + url;
 
@@ -122,19 +125,19 @@ hexo.extend.helper.register("url_for_lang", function (path: string) {
 } as unknown as any);
 
 // Register helper to get the name of the language
-hexo.extend.helper.register("lang_name", function (lang: string) {
+hexo.extend.helper.register("lang_name", function (this: Hexo, lang: string) {
   const data = (this as any).site.data.languages[lang];
   return data.name || data;
 } as unknown as any);
 
 // Register filter to modify template locals
-hexo.extend.filter.register("template_locals", function (locals: any) {
+hexo.extend.filter.register("template_locals", function (this: Hexo, locals: any) {
   const { page } = locals;
   if (page.archive) page.title = "Archive";
 } as unknown as any);
 
 // Register helper to parse table of contents
-hexo.extend.helper.register("parseToc", function (content: string) {
+hexo.extend.helper.register("parseToc", function (this: Hexo, content: string) {
   if (typeof content === "string") {
     const parseTOC = ($: cheerio.CheerioAPI) => {
       const toc: { title: string; link: string; subItems: any[] }[] = [];
@@ -144,7 +147,13 @@ hexo.extend.helper.register("parseToc", function (content: string) {
         const heading = $(element);
         const title = heading.text().trim();
         const link = `#${title.toLowerCase().replace(/\s+/g, "-")}`;
-        const level = parseInt(heading.prop("tagName").charAt(1), 10);
+
+        const tagName = heading.prop("tagName");
+
+        // Skip invalid headings
+        if (!tagName) return;
+
+        const level = parseInt(tagName.charAt(1), 10);
 
         const item = { title, link, subItems: [] };
 
@@ -163,14 +172,19 @@ hexo.extend.helper.register("parseToc", function (content: string) {
 
       return toc;
     };
+
     const cacheKey = "parseToc-" + md5(content);
     const cacheValue = hexoThemesCache.get<ReturnType<typeof parseTOC>>(cacheKey, []);
+
     if (cacheValue.length > 0) return cacheValue;
 
     const $ = cheerio.load(content);
     const result = parseTOC($);
+
     hexoThemesCache.set(cacheKey, result);
+
     return result;
   }
+
   return [{ error: "Cannot parse table of content" }];
 } as unknown as any);
