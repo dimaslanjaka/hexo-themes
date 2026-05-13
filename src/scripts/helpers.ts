@@ -1,7 +1,7 @@
 "use strict";
 
 import cheerio from "cheerio";
-import hutil from "hexo-util";
+import * as hutil from "hexo-util";
 import nunjucks from "nunjucks";
 import { md5 } from "sbg-utility";
 import { hexoThemesCache } from "./utils/cache";
