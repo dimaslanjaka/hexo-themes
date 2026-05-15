@@ -1,6 +1,8 @@
 "use strict";
 
-hexo.extend.helper.register("next_paginator", function () {
+import Hexo from "hexo";
+
+hexo.extend.helper.register("next_paginator", function (this: Hexo) {
   const { __, paginator: hexoPaginator } = this as any;
   const prev = __("accessibility.prev_page");
   const next = __("accessibility.next_page");

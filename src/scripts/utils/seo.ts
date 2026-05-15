@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { md5 } from "sbg-utility";
+import { isEmpty, md5 } from "sbg-utility";
 import { HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "./cache";
 
@@ -55,8 +55,8 @@ export function fixImages($: ReturnType<typeof cheerio.load>, data: HexoPageSche
  */
 export function htmlSeoFixer(content: string, data: HexoPageSchema) {
   const cacheKey = "seo-" + md5(content);
-  const cacheValue = hexoThemesCache.get<string>(cacheKey, null);
-  if (cacheValue) return cacheValue;
+  const cacheValue = hexoThemesCache.get<string>(cacheKey, "");
+  if (!isEmpty(cacheValue)) return cacheValue;
   let $ = cheerio.load(content);
   $ = fixAnchor($, data);
   $ = fixImages($, data);

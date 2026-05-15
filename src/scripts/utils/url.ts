@@ -2,7 +2,7 @@ import Hexo from "hexo";
 import { url_for } from "hexo-util";
 import * as utility from "sbg-utility";
 
-export function fix_url_for(source: string) {
+export function fix_url_for(this: Hexo, source: string) {
   const instance: Hexo = this instanceof Hexo ? this : hexo;
   const { root = null } = instance.config;
   // skip hash source or global protocol url

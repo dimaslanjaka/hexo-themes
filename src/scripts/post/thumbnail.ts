@@ -1,8 +1,7 @@
 import { load } from "cheerio";
-import { HexoLocalsData } from "hexo/dist/hexo/locals-d";
 import _ from "lodash";
 import { array_random, md5 } from "sbg-utility";
-import { HexoPageSchema } from "../../types/post";
+import { HexoLocalsData, HexoPageSchema } from "../../types/post";
 import { hexoThemesCache } from "../utils/cache";
 
 /**
@@ -47,7 +46,18 @@ function getImages(page: Partial<HexoPageSchema | HexoLocalsData>) {
       results.push(...cacheValue);
     }
   }
-  const final = _.filter(_.uniq(results), _.identity).filter((str) => !str.includes("no-image-svgrepo-com"));
+  const final = _.filter(_.uniq(results), _.identity).filter((str) => {
+    if (typeof str !== "string") {
+      if (typeof str.toString === "function") {
+        str = str.toString();
+      }
+    }
+    if (typeof str === "string") {
+      return !str.includes("no-image-svgrepo-com");
+    }
+
+    return false;
+  });
   return final;
 }
 
@@ -66,7 +76,7 @@ function getThumbnail(page: HexoLocalsData) {
   return array_random(getImages(page));
 }
 
-hexo.extend.helper.register("getThumbnail", function (page) {
+hexo.extend.helper.register("getThumbnail", function (page: Parameters<typeof getThumbnail>[0]) {
   const result = getThumbnail(page);
   if (result) return result;
   return "https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg";

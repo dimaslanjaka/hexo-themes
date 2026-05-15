@@ -138,7 +138,7 @@ function listRelatedPosts(_post: any, options?: any, _hexo?: any): any[] {
   return postList;
 }
 
-hexo.extend.helper.register("list_related_posts", function (post: any, options: any, hexoInstance: any) {
+hexo.extend.helper.register("list_related_posts", function (this: Hexo, post: any, options: any, hexoInstance: any) {
   if (typeof hexoInstance !== "undefined") {
     return listRelatedPosts(post, options, hexoInstance);
   } else if (this instanceof Hexo) {

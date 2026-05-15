@@ -28,9 +28,9 @@ function getCachePath(page: HexoPageSchema) {
   if (page && "full_source" in page && page.full_source) md5FileSync(page.full_source);
   if (hash === "empty-hash") {
     if (page.content) {
-      hash = md5(page.content);
+      hash = md5(page.content)!;
     } else if (page._content) {
-      hash = md5(page._content);
+      hash = md5(page._content)!;
     }
   }
   const result = path.join(
@@ -79,7 +79,7 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
       await fs.promises.writeFile(cachePath, jsonStringifyWithCircularRefs(result));
       callback(null, { result, cachePath });
     } catch (error) {
-      hexo.log.error("fail save post info", error.message);
+      hexo.log.error("fail save post info", (error as Error).message);
       if (fs.existsSync(cachePath)) await fs.promises.rm(cachePath, { force: true, recursive: true });
       callback(error as Error, null);
     }
@@ -103,7 +103,7 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
             if (!cacheValue.metadata) cacheValue.metadata = {} as any;
             if (!parse.metadata.description) {
               parse.metadata.description = $.text().slice(0, 150);
-              cacheValue.metadata.description = parse.metadata.description;
+              cacheValue.metadata!.description = parse.metadata.description;
             }
 
             if (!parse.metadata.thumbnail) {
@@ -114,7 +114,7 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
               if (imgTags.length > 0) {
                 const randomIndex = Math.floor(Math.random() * imgTags.length);
                 parse.metadata.thumbnail = $(imgTags[randomIndex]).attr("src");
-                cacheValue.metadata.thumbnail = parse.metadata.thumbnail;
+                cacheValue.metadata!.thumbnail = parse.metadata.thumbnail;
               }
             }
             hexoThemesCache.set(cacheKey, cacheValue);
@@ -131,14 +131,14 @@ export async function metadataProcess(page: HexoPageSchema, callback: Preprocess
             await fs.promises.writeFile(cachePath, jsonStringifyWithCircularRefs(result));
             callback(null, { result, cachePath });
           } catch (error) {
-            hexo.log.error("fail save post info", error.message);
+            hexo.log.error("fail save post info", (error as Error).message);
             if (fs.existsSync(cachePath)) await fs.promises.rm(cachePath, { force: true, recursive: true });
             callback(error as Error, null);
           }
         }
       }
     } catch (err) {
-      callback(new Error("fallback metadata failed: " + err.message), null);
+      callback(new Error("fallback metadata failed: " + (err as Error).message), null);
     }
   }
 }
@@ -211,7 +211,7 @@ export const metadataHelper = (page: HexoPageSchema) => {
         }
       }
     } catch (error) {
-      hexo.log.error("fail load post info", error.message);
+      hexo.log.error("fail load post info", (error as Error).message);
     }
   }
   return page; // Return the original page for now

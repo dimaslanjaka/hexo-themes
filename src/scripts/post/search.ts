@@ -65,7 +65,7 @@ async function scheduleProcessing() {
     try {
       await currentOperation(); // Execute the operation
     } catch (error) {
-      hexo.log.error("Error saving search data:", error.message);
+      hexo.log.error("Error saving search data:", (error as Error).message);
     } finally {
       isProcessing = false; // Mark processing as complete
       scheduleProcessing(); // Continue to the next item in the queue

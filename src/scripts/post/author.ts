@@ -1,9 +1,11 @@
+import { HexoConfig } from "sbg-utility";
+
 /**
  * get author name
  * @param author
  * @returns
  */
-function getAuthorName(author: Partial<string | Record<string, any> | import("hexo/dist/hexo/index-d").HexoConfig>) {
+function getAuthorName(author: Partial<string | Record<string, any> | HexoConfig>) {
   if (typeof author === "string") return author;
   if (author && typeof author === "object" && !Array.isArray(author)) {
     if (typeof author.name === "string") return author.name;
@@ -13,7 +15,10 @@ function getAuthorName(author: Partial<string | Record<string, any> | import("he
   }
 }
 
-hexo.extend.helper.register("getAuthorName", function (author, fallback) {
+hexo.extend.helper.register("getAuthorName", function (
+  author: Parameters<typeof getAuthorName>[0],
+  fallback: Parameters<typeof getAuthorName>[0]
+) {
   const resultAuthor = getAuthorName(author);
   if (resultAuthor) return resultAuthor;
   const resultFallback = getAuthorName(fallback);

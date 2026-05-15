@@ -19,7 +19,7 @@ hexo.extend.filter.register("after_clean", function () {
     try {
       if (fs.existsSync(folder)) fs.rmSync(folder, { recursive: true, force: true });
     } catch (error) {
-      hexo.log.warn("fail delete " + folder, error.message);
+      hexo.log.warn("fail delete " + folder, (error as Error).message);
     }
   }
 });
