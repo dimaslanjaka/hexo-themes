@@ -13,6 +13,7 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
+    "ignoreDeprecations": "6.0",
     "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
