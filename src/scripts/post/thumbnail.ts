@@ -47,9 +47,10 @@ function getImages(page: Partial<HexoPageSchema | HexoLocalsData>) {
     }
   }
   const final = _.filter(_.uniq(results), _.identity).filter((str) => {
-    if (typeof str !== "string") {
-      if (typeof str.toString === "function") {
-        str = str.toString();
+    if (typeof str === "object") {
+      if (!str) return false;
+      if (typeof (str as any).toString === "function") {
+        str = (str as any).toString();
       }
     }
     if (typeof str === "string") {
