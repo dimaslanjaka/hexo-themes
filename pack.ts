@@ -10,14 +10,21 @@ const __dirname = path.dirname(__filename);
 const argv = minimist(process.argv.slice(2));
 
 const parseWorkspaces = spawnAsync("yarn", ["workspaces", "list", "--no-private", "--json"], {
-  cwd: process.cwd()
+  cwd: __dirname
 }).then((o) =>
   o.stdout
     .split(/\r?\n/gm)
     .filter((str) => str.length > 4)
     .map((str) => {
       const parse: { location: string; name: string } = JSON.parse(str.trim());
-      parse.location = path.join(__dirname, parse.location);
+      const paths = [
+        path.join(__dirname, "..", parse.location),
+        path.join(__dirname, parse.location),
+        path.join(process.cwd(), parse.location)
+      ]
+        .filter((p) => fs.existsSync(p))
+        .map((p) => path.resolve(p));
+      parse.location = paths[0] || parse.location;
       return parse;
     })
     .filter((o) => fs.existsSync(o.location))
