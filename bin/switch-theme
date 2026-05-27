@@ -1,68 +1,7 @@
-#!/usr/bin/env node
+#!/usr/bin/env bash
 
-import fs from "fs-extra";
-import minimist from "minimist";
-import { marked } from "marked";
-import { parse, stringify } from "yaml";
-import { spawnSync } from "cross-spawn";
+set -euo pipefail
 
-const argv = minimist(process.argv.slice(2));
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+node "$script_dir/switch-theme.mjs" "$@"
 
-if (!argv._[0]) {
-  console.error("Usage: switch-theme <theme-name>");
-  console.error("Example: switch-theme butterfly");
-  process.exit(1);
-}
-
-const themeName = argv._[0].includes("hexo-theme") ? argv._[0] : "hexo-theme-" + argv._[0];
-const baseConfig = parse(fs.readFileSync("_config.base.yml", "utf-8"));
-
-console.log("Switching theme to", themeName);
-
-const themeBaseConfigFile = `_config.base.${themeName}.yml`;
-const currentThemeFile = "tmp/last_theme_name.txt";
-let previousTheme = null;
-
-// Ensure the `tmp` directory exists
-fs.ensureDirSync("tmp");
-
-// Check if the previous theme exists
-if (fs.existsSync(currentThemeFile)) {
-  previousTheme = fs.readFileSync(currentThemeFile, "utf-8").trim();
-}
-
-if (fs.existsSync(themeBaseConfigFile)) {
-  const themeConfig = parse(fs.readFileSync(themeBaseConfigFile, "utf-8"));
-  const config = Object.assign(baseConfig, themeConfig);
-  config.theme = themeName; // Update theme
-  if (!config.renderers) config.renderers = {};
-  // --renderers=nunjucks,markdown-it
-  if (argv.renderers) {
-    config.renderers.engines = argv.renderers.split(",");
-    console.log("renderers", config.renderers.engines, "applied");
-  }
-  fs.writeFileSync("_config.yml", stringify(config));
-}
-
-const readmeContent = fs.readFileSync(`themes/${themeName}/readme.md`, "utf-8");
-const htmlContent = marked(readmeContent);
-fs.writeFileSync(
-  "source/index.md",
-  ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", htmlContent].join("\n")
-);
-
-// Copy custom layouts into active theme directory
-spawnSync("node", ["_layout-loader.cjs"], { stdio: "inherit" });
-
-// If the theme has changed, update config and perform hexo clean
-if (previousTheme !== themeName) {
-  console.log("Theme has changed. Cleaning Hexo...");
-
-  // Run hexo clean command
-  spawnSync("hexo", ["clean"], { stdio: "inherit" });
-
-  // Update current theme file
-  fs.writeFileSync(currentThemeFile, themeName);
-} else {
-  console.log("Theme has not changed. Skipping Hexo clean.");
-}
