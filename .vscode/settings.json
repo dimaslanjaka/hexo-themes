@@ -186,11 +186,6 @@
   "editor.formatOnSave": false,
   "editor.tabSize": 2,
   "files.eol": "\n",
-  "files.exclude": {
-    "**/node_modules": true,
-    "**/vendor": true,
-    "**/db.json": true
-  },
   "code-runner.executorMap": {
     "typescriptreact": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config --expose-gc",
     "javascript": "node --expose-gc --require dotenv/config",
