@@ -62,15 +62,6 @@ async function configLoader() {
   });
 }
 
-async function findExistingPath(candidates) {
-  for (const candidate of [...new Set(candidates)]) {
-    if (await fs.pathExists(candidate)) {
-      return candidate;
-    }
-  }
-  return null;
-}
-
 async function main() {
   try {
     await configLoader();
