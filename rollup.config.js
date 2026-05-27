@@ -38,6 +38,7 @@ const deps = Array.from(
 const baseTsCompilerOptions = {
   lib: ["DOM", "DOM.Iterable", "ES2020"],
   rootDir: "src",
+  moduleResolution: "bundler",
   typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
   allowSyntheticDefaultImports: true,
   esModuleInterop: true
@@ -64,56 +65,72 @@ const sharedPlugins = [
   commonjs()
 ];
 
+const flowbiteHelperInput = fs.existsSync(path.join(__dirname, "tmp/tsc/src/scripts/index.js"))
+  ? "tmp/tsc/src/scripts/index.js"
+  : "src/scripts/index.ts";
+
+const flowbiteHelperPlugins = flowbiteHelperInput.endsWith(".ts")
+  ? [createTsPlugin(), ...sharedPlugins]
+  : [...sharedPlugins];
+
 /**
  * @type {import("rollup").RollupOptions}
  */
 const hexoThemeFlowbiteHelper = {
-  input: fs.existsSync(path.join(__dirname, "tmp/tsc/src/scripts/index.js"))
-    ? "tmp/tsc/src/scripts/index.js"
-    : "src/scripts/index.ts",
+  input: flowbiteHelperInput,
   output: {
     file: "themes/hexo-theme-flowbite/scripts/helper.js",
     format: "cjs",
     sourcemap: false
   },
-  plugins: [createTsPlugin(), ...sharedPlugins],
+  plugins: flowbiteHelperPlugins,
   external: deps
 };
+
+const flowbiteCliInput = fs.existsSync(path.join(__dirname, "tmp/tsc/src/cli/hexo-theme-flowbite.js"))
+  ? "tmp/tsc/src/cli/hexo-theme-flowbite.js"
+  : "src/cli/hexo-theme-flowbite.ts";
+
+const flowbiteCliPlugins = flowbiteCliInput.endsWith(".ts") ? [createTsPlugin(), ...sharedPlugins] : [...sharedPlugins];
 
 /**
  * @type {import("rollup").RollupOptions}
  */
 const hexoThemeFlowbiteCLI = {
-  input: fs.existsSync(path.join(__dirname, "tmp/tsc/src/cli/hexo-theme-flowbite.js"))
-    ? "tmp/tsc/src/cli/hexo-theme-flowbite.js"
-    : "src/cli/hexo-theme-flowbite.ts",
+  input: flowbiteCliInput,
   output: [
     { file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.cjs", format: "cjs" },
     { file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.mjs", format: "esm" }
   ],
-  plugins: [createTsPlugin(), ...sharedPlugins],
+  plugins: flowbiteCliPlugins,
   external: deps
 };
+
+const butterflyHelperInput = fs.existsSync(path.join(__dirname, "tmp/tsc/src/scripts/hexo-theme-butterfly.js"))
+  ? "tmp/tsc/src/scripts/hexo-theme-butterfly.js"
+  : "src/scripts/hexo-theme-butterfly.ts";
+
+const butterflyHelperPlugins = butterflyHelperInput.endsWith(".ts")
+  ? [
+      createTsPlugin({
+        allowJs: true,
+        checkJs: false
+      }),
+      ...sharedPlugins
+    ]
+  : [...sharedPlugins];
 
 /**
  * @type {import("rollup").RollupOptions}
  */
 const hexoThemeButterflyHelper = {
-  input: fs.existsSync(path.join(__dirname, "tmp/tsc/src/scripts/hexo-theme-butterfly.js"))
-    ? "tmp/tsc/src/scripts/hexo-theme-butterfly.js"
-    : "src/scripts/hexo-theme-butterfly.ts",
+  input: butterflyHelperInput,
   output: {
     file: "themes/hexo-theme-butterfly/scripts/helper.js",
     format: "cjs",
     sourcemap: false
   },
-  plugins: [
-    createTsPlugin({
-      allowJs: true,
-      checkJs: false
-    }),
-    ...sharedPlugins
-  ],
+  plugins: butterflyHelperPlugins,
   external: deps
 };
 
