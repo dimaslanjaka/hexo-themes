@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "build:scripts": "tsc -p tsconfig.json --outDir tmp/tsc && rollup -c",
-    "build:production": "yarn workspaces foreach --worktree --no-private run build",
+    "build:flowbite": "yarn workspace hexo-theme-flowbite run build",
     "build": "run-s \"build:**\"",
     "clean:post": "rimraf source/_posts && git restore source/_posts",
     "clean": "npm run site:clean && npm run clean:post && rimraf tmp",
