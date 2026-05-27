@@ -8,6 +8,7 @@ on:
       - "themes/**/*"
       - "plugins/**/*"
       - ".github/workflows/*.yml"
+      - "bin/**/*"
   workflow_dispatch:
   workflow_call:
     secrets:
@@ -16,6 +17,7 @@ on:
 
 concurrency:
   group: deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
