@@ -25,10 +25,7 @@
       "icon": "terminal-powershell"
     },
     "Command Prompt": {
-      "path": [
-        "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
-      ],
+      "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
       "args": [],
       "icon": "terminal-cmd"
     },
@@ -37,31 +34,19 @@
     },
     "Cygwin": {
       "path": "C:\\cygwin64\\bin\\bash.exe",
-      "args": [
-        "--login",
-        "-i"
-      ],
+      "args": ["--login", "-i"],
       "env": {
         "CHERE_INVOKING": "1"
       }
     },
     "Short PowerShell": {
       "source": "PowerShell",
-      "args": [
-        "-NoExit",
-        "-Command",
-        "function prompt { \"[$((Get-Item .).Name)]> \" }"
-      ],
+      "args": ["-NoExit", "-Command", "function prompt { \"[$((Get-Item .).Name)]> \" }"],
       "icon": "terminal-powershell"
     },
     "Short Command Prompt": {
-      "path": [
-        "${env:windir}\\System32\\cmd.exe"
-      ],
-      "args": [
-        "/k",
-        "prompt $p$_$g"
-      ],
+      "path": ["${env:windir}\\System32\\cmd.exe"],
+      "args": ["/k", "prompt $p$_$g"],
       "icon": "terminal-cmd"
     }
   },
@@ -262,5 +247,9 @@
     "glimmer-ts",
     "svelte",
     "nunjucks"
-  ]
+  ],
+  "scss.format.enable": false,
+  "scss.lint.argumentsInColorFunction": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore"
 }

@@ -1,10 +1,5 @@
 @import "flowbite/dist/flowbite.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind screens;
-
+@import "tailwindcss";
 @import "./pre-code-button.scss";
 @import "./highlight/github-dark-dimmen.scss";
 @import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -332,7 +327,9 @@ img + figcaption,
 
   .masonry-item {
     // position: relative; // Required for absolute positioning of hover effect
-    @apply relative overflow-hidden rounded-lg;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
     min-height: 0;
     height: auto;
 

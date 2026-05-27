@@ -1,5 +1,5 @@
 const postcss = require("postcss");
-const tailwindcss = require("tailwindcss");
+const tailwindcss = require("@tailwindcss/postcss");
 const autoprefixer = require("autoprefixer");
 const importPlugin = require("postcss-import");
 const sass = require("sass");
