@@ -5,12 +5,13 @@ concurrency:
   cancel-in-progress: false
 
 on:
-  schedule:
-    - cron: "0 * * * *" # Schedule every hour
-  push:
-    branches:
-      - master
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Deploy Site
+      - Build Release
+    types:
+      - completed
   workflow_call:
     secrets:
       ACCESS_TOKEN:
@@ -19,6 +20,9 @@ on:
 jobs:
   clean-cache:
     runs-on: windows-latest
+    if: |
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     env:
       PIP_CACHE_DIR: "${{ github.workspace }}/project/tmp/pip"
       NUITKA_CACHE_DIR: "${{ github.workspace }}/project/tmp/nuitka-cache"
