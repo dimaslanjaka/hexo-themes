@@ -49,16 +49,13 @@ jobs:
           ref: gh-pages
           lfs: false
 
-      # ✅ Setup Node.js 22
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: yarn
           cache-dependency-path: "**/package.json"
 
-      # ✅ Enable Corepack only
-      # Uses Yarn version defined by packageManager or .yarnrc.yml
       - name: Enable Corepack
         run: |
           corepack enable
