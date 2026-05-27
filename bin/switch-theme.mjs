@@ -18,17 +18,6 @@ const baseConfig = parse(fs.readFileSync('_config.base.yml', 'utf-8'));
 console.log('Switching theme to', themeName);
 
 const themeBaseConfigFile = `_config.base.${themeName}.yml`;
-const currentThemeFile = 'tmp/last_theme_name.txt';
-let previousTheme = null;
-
-// Ensure the `tmp` directory exists
-fs.ensureDirSync('tmp');
-
-// Check if the previous theme exists
-if (fs.existsSync(currentThemeFile)) {
-  previousTheme = fs.readFileSync(currentThemeFile, 'utf-8').trim();
-}
-
 if (fs.existsSync(themeBaseConfigFile)) {
   const themeConfig = parse(fs.readFileSync(themeBaseConfigFile, 'utf-8'));
   const config = Object.assign(baseConfig, themeConfig);
@@ -54,15 +43,6 @@ spawnSync('npx', ['-y', '-p', '@babel/core', '-p', '@babel/node', 'babel-node', 
   stdio: 'inherit'
 });
 
-// If the theme has changed, update config and perform hexo clean
-if (previousTheme !== themeName) {
-  console.log('Theme has changed. Cleaning Hexo...');
-
-  // Run hexo clean command
-  spawnSync('hexo', ['clean'], { stdio: 'inherit' });
-
-  // Update current theme file
-  fs.writeFileSync(currentThemeFile, themeName);
-} else {
-  console.log('Theme has not changed. Skipping Hexo clean.');
-}
+// Always run hexo clean
+console.log('Cleaning Hexo cache...');
+spawnSync('hexo', ['clean'], { stdio: 'inherit' });
