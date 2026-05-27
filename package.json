@@ -20,7 +20,7 @@
     "pack": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config pack.ts",
     "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && node bin/deploy",
     "start:flowbite": "node bin/switch-theme flowbite && npm run start",
-    "serve": "run-c --exec \"node _pre-server.cjs\" --pattern=\"src/**/*.{ts,js,cjs,mjs}\" --ignore=\"**/*.d.ts\" && hexo server --ssl"
+    "serve": "hexo server --ssl"
   },
   "keywords": [
     "hexo",
@@ -46,12 +46,14 @@
     "hexo-generator-index": "^4.0.0",
     "hexo-generator-tag": "^2.0.0",
     "hexo-log": "^4.1.0",
+    "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-nunjucks": "^2.0.0",
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-shortcodes": "^1.2.4",
     "hexo-theme-flowbite": "*",
+    "hexo-theme-landscape": "^1.1.0",
     "hexo-util": "^4.0.0",
     "jquery": "^4.0.0",
     "jsonc-parser": "^3.3.1",

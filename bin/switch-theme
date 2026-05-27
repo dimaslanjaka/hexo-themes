@@ -51,6 +51,9 @@ fs.writeFileSync(
   ["---", `title: ${themeName}`, `description: HexoJS theme - ${themeName}`, "---", "", "", htmlContent].join("\n")
 );
 
+// Copy custom layouts into active theme directory
+spawnSync("node", ["_layout-loader.cjs"], { stdio: "inherit" });
+
 // If the theme has changed, update config and perform hexo clean
 if (previousTheme !== themeName) {
   console.log("Theme has changed. Cleaning Hexo...");
