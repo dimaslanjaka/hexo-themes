@@ -26,7 +26,11 @@
     "hexo",
     "themes"
   ],
-  "author": "",
+  "author": {
+    "name": "Dimas Lanjaka",
+    "email": "dimaslanjaka@gmail.com",
+    "url": "https://dimaslanjaka.github.io"
+  },
   "license": "MIT",
   "dependencies": {
     "axios": "^1.16.1",
@@ -38,14 +42,14 @@
     "hexo-cli": "^4.3.2",
     "hexo-front-matter": "^5.0.0",
     "hexo-generator-archive": "^2.0.0",
-    "hexo-generator-category": "*",
+    "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
     "hexo-generator-tag": "^2.0.0",
     "hexo-log": "^4.1.0",
     "hexo-renderer-nunjucks": "^2.0.0",
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
-    "hexo-server": "*",
+    "hexo-server": "^3.0.0",
     "hexo-shortcodes": "^1.2.4",
     "hexo-theme-flowbite": "*",
     "hexo-util": "^4.0.0",
@@ -62,7 +66,6 @@
     "static-blog-generator": "^3.0.1",
     "tar": "^7.5.15",
     "upath": "^3.0.7",
-    "warehouse": "*",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
@@ -113,7 +116,6 @@
     "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/87e0c2c3fbcd588fdcec75a59dbca31f9d913e4b/release/hexo-renderers.tgz",
     "hexo-seo": "https://github.com/dimaslanjaka/hexo-seo/raw/21e024b84538853c8b8521140530694d92d64b74/release/hexo-seo.tgz",
     "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/raw/2ed1250d701369b8235a02b9af834bbfc62644a0/release/hexo-shortcodes.tgz",
-    "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/65bbfe29d65b55320eb61bd263f16e1519c6c1b0/releases/hexo-util.tgz",
     "instant-indexing": "https://github.com/dimaslanjaka/static-blog-generator/raw/f221d11cdc32fa7dd001e5236f8c3f30387e62d2/packages/instant-indexing/release/instant-indexing.tgz",
     "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/7f4f9d5ec08ebcfde42affb517ea7c8e6a305534/release/markdown-it.tgz",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/d56ecc86038485977ce5648cbcc67cb34295bef7/release/nodejs-package-types.tgz",
