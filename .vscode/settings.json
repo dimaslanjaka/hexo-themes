@@ -227,7 +227,7 @@
   "npm.packageManager": "yarn",
   "git.enabled": true,
   "explorer.autoReveal": true,
-  "git.autofetch": true,
+  "git.autofetch": "all",
   "git.autorefresh": true,
   "git.autoStash": true,
   "yaml.schemas": {
