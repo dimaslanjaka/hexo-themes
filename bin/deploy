@@ -3,4 +3,4 @@
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-npx -y -p @babel/core -p @babel/node babel-node -- "$script_dir/deploy.cjs" "$@"#!/usr/bin/env bash
+npx -y -p @babel/core -p @babel/node babel-node -- "$script_dir/deploy.cjs" "$@"
