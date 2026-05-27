@@ -1,4 +1,3 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-npx lint-staged
-# git add package.json
+npx -y lint-staged

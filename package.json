@@ -16,7 +16,7 @@
     "site:clean": "hexo clean",
     "update:ncu": "npx npm-check-updates -u -x async,progress,cheerio,jsdom,deepmerge-ts && yarn workspaces foreach --worktree run update:ncu",
     "update:resolutions": "yarn workspaces foreach --all exec \"npx pkg-res-updater\"",
-    "prepare": "husky && yarn workspaces foreach --worktree run prepare",
+    "prepare": "husky",
     "pack": "node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config pack.ts",
     "deploy": "npm run build && npm run pack && rm -rf public && npm run site:build && node bin/deploy",
     "start:flowbite": "node bin/switch-theme flowbite && npm run start",
