@@ -32,20 +32,27 @@ const deps = Array.from(
 ).filter((pkgName) => !["deepmerge-ts", "p-limit", "sanitize-filename"].includes(pkgName));
 
 /**
- * Shared TypeScript options
+ * Shared TypeScript options. Must be cloned per bundle because plugin-typescript
+ * may mutate options while normalizing compiler settings.
  */
-const tsOptions = {
-  tsconfig: false,
-  compilerOptions: {
-    lib: ["DOM", "DOM.Iterable", "ES2020"],
-    rootDir: "src",
-    typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
-    allowSyntheticDefaultImports: true,
-    esModuleInterop: true
-  },
-  include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"],
-  exclude: ["**/*.test.js", "**/*.test.ts", "**/*.builder.*"]
+const baseTsCompilerOptions = {
+  lib: ["DOM", "DOM.Iterable", "ES2020"],
+  rootDir: "src",
+  typeRoots: ["./src/types", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+  allowSyntheticDefaultImports: true,
+  esModuleInterop: true
 };
+
+const createTsPlugin = (compilerOptions = {}) =>
+  typescript({
+    tsconfig: false,
+    compilerOptions: {
+      ...baseTsCompilerOptions,
+      ...compilerOptions
+    },
+    include: ["./package.json", "./src/**/*", "./src/globals.d.ts", "./src/**/*.json"],
+    exclude: ["**/*.test.js", "**/*.test.ts", "**/*.builder.*"]
+  });
 
 // Shared plugin array
 const sharedPlugins = [
@@ -69,7 +76,7 @@ const hexoThemeFlowbiteHelper = {
     format: "cjs",
     sourcemap: false
   },
-  plugins: [typescript(tsOptions), ...sharedPlugins],
+  plugins: [createTsPlugin(), ...sharedPlugins],
   external: deps
 };
 
@@ -84,12 +91,7 @@ const hexoThemeFlowbiteCLI = {
     { file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.cjs", format: "cjs" },
     { file: "themes/hexo-theme-flowbite/bin/hexo-theme-flowbite.mjs", format: "esm" }
   ],
-  plugins: [
-    typescript({
-      ...tsOptions
-    }),
-    ...sharedPlugins
-  ],
+  plugins: [createTsPlugin(), ...sharedPlugins],
   external: deps
 };
 
@@ -106,13 +108,9 @@ const hexoThemeButterflyHelper = {
     sourcemap: false
   },
   plugins: [
-    typescript({
-      ...tsOptions,
-      compilerOptions: {
-        ...tsOptions.compilerOptions,
-        allowJs: true,
-        checkJs: false
-      }
+    createTsPlugin({
+      allowJs: true,
+      checkJs: false
     }),
     ...sharedPlugins
   ],
