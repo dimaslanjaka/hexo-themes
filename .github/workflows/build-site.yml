@@ -53,6 +53,7 @@ jobs:
         with:
           node-version: 22
           cache: yarn
+          cache-dependency-path: "**/package.json"
 
       # ✅ Enable Corepack only
       # Uses Yarn version defined by packageManager or .yarnrc.yml
