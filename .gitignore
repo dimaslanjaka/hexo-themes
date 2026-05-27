@@ -147,3 +147,9 @@ yarn.lock
 /source/hexo-search.json
 _config.yml
 **/.frontmatter/
+
+# Auto-generated files by _pre-server.cjs
+themes/**/layout/mixins/helloWorld.pug
+themes/**/layout/mixins/index.pug
+themes/**/layout/layout-*.*
+themes/**/source/assets/material-icon.svg
