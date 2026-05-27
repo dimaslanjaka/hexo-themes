@@ -18,7 +18,6 @@ on:
 
 jobs:
   clean-cache:
-    if: contains(github.repository, 'php-proxy-hunter')
     runs-on: windows-latest
     env:
       PIP_CACHE_DIR: "${{ github.workspace }}/project/tmp/pip"
