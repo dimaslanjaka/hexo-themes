@@ -1,7 +1,7 @@
-const fs = require('fs-extra');
-const path = require('upath');
-const { parse, stringify } = require('yaml');
-const Hexo = require('hexo');
+const fs = require("fs-extra");
+const path = require("upath");
+const { parse, stringify } = require("yaml");
+const Hexo = require("hexo");
 
 /**
  * read directory recursive
@@ -41,18 +41,18 @@ const _walk = function (dir, done) {
 async function reloadHexoConfigYml(base = undefined, overriden = {}) {
   if (!base) base = __dirname;
   if (!overriden) overriden = {};
-  const defaults = parse(fs.readFileSync(path.join(base, '_config.base.yml'), 'utf-8'));
+  const defaults = parse(fs.readFileSync(path.join(base, "_config.base.yml"), "utf-8"));
   /** @type {import('hexo')['config']} */
   const options = Object.assign(defaults, overriden);
   // save new _config.yml
-  fs.writeFileSync(path.join(base, '_config.yml'), stringify(options));
+  fs.writeFileSync(path.join(base, "_config.yml"), stringify(options));
 
   process.cwd = () => base;
   const hexo = new Hexo(base, { ...options, silent: true });
   await hexo.init();
-  const layouts = fs.readdirSync(path.join(__dirname, 'views')).map((str) => {
+  const layouts = fs.readdirSync(path.join(__dirname, "views")).map((str) => {
     return {
-      src: path.join(path.join(__dirname, 'views'), str),
+      src: path.join(path.join(__dirname, "views"), str),
       dest: path.join(hexo.theme_dir, str)
     };
   });
@@ -71,17 +71,17 @@ async function reloadHexoConfigYml(base = undefined, overriden = {}) {
 
 module.exports = reloadHexoConfigYml;
 
-if (require.main === module && process.argv.some((arg) => arg.endsWith('_config.loader.cjs'))) {
-  reloadHexoConfigYml(__dirname, {
-    theme: 'hexo-theme-flowbite',
-    renderers: {
-      engines: ['ejs', 'stylus', 'nunjucks', 'dartsass', 'pug', 'sass', 'markdown-it', 'rollup'],
-      generator: ['related-posts', 'meta'],
-      html_tags: ['summary', 'details', 'detail'],
-      fix: {
-        html: true
-      }
-    }
-  })
+if (require.main === module && process.argv.some((arg) => arg.endsWith("_config.loader.cjs"))) {
+  // reloadHexoConfigYml(__dirname, {
+  //   theme: 'hexo-theme-flowbite',
+  //   renderers: {
+  //     engines: ['ejs', 'stylus', 'nunjucks', 'dartsass', 'pug', 'sass', 'markdown-it', 'rollup'],
+  //     generator: ['related-posts', 'meta'],
+  //     html_tags: ['summary', 'details', 'detail'],
+  //     fix: {
+  //       html: true
+  //     }
+  //   }
+  // })
   // reloadHexoConfigYml(__dirname, { theme: 'claudia' });
 }
