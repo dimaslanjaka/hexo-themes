@@ -69,3 +69,5 @@ venv/
 /dist
 /bin/*.mjs
 /bin/*.cjs
+
+scripts/types/_*.json
