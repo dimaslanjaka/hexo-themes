@@ -50,7 +50,9 @@ fs.writeFileSync(
 );
 
 // Copy custom layouts into active theme directory
-spawnSync('node', ['_layout-loader.cjs'], { stdio: 'inherit' });
+spawnSync('npx', ['-y', '-p', '@babel/core', '-p', '@babel/node', 'babel-node', '--', '_layout-loader.cjs'], {
+  stdio: 'inherit'
+});
 
 // If the theme has changed, update config and perform hexo clean
 if (previousTheme !== themeName) {

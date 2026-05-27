@@ -1,4 +1,4 @@
 @echo off
 
 set "script_dir=%~dp0"
-node "%script_dir%switch-theme.mjs" %*
+npx -y -p @babel/core -p @babel/node babel-node -- "%script_dir%switch-theme.mjs" %*
