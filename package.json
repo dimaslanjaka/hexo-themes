@@ -131,5 +131,5 @@
   "workspaces": [
     "themes/hexo-theme-flowbite"
   ],
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "yarn@4.18.1"
 }
